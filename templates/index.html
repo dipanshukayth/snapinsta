@@ -8,76 +8,63 @@
   <style>
     :root {
       --bg: #000000;
-      --surface: #121212;
-      --border: #262626;
       --accent-snap: #fffc00;
       --accent-insta: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      --text: #ffffff;
-      --text-muted: #8e8e8e;
+      --border: #262626;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; justify-content: center; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: #0a0a0a; color: #fff; height: 100vh; overflow: hidden; display: flex; justify-content: center; }
 
     .app-viewport {
       width: 100%;
       max-width: 440px;
       height: 100vh;
+      position: relative;
+      background: #000;
       display: flex;
       flex-direction: column;
-      position: relative;
-      background: var(--bg);
-      border-left: 1px solid #1a1a1a;
-      border-right: 1px solid #1a1a1a;
     }
 
     /* Screen Views */
-    .screen { flex: 1; overflow-y: auto; display: none; position: relative; }
+    .screen { flex: 1; height: calc(100vh - 60px); overflow-y: auto; display: none; position: relative; }
     .screen.active { display: flex; flex-direction: column; }
 
-    /* ================= SNAPCHAT CAMERA VIEW ================= */
-    #cameraScreen {
-      position: relative;
-      background: #000;
-      overflow: hidden;
-    }
+    /* Camera View */
+    #cameraScreen { position: relative; background: #111; overflow: hidden; }
     video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
       transform: scaleX(-1);
-      transition: filter 0.3s ease;
     }
-    /* Filter Classes */
     video.filter-bw { filter: grayscale(100%) contrast(120%); }
-    video.filter-vintage { filter: sepia(60%) contrast(110%) brightness(90%); }
+    video.filter-vintage { filter: sepia(60%) contrast(110%); }
     video.filter-cyber { filter: hue-rotate(180deg) saturate(180%); }
 
-    /* Floating Camera Overlay UI */
+    /* Top Overlay */
     .camera-top-bar {
       position: absolute;
       top: 16px;
       left: 0;
       right: 0;
-      padding: 0 20px;
+      padding: 0 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 10;
     }
     .brand-pill {
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.6);
       padding: 6px 14px;
       border-radius: 20px;
       font-weight: 700;
       font-size: 14px;
-      letter-spacing: 0.5px;
     }
     .icon-btn {
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
-      border: none;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255,255,255,0.2);
       color: #fff;
       width: 40px;
       height: 40px;
@@ -85,146 +72,313 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
       cursor: pointer;
     }
 
-    /* Side Tools Bar */
     .camera-side-tools {
       position: absolute;
-      top: 75px;
+      top: 70px;
       right: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
       z-index: 10;
     }
 
-    /* Bottom Shutter & Controls */
+    /* Bottom Overlay Controls */
     .camera-bottom-ui {
       position: absolute;
-      bottom: 25px;
+      bottom: 20px;
       left: 0;
       right: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       z-index: 10;
+      padding: 0 16px;
     }
 
-    /* Mode Pill Picker (Snap vs Post) */
+    .caption-box {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 6px 14px;
+    }
+    .caption-box input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      outline: none;
+      font-size: 14px;
+    }
+
     .mode-selector {
       display: flex;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.6);
       padding: 4px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
     .mode-btn {
       background: transparent;
       border: none;
-      color: rgba(255,255,255,0.7);
-      padding: 6px 16px;
-      border-radius: 20px;
+      color: #bbb;
+      padding: 6px 14px;
+      border-radius: 16px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s;
     }
     .mode-btn.active {
       background: #fff;
       color: #000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
-    /* Snap Shutter Button */
+    /* Snap Shutter */
     .shutter-ring {
-      width: 78px;
-      height: 78px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      border: 4px solid #ffffff;
+      border: 4px solid #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.15s ease;
     }
-    .shutter-ring:active { transform: scale(0.9); }
     .shutter-core {
-      width: 60px;
-      height: 60px;
-      background: #ffffff;
+      width: 54px;
+      height: 54px;
+      background: #fffc00;
       border-radius: 50%;
       transition: background 0.2s;
     }
-    .shutter-snap .shutter-core { background: var(--accent-snap); }
+    .shutter-post .shutter-core { background: #fff; }
 
-    /* Post Caption Input Bar */
-    .caption-box {
-      width: calc(100% - 40px);
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      display: flex;
-      padding: 4px 12px;
-    }
-    .caption-box input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: #fff;
-      padding: 8px 4px;
-      outline: none;
-      font-size: 13px;
-    }
-
-    /* ================= INSTAGRAM FEED VIEW ================= */
-    #feedScreen {
-      background: var(--bg);
-      padding-bottom: 70px;
-    }
+    /* Feed Screen */
+    #feedScreen { background: #000; padding-bottom: 20px; }
     .feed-header {
-      padding: 14px 18px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(10px);
-      z-index: 20;
+      background: rgba(0,0,0,0.9);
       border-bottom: 1px solid var(--border);
+      z-index: 10;
     }
-    .insta-logo {
+    .feed-title {
       font-weight: 800;
       font-size: 20px;
-      letter-spacing: -0.5px;
       background: var(--accent-insta);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Stories Section */
     .stories-tray {
       display: flex;
-      gap: 14px;
-      padding: 14px 16px;
+      gap: 12px;
+      padding: 12px 16px;
       overflow-x: auto;
       border-bottom: 1px solid var(--border);
-      scrollbar-width: none;
     }
-    .stories-tray::-webkit-scrollbar { display: none; }
-    .story-item {
+    .story-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; }
+    .story-ring {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--accent-insta);
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .story-ring.snap { background: var(--accent-snap); }
+    .story-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #222;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .insta-post { border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+    .post-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; }
+    .post-user { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: bold; }
+    .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: bold; }
+    .tag-snap { background: var(--accent-snap); color: #000; }
+    .tag-post { background: #333; color: #fff; }
+    .post-img { width: 100%; max-height: 450px; object-fit: cover; display: block; }
+    .post-body { padding: 10px 14px; font-size: 13px; }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      height: 60px;
+      background: #000;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .nav-tab {
+      background: transparent;
+      border: none;
+      color: #666;
+      font-size: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      color: var(--text-muted);
+      gap: 2px;
       cursor: pointer;
     }
-    .story-ring {
-      width: 6
+    .nav-tab.active { color: #fff; }
+    .nav-tab span { font-size: 11px; }
+
+    #camErrorMsg {
+      position: absolute;
+      top: 40%;
+      left: 20px;
+      right: 20px;
+      background: rgba(220, 38, 38, 0.9);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    
+    <div id="camErrorMsg"></div>
+
+    <!-- CAMERA SCREEN -->
+    <div id="cameraScreen" class="screen active">
+      <div class="camera-top-bar">
+        <div class="brand-pill">Snapista 📸</div>
+        <button class="icon-btn" onclick="toggleCamera()"><i class="fa-solid fa-camera-rotate"></i></button>
+      </div>
+
+      <div class="camera-side-tools">
+        <button class="icon-btn" onclick="cycleFilter()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+      </div>
+
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+
+      <div class="camera-bottom-ui">
+        <div class="caption-box">
+          <input type="text" id="captionInput" placeholder="Add a caption..." />
+        </div>
+
+        <div class="mode-selector">
+          <button class="mode-btn active" id="btnSnap" onclick="setMode('snap')">⚡ Snap (60s)</button>
+          <button class="mode-btn" id="btnPost" onclick="setMode('post')">🖼️ Permanent</button>
+        </div>
+
+        <div class="shutter-ring" id="shutterRing" onclick="captureAndShare()">
+          <div class="shutter-core"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEED SCREEN -->
+    <div id="feedScreen" class="screen">
+      <div class="feed-header">
+        <div class="feed-title">Snapista</div>
+        <i class="fa-regular fa-paper-plane"></i>
+      </div>
+
+      <div class="stories-tray">
+        <div class="story-item"><div class="story-ring snap"><div class="story-avatar">You</div></div><span>Your Story</span></div>
+        <div class="story-item"><div class="story-ring"><div class="story-avatar">Alex</div></div><span>alex</span></div>
+        <div class="story-item"><div class="story-ring"><div class="story-avatar">Ria</div></div><span>ria</span></div>
+      </div>
+
+      <div id="feedContainer"></div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-nav">
+      <button class="nav-tab active" id="tabCamera" onclick="switchScreen('camera')">
+        <i class="fa-solid fa-camera"></i>
+        <span>Camera</span>
+      </button>
+      <button class="nav-tab" id="tabFeed" onclick="switchScreen('feed')">
+        <i class="fa-solid fa-images"></i>
+        <span>Feed</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    let selectedMode = 'snap';
+    let currentFilterIndex = 0;
+    const filters = ['', 'filter-bw', 'filter-vintage', 'filter-cyber'];
+    let useFrontCamera = true;
+    let currentStream = null;
+
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const errBox = document.getElementById('camErrorMsg');
+
+    async function initCamera() {
+      if (currentStream) {
+        currentStream.getTracks().forEach(t => t.stop());
+      }
+      try {
+        errBox.style.display = 'none';
+        const constraints = {
+          video: {
+            facingMode: useFrontCamera ? "user" : "environment",
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+          },
+          audio: false
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        currentStream = stream;
+        video.srcObject = stream;
+        await video.play();
+      } catch (err) {
+        errBox.innerText = "Camera access error: " + err.message + ". Please allow camera permission.";
+        errBox.style.display = 'block';
+      }
+    }
+
+    initCamera();
+
+    function toggleCamera() {
+      useFrontCamera = !useFrontCamera;
+      video.style.transform = useFrontCamera ? "scaleX(-1)" : "none";
+      initCamera();
+    }
+
+    function cycleFilter() {
+      video.classList.remove(filters[currentFilterIndex]);
+      currentFilterIndex = (currentFilterIndex + 1) % filters.length;
+      if (filters[currentFilterIndex]) {
+        video.classList.add(filters[currentFilterIndex]);
+      }
+    }
+
+    function setMode(mode) {
+      selectedMode = mode;
+      document.getElementById('btnSnap').classList.toggle('active', mode === 'snap');
+      document.getElementById('btnPost').classList.toggle('active', mode === 'post');
+      document.getElementById('shutterRing').classList.toggle('shutter-post', mode === 'post');
+    }
+
+    function switchScreen(screen) {
+      document.getElementById('cameraScreen').classList.toggle('active', screen === 'camera');
+      document.getElementById('feedScreen').classList.toggle('active', screen === 'feed');
+      document.getElementById('tabCamera').classList.toggle('active', screen === 'camera');
+      document.getElementById
