@@ -36,9 +36,7 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 .bottom{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:620px;background:#111;color:#fff;border-radius:22px;display:flex;justify-content:space-around;padding:12px 0;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.3)}.bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888}.bottom div.active{color:#FFFC00}.bottom div small{display:block;font-size:10px;font-weight:700}
 .tick{width:16px;height:16px;background:#0095f6;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex:0 0 auto}.tick-big{width:20px;height:20px;font-size:12px}.verified-row{display:flex;align-items:center;justify-content:center;gap:6px}
 .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:#fafafa}.auth-card{width:100%;max-width:380px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center}.auth-logo{font-size:36px;font-weight:900;letter-spacing:-1px;margin-bottom:6px}.auth-logo span{background:linear-gradient(90deg,#FFFC00,#FF004C,#A100F2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.auth-card p{color:#777;font-size:13px}.auth-card input{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;margin-top:10px;background:#fafafa}.auth-card input:focus{border-color:#0095f6;background:#fff}.auth-card input.error{border-color:#ff3040;background:#fff5f5}.link{color:#0095f6;font-weight:700;cursor:pointer;font-size:14px}.divider{display:flex;align-items:center;gap:10px;color:#999;font-size:12px;margin:16px 0}.divider::before,.divider::after{content:'';flex:1;height:1px;background:#ddd}.auth-tabs{display:flex;background:#f2f2f2;border-radius:12px;padding:4px;margin-bottom:14px}.auth-tabs button{flex:1;border:none;padding:10px;border-radius:9px;font-weight:800;background:transparent}.auth-tabs button.active{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}.user-chip{display:flex;align-items:center;gap:10px;text-align:left;background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:10px;margin-top:10px;cursor:pointer}.error-msg{color:#ff3040;font-size:13px;font-weight:700;margin-top:8px;display:none;text-align:left}
-/* CHAT */
 .chat-layout{display:grid;grid-template-columns:280px 1fr;gap:0;background:#fff;border:1px solid #e8e8e8;border-radius:14px;overflow:hidden;min-height:520px}.chat-list{border-right:1px solid #eee;overflow-y:auto}.chat-user{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid #f5f5f5}.chat-user.active{background:#eef6ff}.chat-head{padding:12px 14px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px}.chat-msgs{flex:1;padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;min-height:320px;background:#fafafa}.bubble{max-width:75%;padding:9px 13px;border-radius:18px;font-size:14px}.bubble.me{background:#0095f6;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}.bubble.them{background:#fff;border:1px solid #eee;align-self:flex-start;border-bottom-left-radius:4px}.bubble small{display:block;font-size:10px;opacity:.7;margin-top:3px}.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid #eee;background:#fff}.chat-input-row input{flex:1;padding:12px;border:1px solid #ddd;border-radius:20px;outline:none}.chat-input-row button{width:48px;height:48px;border-radius:50%;border:none;background:#0095f6;color:#fff;font-size:20px}.room-box{background:#e7f5ff;border:1px solid #0095f6;border-radius:12px;padding:12px;margin:10px 0;text-align:center}
-/* SETTINGS */
 .settings-layout{max-width:900px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:240px 1fr;gap:16px}.set-menu{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:10px;height:fit-content;position:sticky;top:80px}.set-menu button{width:100%;text-align:left;background:none;border:none;padding:11px 12px;border-radius:10px;display:flex;gap:10px;align-items:center}.set-menu button.active{background:#f2f2f2;font-weight:700}.set-panel{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:20px}.set-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f0f0f0;gap:12px}.set-row:last-child{border:none}.set-row small{color:#777;display:block}.set-row input,.set-row select,.set-row textarea{padding:10px 12px;border:1px solid #ddd;border-radius:10px;outline:none;width:220px;max-width:100%}.set-row textarea{width:100%;min-height:70px;resize:none}.toggle{width:44px;height:24px;background:#ddd;border-radius:20px;position:relative;cursor:pointer;flex:0 0 auto}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}.toggle.on{background:#0095f6}.toggle.on::after{left:23px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}.modal.active{display:flex}.modal-box{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:380px;text-align:center}.modal-box button{width:100%;padding:12px;border:none;border-bottom:1px solid #eee;background:none}
 #toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:20px;font-weight:700;display:none;z-index:300}
@@ -49,20 +47,19 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 </head>
 <body>
 
-<!-- AUTH -->
 <div id="authPage"><div class="auth-wrap"><div>
 <div class="auth-card">
 <div class="auth-logo">SNAP<span>ISTA</span></div><p>Apna vibe, apni duniya ✨ • Real Chat ON 🔥</p>
 <div class="auth-tabs"><button id="tabSignup" class="active" onclick="switchTab('signup')">Sign Up</button><button id="tabLogin" onclick="switchTab('login')">Log In</button></div>
 <div id="signupForm">
 <input id="suName" placeholder="Full Name">
-<input id="suUser" placeholder="Username - jaise rahul_01" oninput="checkUsernameLive()">
+<input id="suUser" placeholder="Username - jaise kayth01" oninput="checkUsernameLive()">
 <div id="suError" class="error-msg">❌ Ye username pehle se liya hua hai!</div>
 <div id="suOk" class="error-msg" style="color:#00a400">✅ Ye username available hai!</div>
 <input id="suEmail" placeholder="Email or Mobile">
 <input id="suPass" type="password" placeholder="Password">
 <button class="btn" onclick="doSignup()">Sign up</button>
-<p style="font-size:12px;margin-top:10px">1 naam = 1 user • Pehla user = Blue Tick ✓</p>
+<p style="font-size:12px;margin-top:10px">1 naam = 1 user • 1 email se kitne bhi account • Pehla user = Blue Tick ✓</p>
 </div>
 <div id="loginForm" style="display:none">
 <input id="loginUser" placeholder="Username"><input id="loginPass" type="password" placeholder="Password">
@@ -75,11 +72,9 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 <div class="auth-card" style="margin-top:12px"><p style="color:#000;font-size:14px">New ho? <b>Sign Up</b> upar se karo.<br>Purana hai? <b>Log In</b> dabao.</p></div>
 </div></div></div>
 
-<!-- APP -->
 <div id="appPage" style="display:none">
 <header class="topbar"><div class="brand" onclick="goPage('home')">SNAP<span>ISTA</span></div><input class="search" placeholder="Search" /><nav class="nav"><span onclick="goPage('home')">⌂</span><span onclick="goPage('chat')">✉</span><span onclick="goPage('snap')">＋</span><span onclick="goPage('explore')">⌕</span><span onclick="goPage('profile')">◉</span><span onclick="goPage('settings')">⚙️</span></nav></header>
 
-<!-- HOME -->
 <div id="page-home" class="page active"><main class="layout"><section>
 <div class="vibe-banner"><h2>Apna vibe,<br>apni duniya ✨</h2><p id="welcomeText">Snap lo. Post karo.</p><button onclick="goPage('snap')">📸 Snap Lo →</button></div>
 <div class="stories" id="stories"></div>
@@ -93,16 +88,12 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 <div class="card" style="margin-top:12px;padding:14px;border:none"><b>👥 Saved Accounts</b><div id="accountSwitcher"></div><button class="btn btn-gray" style="margin-top:10px" onclick="logout()">+ Add Account</button></div>
 </aside></main></div>
 
-<!-- EXPLORE -->
 <div id="page-explore" class="page"><main class="layout"><section><h2 style="margin:0">Explore</h2><p style="color:#777">Duniya kya dekh rahi hai</p><div style="display:flex;gap:8px;margin-bottom:14px"><input id="searchInput" placeholder="Search friends..." style="flex:1;padding:12px;border:1px solid #ddd;border-radius:12px;outline:none"><button class="btn" style="width:auto;margin:0" onclick="doSearch()">Search</button></div><div class="empty"><div class="big">🔍</div><h3>Abhi khaali hai</h3><p>Jab users aayenge, yahan unke posts dikhenge.</p></div></section></main></div>
 
-<!-- SNAP -->
 <div id="page-snap" class="page"><main class="layout"><section><h2 style="margin:0">Snap</h2><p style="color:#777">Camera • Photo • Send</p><div class="camera-box"><video id="cameraVideo" autoplay playsinline muted style="display:none"></video><img id="capturedImg" style="display:none"><div id="cameraPlaceholder"><div><div style="font-size:64px">📸</div><b>Snap Camera Ready</b><p style="color:#aaa">Camera on karo, photo khicho</p><button class="btn btn-yellow" onclick="startCamera()">Open Camera</button></div></div><div class="camera-text" id="cameraText"></div></div><div class="capture-bar"><button class="small-btn" onclick="switchCamera()">🔄</button><button class="capture-btn" onclick="takeSnap()"></button><button class="small-btn" onclick="retakeSnap()">↩️</button></div><input class="snap-input" id="snapText" placeholder="Is Snap pe kya likhna hai?..." oninput="document.getElementById('cameraText').innerText=this.value"><button class="btn btn-yellow" onclick="sendSnap()">Send Snap →</button><button class="btn btn-black" onclick="addToStory()">+ Add to Story</button><button class="btn btn-gray" onclick="downloadSnap()">⬇️ Download</button></section></main></div>
 
-<!-- REELS -->
 <div id="page-reels" class="page"><main class="layout"><section><h2 style="margin:0">Reels</h2><p style="color:#777">Short • Fast • Vibe</p><div class="empty"><div class="big">🎬</div><h3>No reels yet</h3><p>Tu pehli reel daalega?</p><button class="btn" onclick="showToast('Reel upload jald aayega')">Upload Reel</button></div></section></main></div>
 
-<!-- REAL CHAT -->
 <div id="page-chat" class="page"><main class="layout" style="grid-template-columns:1fr;max-width:820px"><section>
 <h2 style="margin:0">Messages <span style="color:#31a24c;font-size:13px">● LIVE - FREE</span></h2><p style="color:#777">Alag phone wale dost se bhi chat hogi. Room Code same rakho.</p>
 <div class="room-box"><b>Room Code:</b> <span id="roomCodeText" style="font-size:18px">snapista-chat</span><br><small>Dono ka Room Code SAME hona chahiye</small><br><input id="roomInput" placeholder="Room Code - jaise snapista-chat" style="width:100%;padding:10px;border:1px solid #0095f6;border-radius:10px;margin-top:8px"><button class="btn" style="margin-top:8px" onclick="joinRoom()">Join Room →</button></div>
@@ -113,10 +104,8 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 <p style="color:#777;font-size:12px;text-align:center">FREE server se chal rahi hai. Koi paisa nahi, koi Firebase nahi.<br>Message 2-3 sec me pahuchta hai.</p>
 </section></main></div>
 
-<!-- PROFILE -->
 <div id="page-profile" class="page"><main class="layout"><section><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Profile</h2><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="goPage('settings')">⚙️ Settings</button></div><div style="text-align:center;padding:20px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;margin-top:12px"><div style="width:96px;height:96px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2);padding:3px;margin:0 auto"><div class="avatar" id="profileAvatar" style="width:100%;height:100%;font-size:46px;border:3px solid #fff">😎</div></div><div class="verified-row"><h2 id="profileUser" style="margin:10px 0 0">you</h2><span class="tick tick-big" id="profileTick" style="display:none">✓</span></div><p style="color:#777" id="profileBio">Snapista Creator • Vibe King 👑</p><p id="verifiedText" style="color:#0095f6;font-weight:700;font-size:13px;display:none">✓ Verified Creator • Snapista Official</p><p><b id="postCount">0</b> Posts • <b>0</b> Followers • <b>0</b> Following</p><div style="display:flex;gap:8px"><button class="btn" style="margin:0" onclick="goPage('settings');openSetting('edit')">Edit Profile</button><button class="btn btn-gray" style="margin:0" onclick="showToast('Profile link copied')">Share Profile</button></div></div><div class="empty" style="margin-top:14px"><div class="big">📸</div><h3>No posts yet</h3><p>Abhi koi post nahi hai.</p></div></section></main></div>
 
-<!-- SETTINGS - FULL -->
 <div id="page-settings" class="page"><div class="settings-layout"><div class="set-menu"><button class="active" onclick="openSetting('edit',this)">👤 Edit Profile</button><button onclick="openSetting('privacy',this)">🔒 Privacy</button><button onclick="openSetting('notif',this)">🔔 Notifications</button><button onclick="openSetting('security',this)">🛡️ Security</button><button onclick="openSetting('verify',this)">✅ Blue Tick</button><button onclick="openSetting('blocked',this)">🚫 Blocked</button><button onclick="openSetting('lang',this)">🌐 Language</button><button onclick="openSetting('theme',this)">🎨 Theme</button><button onclick="openSetting('help',this)">❓ Help</button><button onclick="openSetting('about',this)">ℹ️ About</button></div><div>
 <div id="set-edit" class="set-panel"><h2 style="margin:0">Edit Profile</h2><p style="color:#777">Teri public info</p><div class="set-row"><div><b>Profile Photo</b></div><input type="file" accept="image/*" onchange="changeAvatar(event)" style="width:auto"></div><div class="set-row"><div><b>Name</b></div><input id="setName" value="You" oninput="updateProfile()"></div><div class="set-row"><div><b>Username</b><small>Same naam dobara nahi chalega</small></div><input id="setUsername" value="you" oninput="updateProfile()"></div><div class="set-row"><div><b>Bio</b></div><textarea id="setBio" oninput="updateProfile()">Snapista Creator • Vibe King 👑</textarea></div><div class="set-row"><div><b>Gender</b></div><select><option>Prefer not to say</option><option>Male</option><option>Female</option><option>Other</option></select></div><button class="btn" onclick="saveProfile()">Save Changes</button></div>
 <div id="set-privacy" class="set-panel" style="display:none"><h2 style="margin:0">Privacy</h2><div class="set-row"><div><b>Private Account</b><small>Sirf followers dekh payenge</small></div><div class="toggle" onclick="toggle(this,'Private')"></div></div><div class="set-row"><div><b>Show Activity Status</b></div><div class="toggle on" onclick="toggle(this,'Activity')"></div></div><div class="set-row"><div><b>Allow Comments</b></div><select><option>Everyone</option><option>Followers</option><option>Nobody</option></select></div><div class="set-row"><div><b>Show Like Count</b></div><div class="toggle on" onclick="toggle(this,'Like count')"></div></div><div class="set-row"><div><b>Hide Offensive Comments</b></div><div class="toggle on" onclick="toggle(this,'Filter')"></div></div></div>
@@ -140,13 +129,26 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 <script>
 let posts=[], myStories=[], stream=null, facing='user', capturedDataUrl=null
 let currentUserObj=null, activeChatUser=null, roomCode='snapista-chat', pollTimer=null
+let seenMsgIds = new Set(JSON.parse(localStorage.getItem('seen_msgs')||'[]'))
 function getUsers(){try{return JSON.parse(localStorage.getItem('snapista_users')||'[]')}catch(e){return[]}}
 function saveUsers(u){localStorage.setItem('snapista_users',JSON.stringify(u))}
 function switchTab(t){document.getElementById('tabSignup').classList.toggle('active',t=='signup');document.getElementById('tabLogin').classList.toggle('active',t=='login');document.getElementById('signupForm').style.display=t=='signup'?'block':'none';document.getElementById('loginForm').style.display=t=='login'?'block':'none'}
 function checkUsernameLive(){let user=document.getElementById('suUser').value.trim().toLowerCase();let err=document.getElementById('suError'), ok=document.getElementById('suOk'), input=document.getElementById('suUser');if(!user){err.style.display='none';ok.style.display='none';input.classList.remove('error');return}let exists=getUsers().some(u=>u.username.toLowerCase()==user);if(exists){err.style.display='block';ok.style.display='none';input.classList.add('error')}else{err.style.display='none';ok.style.display='block';input.classList.remove('error')}}
 function renderSavedUsers(){let users=getUsers();let box=document.getElementById('savedUsers');if(users.length==0){box.innerHTML='';return}box.innerHTML='<p style="color:#777;font-size:12px;margin:8px 0">Saved Accounts:</p>'+users.map((u,i)=>`<div class="user-chip" onclick="quickLogin(${i})"><div class="avatar" style="width:36px;height:36px">😎</div><div style="flex:1"><b>${u.username} ${u.verified?'<span style="color:#0095f6">✓</span>':''}</b><br><small>${u.name}</small></div><span style="color:#0095f6;font-weight:700">Login →</span></div>`).join('')}
 function quickLogin(i){let u=getUsers()[i];currentUserObj=u;localStorage.setItem('snapista_current',i);enterApp(u)}
-function doSignup(){let name=document.getElementById('suName').value.trim(), user=document.getElementById('suUser').value.trim(), email=document.getElementById('suEmail').value.trim(), pass=document.getElementById('suPass').value.trim();if(!name||!user||!email||!pass) return showToast('Saare box bharo');if(pass.length<4) return showToast('Password kam se kam 4 ka rakho');let users=getUsers();if(users.some(u=>u.username.toLowerCase()==user.toLowerCase())){showToast('❌ Ye username pehle se liya hua hai!');alert('❌ Error: "'+user+'" pehle se liya hua hai! Dusra try karo.');return}if(users.some(u=>u.email && u.email.toLowerCase()==email.toLowerCase())){showToast('❌ Ye email pehle se use ho raha hai!');return}let isFirst=users.length==0;let newUser={name:name,username:user,email:email,pass:pass,verified:isFirst,created:Date.now()};users.push(newUser);saveUsers(users);localStorage.setItem('snapista_current',users.length-1);currentUserObj=newUser;if(isFirst) showToast('🎉 Tu pehla user hai! Blue Tick mil gaya ✓');enterApp(newUser)}
+function doSignup(){
+let name=document.getElementById('suName').value.trim(), user=document.getElementById('suUser').value.trim(), email=document.getElementById('suEmail').value.trim(), pass=document.getElementById('suPass').value.trim();
+if(!name||!user||!email||!pass) return showToast('Saare box bharo');
+if(pass.length<4) return showToast('Password kam se kam 4 ka rakho');
+let users=getUsers();
+if(users.some(u=>u.username.toLowerCase()==user.toLowerCase())){showToast('❌ Ye username pehle se liya hua hai!');alert('❌ Error: "'+user+'" pehle se liya hua hai! Dusra try karo.');return}
+// FIX: Email wala check HATA DIYA - 1 email se kitne bhi account ban sakte hai
+let isFirst=users.length==0;
+let newUser={name:name,username:user,email:email,pass:pass,verified:isFirst,created:Date.now()};
+users.push(newUser);saveUsers(users);localStorage.setItem('snapista_current',users.length-1);currentUserObj=newUser;
+if(isFirst) showToast('🎉 Tu pehla user hai! Blue Tick mil gaya ✓');
+enterApp(newUser)
+}
 function doLogin(){let user=document.getElementById('loginUser').value.trim(), pass=document.getElementById('loginPass').value.trim();if(!user||!pass) return showToast('Username aur Password daalo');let users=getUsers();let foundIdx=users.findIndex(u=>u.username.toLowerCase()==user.toLowerCase() && u.pass==pass);if(foundIdx==-1){let same=users.find(u=>u.username.toLowerCase()==user.toLowerCase());if(same) return showToast('Password galat hai');return showToast('Ye username nahi mila, pehle Sign Up karo')}currentUserObj=users[foundIdx];localStorage.setItem('snapista_current',foundIdx);enterApp(users[foundIdx])}
 function enterApp(u){currentUserObj=u;document.getElementById('authPage').style.display='none';document.getElementById('appPage').style.display='block';document.getElementById('sideUser').innerHTML=u.username+' '+(u.verified?'<span class="tick">✓</span>':'');document.getElementById('sideName').innerText=u.name;document.getElementById('profileUser').innerText=u.username;document.getElementById('profileTick').style.display=u.verified?'inline-flex':'none';document.getElementById('verifiedText').style.display=u.verified?'block':'none';document.getElementById('setUsername').value=u.username;document.getElementById('setName').value=u.name;document.getElementById('welcomeText').innerText='Welcome back, '+u.username+' '+(u.verified?'✓':'')+' ✨';updateVerifyBox();renderAccountSwitcher();renderStories();renderFeed();renderUserLists();joinRoom();showToast('Welcome '+u.username+' '+(u.verified?'✓':'')+' 🔥')}
 function renderAccountSwitcher(){let users=getUsers();document.getElementById('accountSwitcher').innerHTML=users.map((u,i)=>`<div class="user-chip" onclick="quickLogin(${i})"><div class="avatar" style="width:32px;height:32px">😎</div><div style="flex:1"><b style="font-size:13px">${u.username} ${u.verified?'✓':''}</b><br><small>${u.name}</small></div><span style="font-size:12px;color:#0095f6">Switch</span></div>`).join('')}
@@ -175,14 +177,55 @@ function retakeSnap(){document.getElementById('capturedImg').style.display='none
 function downloadSnap(){if(!capturedDataUrl){showToast('Pehle photo khicho');return}let a=document.createElement('a');a.href=capturedDataUrl;a.download='snapista-snap.png';a.click();showToast('Snap download ho gaya')}
 function sendSnap(){if(!capturedDataUrl){showToast('Pehle camera se photo khicho');return}posts.unshift({img:`<img class="post-image" src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap ✨'});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Snap bhej diya 🔥');goPage('home')}
 function addToStory(){if(!capturedDataUrl&&!document.getElementById('snapText').value){showToast('Pehle photo khicho');return}myStories.push({img:capturedDataUrl,text:document.getElementById('snapText').value||'My Story'});renderStories();showToast('Story me add ho gaya ✨');goPage('home')}
-// ===== REAL CHAT - FREE, NO FIREBASE =====
+// ===== REAL CHAT - FIXED: 1 baar hi jayega =====
 function renderUserLists(){let users=getUsers().filter(u=>u.username.toLowerCase()!==currentUserObj.username.toLowerCase());let box=document.getElementById('chatUserList');if(users.length==0){box.innerHTML=`<div style="padding:16px;color:#777;text-align:center">Is phone me koi aur user nahi hai<br>Neeche se Dost Add Karo<br>Alag phone wale dost ka naam daalo</div>`;return}box.innerHTML=users.map(u=>`<div class="chat-user ${activeChatUser==u.username?'active':''}" onclick="openChat('${u.username}')"><div class="avatar">😎</div><div><b>${u.username} ${u.verified?'✓':''}</b><div style="font-size:12px;color:#777">${u.name}</div></div></div>`).join('')}
 function addFriend(){let name=document.getElementById('newFriendInput').value.trim().toLowerCase();if(!name) return showToast('Dost ka username daalo');if(name==currentUserObj.username) return showToast('Ye to tu khud hai!');activeChatUser=name;document.getElementById('chatHeadName').innerText=name;document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';document.getElementById('chatLayout').classList.remove('show-list');document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:30px">👋 Say hi to ${name}<br>Message bhejte hi uske phone pe jayega</div>`;showToast('Chat khul gayi - '+name)}
 function joinRoom(){let val=document.getElementById('roomInput').value.trim();if(val) roomCode=val.toLowerCase().replace(/[^a-z0-9-_]/g,'-');document.getElementById('roomCodeText').innerText=roomCode;document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';showToast('Room join ho gaya: '+roomCode);if(pollTimer) clearInterval(pollTimer);pollTimer=setInterval(fetchMessages,2500);fetchMessages()}
-async function sendRealChat(){let input=document.getElementById('chatInput');let text=input.value.trim();if(!activeChatUser) return showToast('Pehle dost ko chuno ya Add Karo');if(!text) return;let msg={from:currentUserObj.username,to:activeChatUser,text:text,time:Date.now()};try{await fetch('https://ntfy.sh/'+roomCode,{method:'POST',body:JSON.stringify(msg),headers:{'Title':currentUserObj.username+' -> '+activeChatUser}});input.value='';addBubble(msg,true);showToast('Bhej diya → '+activeChatUser)}catch(e){showToast('Internet check karo')}}
-async function fetchMessages(){if(!activeChatUser) return;try{let res=await fetch('https://ntfy.sh/'+roomCode+'/json?since=1h&poll=1');let txt=await res.text();let lines=txt.trim().split('\n').filter(Boolean);lines.forEach(line=>{try{let j=JSON.parse(line);if(j.event!=='message') return;let data=JSON.parse(j.message);if((data.from==currentUserObj.username && data.to==activeChatUser) || (data.from==activeChatUser && data.to==currentUserObj.username)){if(data.from!==currentUserObj.username){addBubble(data,false)}}}catch(e){}})}catch(e){}}
+async function sendRealChat(){
+let input=document.getElementById('chatInput');let text=input.value.trim();
+if(!activeChatUser) return showToast('Pehle dost ko chuno ya Add Karo');
+if(!text) return;
+let msg={from:currentUserObj.username,to:activeChatUser,text:text,time:Date.now()};
+try{
+  await fetch('https://ntfy.sh/'+roomCode,{method:'POST',body:JSON.stringify(msg),headers:{'Title':currentUserObj.username+' -> '+activeChatUser}});
+  input.value='';
+  addBubble(msg,true);
+  showToast('Bhej diya → '+activeChatUser)
+}catch(e){showToast('Internet check karo')}
+}
+async function fetchMessages(){
+if(!activeChatUser) return;
+try{
+  let res=await fetch('https://ntfy.sh/'+roomCode+'/json?since=1h&poll=1');
+  let txt=await res.text();
+  let lines=txt.trim().split('\n').filter(Boolean);
+  lines.forEach(line=>{
+    try{
+      let j=JSON.parse(line);
+      if(j.event!=='message') return;
+      // FIX: Ek message dobara nahi dikhega
+      if(seenMsgIds.has(j.id)) return;
+      seenMsgIds.add(j.id);
+      localStorage.setItem('seen_msgs', JSON.stringify([...seenMsgIds].slice(-200)));
+      let data=JSON.parse(j.message);
+      if((data.from==currentUserObj.username && data.to==activeChatUser) || (data.from==activeChatUser && data.to==currentUserObj.username)){
+        if(data.from!==currentUserObj.username){
+          addBubble(data,false)
+        }
+      }
+    }catch(e){}
+  })
+}catch(e){}
+}
 function addBubble(m,isMe){let box=document.getElementById('chatMsgs');if(box.innerHTML.includes('Say hi to')) box.innerHTML='';let d=document.createElement('div');d.className='bubble '+(isMe?'me':'them');d.innerHTML=`${m.text}<small>${isMe?'You':m.from} • ${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</small>`;box.appendChild(d);box.scrollTop=box.scrollHeight}
-function openChat(username){activeChatUser=username;document.getElementById('chatHeadName').innerText=username;document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';document.getElementById('chatLayout').classList.remove('show-list');document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:20px">Chat khul gayi - ${username}</div>`;fetchMessages()}
+function openChat(username){
+activeChatUser=username;
+document.getElementById('chatHeadName').innerText=username;
+document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';
+document.getElementById('chatLayout').classList.remove('show-list');
+document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:20px">Chat khul gayi - ${username}</div>`;
+fetchMessages()
+}
 function backToChatList(){document.getElementById('chatLayout').classList.add('show-list')}
 function closeViewer(){document.getElementById('viewer').classList.remove('active')}
 function closeModal(){document.getElementById('moreModal').classList.remove('active')}
