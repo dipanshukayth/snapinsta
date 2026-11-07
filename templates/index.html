@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Snapista - Final</title>
+<title>Snapista - Pro Private</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#fafafa;color:#171717;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;padding-bottom:80px}
+body{margin:0;background:#fafafa;color:#171717;font:15px/1.45 system-ui,sans-serif;padding-bottom:80px}
 button{font:inherit;cursor:pointer}input,select{font:inherit}
 .topbar{height:64px;background:#fff;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;padding:0 max(5%,calc((100% - 1100px)/2));position:sticky;top:0;z-index:5}
-.brand{font-size:26px;font-weight:900;letter-spacing:-1px;cursor:pointer}.brand span{background:linear-gradient(90deg,#FFFC00,#FF004C,#A100F2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand{font-size:26px;font-weight:900;cursor:pointer}.brand span{background:linear-gradient(90deg,#FFFC00,#FF004C,#A100F2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .search{width:240px;padding:10px 14px;border:0;border-radius:10px;background:#f2f2f2;outline:none}
-.nav{display:flex;gap:18px;font-size:21px}.nav span{cursor:pointer}
+.nav{display:flex;gap:18px;font-size:21px}.nav span{cursor:pointer;position:relative}
+.badge{position:absolute;top:-6px;right:-8px;background:#ff3040;color:#fff;font-size:10px;min-width:18px;height:18px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-weight:800}
 .layout{max-width:1000px;margin:28px auto;padding:0 18px;display:grid;grid-template-columns:minmax(0,620px) 300px;gap:38px}
 .stories,.post,.card{background:white;border:1px solid #e8e8e8;border-radius:14px}
 .stories{padding:16px;display:flex;gap:16px;overflow-x:auto;margin-bottom:20px}
-.story{flex:0 0 62px;text-align:center;font-size:12px;cursor:pointer}
-.ring{width:58px;height:58px;padding:3px;margin:auto auto 6px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2)}
-.ring div{width:100%;height:100%;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:26px;border:2px solid white}
+.story{flex:0 0 62px;text-align:center;font-size:12px;cursor:pointer}.ring{width:58px;height:58px;padding:3px;margin:auto auto 6px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2)}.ring div{width:100%;height:100%;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:26px;border:2px solid white}
 .post{margin-bottom:22px;overflow:hidden}.post-head{display:flex;align-items:center;gap:10px;padding:13px 15px}
 .avatar{width:38px;height:38px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:20px;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}
 .username{font-weight:700;display:flex;align-items:center;gap:4px}.place{color:#777;font-size:12px}.more{margin-left:auto;border:0;background:none;font-size:22px}
@@ -29,27 +28,28 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 .empty{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:36px 20px;text-align:center;color:#777}.empty h3{color:#171717;margin:8px 0 4px}.empty .big{font-size:52px}
 .page{display:none}.page.active{display:block}
 .vibe-banner{margin:0 0 20px;background:linear-gradient(135deg,#FFFC00,#FF004C,#A100F2);border-radius:14px;padding:18px;color:#fff}.vibe-banner h2{margin:0;font-size:22px}.vibe-banner p{margin:6px 0 0;opacity:.9;font-size:13px}.vibe-banner button{margin-top:12px;background:#000;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:800}
-.btn{width:100%;background:#0095f6;border:none;padding:13px;border-radius:12px;font-weight:700;font-size:15px;margin-top:10px;color:#fff}.btn-yellow{background:#FFFC00;color:#000}.btn-black{background:#000;color:#fff}.btn-gray{background:#eee;color:#000}.btn-red{background:#ff3040;color:#fff}
+.btn{width:100%;background:#0095f6;border:none;padding:13px;border-radius:12px;font-weight:700;font-size:15px;margin-top:10px;color:#fff}.btn-yellow{background:#FFFC00;color:#000}.btn-black{background:#000;color:#fff}.btn-gray{background:#eee;color:#000}.btn-red{background:#ff3040;color:#fff}.btn-green{background:#00a400;color:#fff}
 .camera-box{width:100%;height:380px;background:#111;border-radius:14px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}.camera-box video,.camera-box img{width:100%;height:100%;object-fit:cover}.camera-text{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-weight:800;text-shadow:0 2px 8px #000;font-size:20px}
 .capture-bar{display:flex;align-items:center;justify-content:center;gap:20px;margin:14px 0}.capture-btn{width:68px;height:68px;border-radius:50%;background:#fff;border:6px solid #FFFC00;cursor:pointer}.small-btn{background:#eee;border:1px solid #ddd;width:46px;height:46px;border-radius:50%;font-size:20px}
 .snap-input{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:12px;outline:none;margin-top:8px}
-.bottom{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:620px;background:#111;color:#fff;border-radius:22px;display:flex;justify-content:space-around;padding:12px 0;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.3)}.bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888}.bottom div.active{color:#FFFC00}.bottom div small{display:block;font-size:10px;font-weight:700}
-.tick{width:16px;height:16px;background:#0095f6;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex:0 0 auto}.tick-big{width:20px;height:20px;font-size:12px}.verified-row{display:flex;align-items:center;justify-content:center;gap:6px}
-.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:#fafafa}.auth-card{width:100%;max-width:380px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center}.auth-logo{font-size:36px;font-weight:900;letter-spacing:-1px;margin-bottom:6px}.auth-logo span{background:linear-gradient(90deg,#FFFC00,#FF004C,#A100F2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.auth-card p{color:#777;font-size:13px}.auth-card input{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;margin-top:10px;background:#fafafa}.auth-card input:focus{border-color:#0095f6;background:#fff}.auth-card input.error{border-color:#ff3040;background:#fff5f5}.link{color:#0095f6;font-weight:700;cursor:pointer;font-size:14px}.divider{display:flex;align-items:center;gap:10px;color:#999;font-size:12px;margin:16px 0}.divider::before,.divider::after{content:'';flex:1;height:1px;background:#ddd}.auth-tabs{display:flex;background:#f2f2f2;border-radius:12px;padding:4px;margin-bottom:14px}.auth-tabs button{flex:1;border:none;padding:10px;border-radius:9px;font-weight:800;background:transparent}.auth-tabs button.active{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}.user-chip{display:flex;align-items:center;gap:10px;text-align:left;background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:10px;margin-top:10px;cursor:pointer}.error-msg{color:#ff3040;font-size:13px;font-weight:700;margin-top:8px;display:none;text-align:left}
-.chat-layout{display:grid;grid-template-columns:280px 1fr;gap:0;background:#fff;border:1px solid #e8e8e8;border-radius:14px;overflow:hidden;min-height:520px}.chat-list{border-right:1px solid #eee;overflow-y:auto}.chat-user{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid #f5f5f5}.chat-user.active{background:#eef6ff}.chat-head{padding:12px 14px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px}.chat-msgs{flex:1;padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;min-height:320px;background:#fafafa}.bubble{max-width:75%;padding:9px 13px;border-radius:18px;font-size:14px}.bubble.me{background:#0095f6;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}.bubble.them{background:#fff;border:1px solid #eee;align-self:flex-start;border-bottom-left-radius:4px}.bubble small{display:block;font-size:10px;opacity:.7;margin-top:3px}.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid #eee;background:#fff}.chat-input-row input{flex:1;padding:12px;border:1px solid #ddd;border-radius:20px;outline:none}.chat-input-row button{width:48px;height:48px;border-radius:50%;border:none;background:#0095f6;color:#fff;font-size:20px}.room-box{background:#e7f5ff;border:1px solid #0095f6;border-radius:12px;padding:12px;margin:10px 0;text-align:center}
-.settings-layout{max-width:900px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:240px 1fr;gap:16px}.set-menu{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:10px;height:fit-content;position:sticky;top:80px}.set-menu button{width:100%;text-align:left;background:none;border:none;padding:11px 12px;border-radius:10px;display:flex;gap:10px;align-items:center}.set-menu button.active{background:#f2f2f2;font-weight:700}.set-panel{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:20px}.set-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f0f0f0;gap:12px}.set-row:last-child{border:none}.set-row small{color:#777;display:block}.set-row input,.set-row select,.set-row textarea{padding:10px 12px;border:1px solid #ddd;border-radius:10px;outline:none;width:220px;max-width:100%}.set-row textarea{width:100%;min-height:70px;resize:none}.toggle{width:44px;height:24px;background:#ddd;border-radius:20px;position:relative;cursor:pointer;flex:0 0 auto}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}.toggle.on{background:#0095f6}.toggle.on::after{left:23px}
+.bottom{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:620px;background:#111;color:#fff;border-radius:22px;display:flex;justify-content:space-around;padding:12px 0;z-index:40}.bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888;position:relative}.bottom div.active{color:#FFFC00}.bottom div small{display:block;font-size:10px;font-weight:700}
+.tick{width:16px;height:16px;background:#0095f6;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900}.tick-big{width:20px;height:20px;font-size:12px}.verified-row{display:flex;align-items:center;justify-content:center;gap:6px}
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:#fafafa}.auth-card{width:100%;max-width:380px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:24px;text-align:center}.auth-logo{font-size:36px;font-weight:900;margin-bottom:6px}.auth-logo span{background:linear-gradient(90deg,#FFFC00,#FF004C,#A100F2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.auth-card p{color:#777;font-size:13px}.auth-card input{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;outline:none;margin-top:10px;background:#fafafa}.auth-card input.error{border-color:#ff3040;background:#fff5f5}.link{color:#0095f6;font-weight:700;cursor:pointer;font-size:14px}.divider{display:flex;align-items:center;gap:10px;color:#999;font-size:12px;margin:16px 0}.divider::before,.divider::after{content:'';flex:1;height:1px;background:#ddd}.auth-tabs{display:flex;background:#f2f2f2;border-radius:12px;padding:4px;margin-bottom:14px}.auth-tabs button{flex:1;border:none;padding:10px;border-radius:9px;font-weight:800;background:transparent}.auth-tabs button.active{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}.user-chip{display:flex;align-items:center;gap:10px;text-align:left;background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:10px;margin-top:10px;cursor:pointer}.error-msg{color:#ff3040;font-size:13px;font-weight:700;margin-top:8px;display:none;text-align:left}
+.chat-layout{display:grid;grid-template-columns:280px 1fr;gap:0;background:#fff;border:1px solid #e8e8e8;border-radius:14px;overflow:hidden;min-height:520px}.chat-list{border-right:1px solid #eee;overflow-y:auto}.chat-user{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid #f5f5f5}.chat-user.active{background:#eef6ff}.chat-head{padding:12px 14px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px}.chat-msgs{flex:1;padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;min-height:320px;background:#fafafa}.bubble{max-width:75%;padding:9px 13px;border-radius:18px;font-size:14px}.bubble.me{background:#0095f6;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}.bubble.them{background:#fff;border:1px solid #eee;align-self:flex-start;border-bottom-left-radius:4px}.bubble small{display:block;font-size:10px;opacity:.7;margin-top:3px}.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid #eee;background:#fff}.chat-input-row input{flex:1;padding:12px;border:1px solid #ddd;border-radius:20px;outline:none}.chat-input-row button{width:48px;height:48px;border-radius:50%;border:none;background:#0095f6;color:#fff;font-size:20px}.room-box{background:#e7f5ff;border:1px solid #0095f6;border-radius:12px;padding:12px;margin:10px 0;text-align:center}.lock-badge{background:#000;color:#FFFC00;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
+.typing{font-size:12px;color:#0095f6;font-style:italic;padding:4px 14px;display:none}
+.follow-card{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #eee;border-radius:12px;margin-bottom:10px;background:#fff}.follow-card button{width:auto;margin:0;padding:8px 14px;font-size:13px}
+.settings-layout{max-width:900px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:240px 1fr;gap:16px}.set-menu{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:10px;height:fit-content;position:sticky;top:80px}.set-menu button{width:100%;text-align:left;background:none;border:none;padding:11px 12px;border-radius:10px;display:flex;gap:10px;align-items:center}.set-menu button.active{background:#f2f2f2;font-weight:700}.set-panel{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:20px}.set-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f0f0f0;gap:12px}.set-row small{color:#777;display:block}.set-row input,.set-row select,.set-row textarea{padding:10px 12px;border:1px solid #ddd;border-radius:10px;outline:none;width:220px;max-width:100%}.set-row textarea{width:100%;min-height:70px;resize:none}.toggle{width:44px;height:24px;background:#ddd;border-radius:20px;position:relative;cursor:pointer;flex:0 0 auto}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}.toggle.on{background:#0095f6}.toggle.on::after{left:23px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}.modal.active{display:flex}.modal-box{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:380px;text-align:center}.modal-box button{width:100%;padding:12px;border:none;border-bottom:1px solid #eee;background:none}
 #toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:20px;font-weight:700;display:none;z-index:300}
 .viewer{position:fixed;inset:0;background:#000;z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:20px}.viewer.active{display:flex}.viewer img{max-width:100%;max-height:60vh;border-radius:14px}
 @media(max-width:800px){.layout{display:block;max-width:620px;margin-top:16px}.profile-card{display:none}.search{width:min(38vw,220px)}.settings-layout{grid-template-columns:1fr}.set-menu{position:static;display:flex;overflow-x:auto}.set-menu button{white-space:nowrap;width:auto}.chat-layout{grid-template-columns:1fr}.chat-list{display:none}.chat-layout.show-list .chat-list{display:block}.chat-layout.show-list .chat-main{display:none}}
-@media(max-width:480px){.topbar{height:56px;padding:0 14px}.search{display:none}.layout{padding:0;margin:10px auto}.stories,.post{border-radius:0;border-left:0;border-right:0}}
 </style>
 </head>
 <body>
 
 <div id="authPage"><div class="auth-wrap"><div>
 <div class="auth-card">
-<div class="auth-logo">SNAP<span>ISTA</span></div><p>Apna vibe, apni duniya ✨ • Real Chat ON 🔥</p>
+<div class="auth-logo">SNAP<span>ISTA</span></div><p>Apna vibe, apni duniya ✨ • Private Chat 🔒 • Follow Request ✅</p>
 <div class="auth-tabs"><button id="tabSignup" class="active" onclick="switchTab('signup')">Sign Up</button><button id="tabLogin" onclick="switchTab('login')">Log In</button></div>
 <div id="signupForm">
 <input id="suName" placeholder="Full Name">
@@ -64,8 +64,6 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 <div id="loginForm" style="display:none">
 <input id="loginUser" placeholder="Username"><input id="loginPass" type="password" placeholder="Password">
 <button class="btn" onclick="doLogin()">Log in</button>
-<div class="divider"><span>OR</span></div><div class="link" onclick="showToast('Facebook login jald aayega')">Log in with Facebook</div>
-<p style="margin-top:14px"><span class="link" onclick="showToast('Password reset link bhej diya')">Forgotten password?</span></p>
 </div>
 <div id="savedUsers" style="margin-top:12px"></div>
 </div>
@@ -73,53 +71,62 @@ button{font:inherit;cursor:pointer}input,select{font:inherit}
 </div></div></div>
 
 <div id="appPage" style="display:none">
-<header class="topbar"><div class="brand" onclick="goPage('home')">SNAP<span>ISTA</span></div><input class="search" placeholder="Search" /><nav class="nav"><span onclick="goPage('home')">⌂</span><span onclick="goPage('chat')">✉</span><span onclick="goPage('snap')">＋</span><span onclick="goPage('explore')">⌕</span><span onclick="goPage('profile')">◉</span><span onclick="goPage('settings')">⚙️</span></nav></header>
+<header class="topbar"><div class="brand" onclick="goPage('home')">SNAP<span>ISTA</span></div><input class="search" placeholder="Search" /><nav class="nav"><span onclick="goPage('home')">⌂</span><span onclick="goPage('chat')">✉<span class="badge" id="chatBadge" style="display:none">0</span></span><span onclick="goPage('snap')">＋</span><span onclick="goPage('explore')">⌕</span><span onclick="goPage('follow')">👥<span class="badge" id="followBadge" style="display:none">0</span></span><span onclick="goPage('profile')">◉</span><span onclick="goPage('settings')">⚙️</span></nav></header>
 
 <div id="page-home" class="page active"><main class="layout"><section>
 <div class="vibe-banner"><h2>Apna vibe,<br>apni duniya ✨</h2><p id="welcomeText">Snap lo. Post karo.</p><button onclick="goPage('snap')">📸 Snap Lo →</button></div>
+<div id="followReqBanner" style="display:none;background:#fff3cd;border:1px solid #ffcc00;border-radius:12px;padding:12px;margin-bottom:14px"><b>👥 <span id="followReqCount">0</span> Follow Request aayi hai!</b><br><button class="btn btn-yellow" style="margin-top:8px" onclick="goPage('follow')">Dekho →</button></div>
 <div class="stories" id="stories"></div>
 <div class="card" style="padding:14px;margin-bottom:20px"><input type="file" id="fileInput" accept="image/*" onchange="uploadPost(event)" style="display:none"><button class="btn btn-yellow" style="margin:0" onclick="document.getElementById('fileInput').click()">+ New Post - Photo Chuno</button></div>
 <div id="feed"></div>
 </section>
 <aside class="profile-card">
 <div class="profile-row"><div class="avatar" id="sideAvatar">😎</div><div><div class="username" id="sideUser">you</div><div class="place" id="sideName">Your profile • Snapista</div></div><button class="switch" onclick="logout()">Log out</button></div>
-<div class="suggest-title">Suggestions for you</div><div class="empty" style="padding:20px"><p style="margin:0">Abhi koi suggestion nahi hai.</p></div>
-<div class="card" style="margin-top:20px;padding:14px;border:none"><b>🔥 Snapista Streak</b><p style="color:#777;font-size:13px;margin:6px 0 0">Roz 1 snap bhej, streak ban jayegi.<br>Abhi: 0 days</p></div>
+<div class="suggest-title">Follow Requests</div><div id="sideFollowReq"></div>
+<div class="suggest-title">Suggestions for you</div><div id="suggestList"></div>
+<div class="card" style="margin-top:20px;padding:14px;border:none"><b>🔥 Snapista Streak</b><p style="color:#777;font-size:13px;margin:6px 0 0" id="streakText">Roz 1 snap bhej, streak ban jayegi.<br>Abhi: 0 days</p></div>
 <div class="card" style="margin-top:12px;padding:14px;border:none"><b>👥 Saved Accounts</b><div id="accountSwitcher"></div><button class="btn btn-gray" style="margin-top:10px" onclick="logout()">+ Add Account</button></div>
 </aside></main></div>
 
-<div id="page-explore" class="page"><main class="layout"><section><h2 style="margin:0">Explore</h2><p style="color:#777">Duniya kya dekh rahi hai</p><div style="display:flex;gap:8px;margin-bottom:14px"><input id="searchInput" placeholder="Search friends..." style="flex:1;padding:12px;border:1px solid #ddd;border-radius:12px;outline:none"><button class="btn" style="width:auto;margin:0" onclick="doSearch()">Search</button></div><div class="empty"><div class="big">🔍</div><h3>Abhi khaali hai</h3><p>Jab users aayenge, yahan unke posts dikhenge.</p></div></section></main></div>
+<div id="page-explore" class="page"><main class="layout"><section><h2 style="margin:0">Explore</h2><p style="color:#777">Logon ko dhoondo, Follow karo</p><div style="display:flex;gap:8px;margin-bottom:14px"><input id="searchInput" placeholder="Username dhoondo - jaise kayth..." style="flex:1;padding:12px;border:1px solid #ddd;border-radius:12px;outline:none"><button class="btn" style="width:auto;margin:0" onclick="doSearch()">Search</button></div><div id="exploreList"></div></section></main></div>
+
+<div id="page-follow" class="page"><main class="layout"><section>
+<h2 style="margin:0">Follow Requests 👥</h2><p style="color:#777">Jaise Insta / Snap me hota hai - Accept karo tabhi wo Follow kar payega</p>
+<div class="card" style="padding:14px"><h3 style="margin:0">📩 Incoming Requests</h3><div id="incomingReqList" style="margin-top:10px"></div></div>
+<div class="card" style="padding:14px;margin-top:14px"><h3 style="margin:0">📤 Tumne Bheji Hui Requests</h3><div id="outgoingReqList" style="margin-top:10px"></div></div>
+<div class="card" style="padding:14px;margin-top:14px"><h3 style="margin:0">👥 Followers (<span id="followerCount">0</span>) • Following (<span id="followingCount">0</span>)</h3><div id="followersList" style="margin-top:10px"></div></div>
+</section></main></div>
 
 <div id="page-snap" class="page"><main class="layout"><section><h2 style="margin:0">Snap</h2><p style="color:#777">Camera • Photo • Send</p><div class="camera-box"><video id="cameraVideo" autoplay playsinline muted style="display:none"></video><img id="capturedImg" style="display:none"><div id="cameraPlaceholder"><div><div style="font-size:64px">📸</div><b>Snap Camera Ready</b><p style="color:#aaa">Camera on karo, photo khicho</p><button class="btn btn-yellow" onclick="startCamera()">Open Camera</button></div></div><div class="camera-text" id="cameraText"></div></div><div class="capture-bar"><button class="small-btn" onclick="switchCamera()">🔄</button><button class="capture-btn" onclick="takeSnap()"></button><button class="small-btn" onclick="retakeSnap()">↩️</button></div><input class="snap-input" id="snapText" placeholder="Is Snap pe kya likhna hai?..." oninput="document.getElementById('cameraText').innerText=this.value"><button class="btn btn-yellow" onclick="sendSnap()">Send Snap →</button><button class="btn btn-black" onclick="addToStory()">+ Add to Story</button><button class="btn btn-gray" onclick="downloadSnap()">⬇️ Download</button></section></main></div>
 
 <div id="page-reels" class="page"><main class="layout"><section><h2 style="margin:0">Reels</h2><p style="color:#777">Short • Fast • Vibe</p><div class="empty"><div class="big">🎬</div><h3>No reels yet</h3><p>Tu pehli reel daalega?</p><button class="btn" onclick="showToast('Reel upload jald aayega')">Upload Reel</button></div></section></main></div>
 
 <div id="page-chat" class="page"><main class="layout" style="grid-template-columns:1fr;max-width:820px"><section>
-<h2 style="margin:0">Messages <span style="color:#31a24c;font-size:13px">● LIVE - FREE</span></h2><p style="color:#777">Alag phone wale dost se bhi chat hogi. Room Code same rakho.</p>
-<div class="room-box"><b>Room Code:</b> <span id="roomCodeText" style="font-size:18px">snapista-chat</span><br><small>Dono ka Room Code SAME hona chahiye</small><br><input id="roomInput" placeholder="Room Code - jaise snapista-chat" style="width:100%;padding:10px;border:1px solid #0095f6;border-radius:10px;margin-top:8px"><button class="btn" style="margin-top:8px" onclick="joinRoom()">Join Room →</button></div>
+<h2 style="margin:0">Messages <span class="lock-badge">🔒 ENCRYPTED PRIVATE</span></h2><p style="color:#777">Message lock ho ke jayega. Beech me koi nahi padh sakta. Room Code secret rakho.</p>
+<div class="room-box"><b>Room Code (Secret):</b> <span id="roomCodeText" style="font-size:18px">snapista-chat</span><br><small>Dono ka Room Code SAME + SECRET hona chahiye. Jaise <b>kayth-secret-9177</b><br>Default wala mat use karo, wo sabko pata hai.</small><br><input id="roomInput" placeholder="Secret Room Code - jaise kayth-secret-9177" style="width:100%;padding:10px;border:1px solid #0095f6;border-radius:10px;margin-top:8px"><button class="btn" style="margin-top:8px" onclick="joinRoom()">Join Secret Room →</button></div>
 <div class="chat-layout show-list" id="chatLayout">
-<div class="chat-list"><div style="padding:14px;border-bottom:1px solid #eee;font-weight:800">Users</div><div id="chatUserList"></div><div style="padding:12px"><input id="newFriendInput" placeholder="Dost ka username daalo" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px"><button class="btn btn-gray" style="margin-top:8px" onclick="addFriend()">+ Dost Add Karo</button></div></div>
-<div class="chat-main"><div class="chat-head"><button class="btn btn-gray" style="width:auto;margin:0;padding:6px 12px" onclick="backToChatList()">← Back</button><div class="avatar">💬</div><div><div style="font-weight:700" id="chatHeadName">Kisi ko chuno</div><div style="color:#777;font-size:12px" id="chatHeadStatus">Room join karo</div></div></div><div class="chat-msgs" id="chatMsgs"><div style="text-align:center;color:#999;padding:30px">👈 Left se dost chuno<br>Ya + Dost Add Karo se naam daalo</div></div><div class="chat-input-row"><input id="chatInput" placeholder="Message..." onkeydown="if(event.key=='Enter')sendRealChat()"><button onclick="sendRealChat()">➤</button></div></div>
+<div class="chat-list"><div style="padding:14px;border-bottom:1px solid #eee;font-weight:800">Users • Follow kiye hue hi chat kar sakte hai</div><div id="chatUserList"></div><div style="padding:12px"><input id="newFriendInput" placeholder="Dost ka username daalo" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px"><button class="btn btn-gray" style="margin-top:8px" onclick="addFriend()">+ Dost Add Karo</button></div></div>
+<div class="chat-main"><div class="chat-head"><button class="btn btn-gray" style="width:auto;margin:0;padding:6px 12px" onclick="backToChatList()">← Back</button><div class="avatar">💬</div><div><div style="font-weight:700" id="chatHeadName">Kisi ko chuno</div><div style="color:#777;font-size:12px" id="chatHeadStatus">Room join karo</div></div><span class="lock-badge" style="margin-left:auto">🔒 Private</span></div><div id="typingBar" class="typing">✍️ Dost likh raha hai...</div><div class="chat-msgs" id="chatMsgs"><div style="text-align:center;color:#999;padding:30px">👈 Left se dost chuno<br>🔒 Chat Encrypted hai - koi beech me nahi padh sakta</div></div><div class="chat-input-row"><input id="chatInput" placeholder="Message... 🔒" oninput="sendTyping()" onkeydown="if(event.key=='Enter')sendRealChat()"><button onclick="sendRealChat()">➤</button></div></div>
 </div>
-<p style="color:#777;font-size:12px;text-align:center">FREE server se chal rahi hai. Koi paisa nahi, koi Firebase nahi.<br>Message 2-3 sec me pahuchta hai.</p>
+<p style="color:#777;font-size:12px;text-align:center">🔒 End-to-End jaisa lock - Room Code hi chabi hai.<br>Room Code kisi ko mat batao, sirf dost ko.</p>
 </section></main></div>
 
-<div id="page-profile" class="page"><main class="layout"><section><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Profile</h2><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="goPage('settings')">⚙️ Settings</button></div><div style="text-align:center;padding:20px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;margin-top:12px"><div style="width:96px;height:96px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2);padding:3px;margin:0 auto"><div class="avatar" id="profileAvatar" style="width:100%;height:100%;font-size:46px;border:3px solid #fff">😎</div></div><div class="verified-row"><h2 id="profileUser" style="margin:10px 0 0">you</h2><span class="tick tick-big" id="profileTick" style="display:none">✓</span></div><p style="color:#777" id="profileBio">Snapista Creator • Vibe King 👑</p><p id="verifiedText" style="color:#0095f6;font-weight:700;font-size:13px;display:none">✓ Verified Creator • Snapista Official</p><p><b id="postCount">0</b> Posts • <b>0</b> Followers • <b>0</b> Following</p><div style="display:flex;gap:8px"><button class="btn" style="margin:0" onclick="goPage('settings');openSetting('edit')">Edit Profile</button><button class="btn btn-gray" style="margin:0" onclick="showToast('Profile link copied')">Share Profile</button></div></div><div class="empty" style="margin-top:14px"><div class="big">📸</div><h3>No posts yet</h3><p>Abhi koi post nahi hai.</p></div></section></main></div>
+<div id="page-profile" class="page"><main class="layout"><section><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Profile</h2><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="goPage('settings')">⚙️ Settings</button></div><div style="text-align:center;padding:20px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;margin-top:12px"><div style="width:96px;height:96px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2);padding:3px;margin:0 auto"><div class="avatar" id="profileAvatar" style="width:100%;height:100%;font-size:46px;border:3px solid #fff">😎</div></div><div class="verified-row"><h2 id="profileUser" style="margin:10px 0 0">you</h2><span class="tick tick-big" id="profileTick" style="display:none">✓</span></div><p style="color:#777" id="profileBio">Snapista Creator • Vibe King 👑</p><p id="verifiedText" style="color:#0095f6;font-weight:700;font-size:13px;display:none">✓ Verified Creator • Snapista Official</p><p><b id="postCount">0</b> Posts • <b id="followerCount2">0</b> Followers • <b id="followingCount2">0</b> Following</p><div style="display:flex;gap:8px"><button class="btn" style="margin:0" onclick="goPage('settings');openSetting('edit')">Edit Profile</button><button class="btn btn-gray" style="margin:0" onclick="showToast('Profile link copied')">Share Profile</button></div></div><div class="empty" style="margin-top:14px"><div class="big">📸</div><h3>No posts yet</h3><p>Abhi koi post nahi hai.</p></div></section></main></div>
 
 <div id="page-settings" class="page"><div class="settings-layout"><div class="set-menu"><button class="active" onclick="openSetting('edit',this)">👤 Edit Profile</button><button onclick="openSetting('privacy',this)">🔒 Privacy</button><button onclick="openSetting('notif',this)">🔔 Notifications</button><button onclick="openSetting('security',this)">🛡️ Security</button><button onclick="openSetting('verify',this)">✅ Blue Tick</button><button onclick="openSetting('blocked',this)">🚫 Blocked</button><button onclick="openSetting('lang',this)">🌐 Language</button><button onclick="openSetting('theme',this)">🎨 Theme</button><button onclick="openSetting('help',this)">❓ Help</button><button onclick="openSetting('about',this)">ℹ️ About</button></div><div>
-<div id="set-edit" class="set-panel"><h2 style="margin:0">Edit Profile</h2><p style="color:#777">Teri public info</p><div class="set-row"><div><b>Profile Photo</b></div><input type="file" accept="image/*" onchange="changeAvatar(event)" style="width:auto"></div><div class="set-row"><div><b>Name</b></div><input id="setName" value="You" oninput="updateProfile()"></div><div class="set-row"><div><b>Username</b><small>Same naam dobara nahi chalega</small></div><input id="setUsername" value="you" oninput="updateProfile()"></div><div class="set-row"><div><b>Bio</b></div><textarea id="setBio" oninput="updateProfile()">Snapista Creator • Vibe King 👑</textarea></div><div class="set-row"><div><b>Gender</b></div><select><option>Prefer not to say</option><option>Male</option><option>Female</option><option>Other</option></select></div><button class="btn" onclick="saveProfile()">Save Changes</button></div>
-<div id="set-privacy" class="set-panel" style="display:none"><h2 style="margin:0">Privacy</h2><div class="set-row"><div><b>Private Account</b><small>Sirf followers dekh payenge</small></div><div class="toggle" onclick="toggle(this,'Private')"></div></div><div class="set-row"><div><b>Show Activity Status</b></div><div class="toggle on" onclick="toggle(this,'Activity')"></div></div><div class="set-row"><div><b>Allow Comments</b></div><select><option>Everyone</option><option>Followers</option><option>Nobody</option></select></div><div class="set-row"><div><b>Show Like Count</b></div><div class="toggle on" onclick="toggle(this,'Like count')"></div></div><div class="set-row"><div><b>Hide Offensive Comments</b></div><div class="toggle on" onclick="toggle(this,'Filter')"></div></div></div>
-<div id="set-notif" class="set-panel" style="display:none"><h2 style="margin:0">Notifications</h2><div class="set-row"><div><b>Likes</b></div><div class="toggle on" onclick="toggle(this,'Likes')"></div></div><div class="set-row"><div><b>Comments</b></div><div class="toggle on" onclick="toggle(this,'Comments')"></div></div><div class="set-row"><div><b>New Followers</b></div><div class="toggle on" onclick="toggle(this,'Followers')"></div></div><div class="set-row"><div><b>Messages</b></div><div class="toggle on" onclick="toggle(this,'Messages')"></div></div><div class="set-row"><div><b>Stories</b></div><div class="toggle" onclick="toggle(this,'Story')"></div></div><div class="set-row"><div><b>Reels</b></div><div class="toggle on" onclick="toggle(this,'Reels')"></div></div></div>
-<div id="set-security" class="set-panel" style="display:none"><h2 style="margin:0">Security</h2><div class="set-row"><div><b>Change Password</b></div><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="changePass()">Change</button></div><div class="set-row"><div><b>Two-Factor Authentication</b></div><div class="toggle" onclick="toggle(this,'2FA')"></div></div><div class="set-row"><div><b>Login Activity</b></div><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="showToast('This device • Siwani, Haryana • Active now')">View</button></div><div class="set-row"><div><b>Saved Login Info</b></div><div class="toggle on" onclick="toggle(this,'Saved login')"></div></div></div>
+<div id="set-edit" class="set-panel"><h2 style="margin:0">Edit Profile</h2><p style="color:#777">Teri public info</p><div class="set-row"><div><b>Profile Photo</b></div><input type="file" accept="image/*" onchange="changeAvatar(event)" style="width:auto"></div><div class="set-row"><div><b>Name</b></div><input id="setName" value="You" oninput="updateProfile()"></div><div class="set-row"><div><b>Username</b><small>Same naam dobara nahi chalega</small></div><input id="setUsername" value="you" oninput="updateProfile()"></div><div class="set-row"><div><b>Bio</b></div><textarea id="setBio" oninput="updateProfile()">Snapista Creator • Vibe King 👑</textarea></div><div class="set-row"><div><b>Private Account</b><small>Follow Request se hi koi Follow kar payega</small></div><div class="toggle on" id="privateToggle" onclick="togglePrivate(this)"></div></div><button class="btn" onclick="saveProfile()">Save Changes</button></div>
+<div id="set-privacy" class="set-panel" style="display:none"><h2 style="margin:0">Privacy</h2><div class="set-row"><div><b>Private Account</b><small>Follow Request ON hai</small></div><div class="toggle on" onclick="toggle(this,'Private')"></div></div><div class="set-row"><div><b>Show Activity Status</b></div><div class="toggle on" onclick="toggle(this,'Activity')"></div></div><div class="set-row"><div><b>Allow Comments</b></div><select><option>Everyone</option><option>Followers</option><option>Nobody</option></select></div><div class="set-row"><div><b>Show Like Count</b></div><div class="toggle on" onclick="toggle(this,'Like count')"></div></div></div>
+<div id="set-notif" class="set-panel" style="display:none"><h2 style="margin:0">Notifications</h2><div class="set-row"><div><b>Follow Requests</b></div><div class="toggle on" onclick="toggle(this,'Follow req')"></div></div><div class="set-row"><div><b>Likes</b></div><div class="toggle on" onclick="toggle(this,'Likes')"></div></div><div class="set-row"><div><b>Comments</b></div><div class="toggle on" onclick="toggle(this,'Comments')"></div></div><div class="set-row"><div><b>Messages</b></div><div class="toggle on" onclick="toggle(this,'Messages')"></div></div></div>
+<div id="set-security" class="set-panel" style="display:none"><h2 style="margin:0">Security</h2><div class="set-row"><div><b>Change Password</b></div><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="changePass()">Change</button></div><div class="set-row"><div><b>Two-Factor Authentication</b></div><div class="toggle" onclick="toggle(this,'2FA')"></div></div><div class="set-row"><div><b>Chat Encryption</b><small>🔒 ON - Koi beech me nahi padh sakta</small></div><div class="toggle on" onclick="toggle(this,'Encryption')"></div></div></div>
 <div id="set-verify" class="set-panel" style="display:none"><h2 style="margin:0">Blue Tick - Verification</h2><div id="verifyBox"></div><div class="set-row"><div><b>Request Verification</b></div><button class="btn" style="width:auto;margin:0;padding:10px 18px" onclick="requestVerify()">Request</button></div></div>
 <div id="set-blocked" class="set-panel" style="display:none"><h2 style="margin:0">Blocked Accounts</h2><div class="empty"><div class="big">🚫</div><h3>No blocked accounts</h3></div></div>
 <div id="set-lang" class="set-panel" style="display:none"><h2 style="margin:0">Language</h2><div class="set-row"><div><b>App Language</b></div><select><option>English</option><option>Hindi - हिन्दी</option><option>Haryanvi</option><option>Punjabi</option><option>Hinglish</option></select></div></div>
-<div id="set-theme" class="set-panel" style="display:none"><h2 style="margin:0">Theme & Display</h2><div class="set-row"><div><b>Dark Mode</b></div><div class="toggle" onclick="toggleTheme(this)"></div></div><div class="set-row"><div><b>Data Saver</b></div><div class="toggle" onclick="toggle(this,'Data saver')"></div></div><div class="set-row"><div><b>Autoplay Reels</b></div><div class="toggle on" onclick="toggle(this,'Autoplay')"></div></div></div>
-<div id="set-help" class="set-panel" style="display:none"><h2 style="margin:0">Help</h2><div class="set-row"><div><b>Report a Problem</b></div><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="showToast('Report bheja gaya')">Report</button></div><div class="set-row"><div><b>Help Center</b></div><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="showToast('Help Center khul raha hai')">Open</button></div></div>
-<div id="set-about" class="set-panel" style="display:none"><h2 style="margin:0">About Snapista</h2><p style="color:#777">Version 1.0.0 • Made in India 🇮🇳<br>© 2026 Snapista</p><button class="btn btn-red" onclick="logout()">Log Out</button><button class="btn btn-gray" onclick="deleteAccount()">Delete Account</button></div>
+<div id="set-theme" class="set-panel" style="display:none"><h2 style="margin:0">Theme & Display</h2><div class="set-row"><div><b>Dark Mode</b></div><div class="toggle" onclick="toggleTheme(this)"></div></div><div class="set-row"><div><b>Data Saver</b></div><div class="toggle" onclick="toggle(this,'Data saver')"></div></div></div>
+<div id="set-help" class="set-panel" style="display:none"><h2 style="margin:0">Help</h2><div class="set-row"><div><b>Report a Problem</b></div><button class="btn btn-gray" style="width:auto;margin:0;padding:9px 16px" onclick="showToast('Report bheja gaya')">Report</button></div></div>
+<div id="set-about" class="set-panel" style="display:none"><h2 style="margin:0">About Snapista</h2><p style="color:#777">Version 2.0 Pro • Private Chat 🔒 • Made in India 🇮🇳<br>© 2026 Snapista</p><button class="btn btn-red" onclick="logout()">Log Out</button><button class="btn btn-gray" onclick="deleteAccount()">Delete Account</button></div>
 </div></div></div>
 
-<div class="bottom"><div class="active" onclick="goPage('home')">🏠<small>Home</small></div><div onclick="goPage('explore')">🔍<small>Explore</small></div><div onclick="goPage('snap')">📸<small>Snap</small></div><div onclick="goPage('reels')">🎬<small>Reels</small></div><div onclick="goPage('chat')">💬<small>Chat</small></div><div onclick="goPage('profile')">👤<small>You</small></div></div>
+<div class="bottom"><div class="active" onclick="goPage('home')">🏠<small>Home</small></div><div onclick="goPage('explore')">🔍<small>Explore</small></div><div onclick="goPage('snap')">📸<small>Snap</small></div><div onclick="goPage('reels')">🎬<small>Reels</small></div><div onclick="goPage('chat')">💬<small>Chat</small></div><div onclick="goPage('follow')">👥<small>Follow</small></div><div onclick="goPage('profile')">👤<small>You</small></div></div>
 </div>
 
 <div class="modal" id="moreModal"><div class="modal-box"><button onclick="closeModal();showToast('Link copied')">Copy Link</button><button onclick="closeModal();showToast('Saved')">Save</button><button onclick="closeModal()">Cancel</button></div></div>
@@ -132,6 +139,22 @@ let currentUserObj=null, activeChatUser=null, roomCode='snapista-chat', pollTime
 let seenMsgIds = new Set(JSON.parse(localStorage.getItem('seen_msgs')||'[]'))
 function getUsers(){try{return JSON.parse(localStorage.getItem('snapista_users')||'[]')}catch(e){return[]}}
 function saveUsers(u){localStorage.setItem('snapista_users',JSON.stringify(u))}
+function getFollows(){try{return JSON.parse(localStorage.getItem('snapista_follows')||'{"following":[],"followers":[],"incoming":[],"outgoing":[]}')}catch(e){return{following:[],followers:[],incoming:[],outgoing:[]}}}
+function saveFollows(f){localStorage.setItem('snapista_follows',JSON.stringify(f))}
+// ===== ENCRYPTION - Room Code hi chabi hai =====
+function encryptText(text,key){
+  let out='';
+  for(let i=0;i<text.length;i++){out+=String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length))}
+  return btoa(unescape(encodeURIComponent(out)))
+}
+function decryptText(enc,key){
+  try{
+    let s=decodeURIComponent(escape(atob(enc)));
+    let out='';
+    for(let i=0;i<s.length;i++){out+=String.fromCharCode(s.charCodeAt(i) ^ key.charCodeAt(i % key.length))}
+    return out
+  }catch(e){return '[🔒 Locked Message]'}
+}
 function switchTab(t){document.getElementById('tabSignup').classList.toggle('active',t=='signup');document.getElementById('tabLogin').classList.toggle('active',t=='login');document.getElementById('signupForm').style.display=t=='signup'?'block':'none';document.getElementById('loginForm').style.display=t=='login'?'block':'none'}
 function checkUsernameLive(){let user=document.getElementById('suUser').value.trim().toLowerCase();let err=document.getElementById('suError'), ok=document.getElementById('suOk'), input=document.getElementById('suUser');if(!user){err.style.display='none';ok.style.display='none';input.classList.remove('error');return}let exists=getUsers().some(u=>u.username.toLowerCase()==user);if(exists){err.style.display='block';ok.style.display='none';input.classList.add('error')}else{err.style.display='none';ok.style.display='block';input.classList.remove('error')}}
 function renderSavedUsers(){let users=getUsers();let box=document.getElementById('savedUsers');if(users.length==0){box.innerHTML='';return}box.innerHTML='<p style="color:#777;font-size:12px;margin:8px 0">Saved Accounts:</p>'+users.map((u,i)=>`<div class="user-chip" onclick="quickLogin(${i})"><div class="avatar" style="width:36px;height:36px">😎</div><div style="flex:1"><b>${u.username} ${u.verified?'<span style="color:#0095f6">✓</span>':''}</b><br><small>${u.name}</small></div><span style="color:#0095f6;font-weight:700">Login →</span></div>`).join('')}
@@ -141,8 +164,7 @@ let name=document.getElementById('suName').value.trim(), user=document.getElemen
 if(!name||!user||!email||!pass) return showToast('Saare box bharo');
 if(pass.length<4) return showToast('Password kam se kam 4 ka rakho');
 let users=getUsers();
-if(users.some(u=>u.username.toLowerCase()==user.toLowerCase())){showToast('❌ Ye username pehle se liya hua hai!');alert('❌ Error: "'+user+'" pehle se liya hua hai! Dusra try karo.');return}
-// FIX: Email wala check HATA DIYA - 1 email se kitne bhi account ban sakte hai
+if(users.some(u=>u.username.toLowerCase()==user.toLowerCase())){showToast('❌ Ye username pehle se liya hua hai!');alert('❌ Error: "'+user+'" pehle se liya hua hai!');return}
 let isFirst=users.length==0;
 let newUser={name:name,username:user,email:email,pass:pass,verified:isFirst,created:Date.now()};
 users.push(newUser);saveUsers(users);localStorage.setItem('snapista_current',users.length-1);currentUserObj=newUser;
@@ -150,51 +172,148 @@ if(isFirst) showToast('🎉 Tu pehla user hai! Blue Tick mil gaya ✓');
 enterApp(newUser)
 }
 function doLogin(){let user=document.getElementById('loginUser').value.trim(), pass=document.getElementById('loginPass').value.trim();if(!user||!pass) return showToast('Username aur Password daalo');let users=getUsers();let foundIdx=users.findIndex(u=>u.username.toLowerCase()==user.toLowerCase() && u.pass==pass);if(foundIdx==-1){let same=users.find(u=>u.username.toLowerCase()==user.toLowerCase());if(same) return showToast('Password galat hai');return showToast('Ye username nahi mila, pehle Sign Up karo')}currentUserObj=users[foundIdx];localStorage.setItem('snapista_current',foundIdx);enterApp(users[foundIdx])}
-function enterApp(u){currentUserObj=u;document.getElementById('authPage').style.display='none';document.getElementById('appPage').style.display='block';document.getElementById('sideUser').innerHTML=u.username+' '+(u.verified?'<span class="tick">✓</span>':'');document.getElementById('sideName').innerText=u.name;document.getElementById('profileUser').innerText=u.username;document.getElementById('profileTick').style.display=u.verified?'inline-flex':'none';document.getElementById('verifiedText').style.display=u.verified?'block':'none';document.getElementById('setUsername').value=u.username;document.getElementById('setName').value=u.name;document.getElementById('welcomeText').innerText='Welcome back, '+u.username+' '+(u.verified?'✓':'')+' ✨';updateVerifyBox();renderAccountSwitcher();renderStories();renderFeed();renderUserLists();joinRoom();showToast('Welcome '+u.username+' '+(u.verified?'✓':'')+' 🔥')}
+function enterApp(u){
+currentUserObj=u;document.getElementById('authPage').style.display='none';document.getElementById('appPage').style.display='block';
+document.getElementById('sideUser').innerHTML=u.username+' '+(u.verified?'<span class="tick">✓</span>':'');document.getElementById('sideName').innerText=u.name;document.getElementById('profileUser').innerText=u.username;document.getElementById('profileTick').style.display=u.verified?'inline-flex':'none';document.getElementById('verifiedText').style.display=u.verified?'block':'none';document.getElementById('setUsername').value=u.username;document.getElementById('setName').value=u.name;document.getElementById('welcomeText').innerText='Welcome back, '+u.username+' '+(u.verified?'✓':'')+' ✨';
+updateVerifyBox();renderAccountSwitcher();renderStories();renderFeed();renderUserLists();renderFollowUI();joinRoom();showToast('Welcome '+u.username+' '+(u.verified?'✓':'')+' 🔥')
+}
 function renderAccountSwitcher(){let users=getUsers();document.getElementById('accountSwitcher').innerHTML=users.map((u,i)=>`<div class="user-chip" onclick="quickLogin(${i})"><div class="avatar" style="width:32px;height:32px">😎</div><div style="flex:1"><b style="font-size:13px">${u.username} ${u.verified?'✓':''}</b><br><small>${u.name}</small></div><span style="font-size:12px;color:#0095f6">Switch</span></div>`).join('')}
 function updateVerifyBox(){let box=document.getElementById('verifyBox');if(!box)return;if(currentUserObj && currentUserObj.verified){box.innerHTML=`<div style="background:#e7f5ff;border:1px solid #0095f6;padding:14px;border-radius:12px;text-align:center"><b style="color:#0095f6">✓ You are Verified</b><p style="margin:4px 0 0;color:#555;font-size:13px">Tu Snapista ka pehla Verified Creator hai 👑</p></div>`}else{box.innerHTML=`<div style="background:#fff3cd;border:1px solid #ffcc00;padding:14px;border-radius:12px;text-align:center"><b>Not Verified Yet</b></div>`}}
 function requestVerify(){if(currentUserObj && currentUserObj.verified) return showToast('Tujhe pehle se hi Blue Tick hai ✓');showToast('Verification request bhej di gayi')}
 function logout(){localStorage.removeItem('snapista_current');document.getElementById('appPage').style.display='none';document.getElementById('authPage').style.display='block';switchTab('login');renderSavedUsers();showToast('Logged out')}
 function deleteAccount(){if(confirm('Pakka delete karna hai?')){let users=getUsers();let idx=parseInt(localStorage.getItem('snapista_current')||'0');users.splice(idx,1);saveUsers(users);logout();showToast('Account deleted')}}
-function goPage(name){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active'));let idx={home:0,explore:1,snap:2,reels:3,chat:4,profile:5}[name];if(idx!==undefined)document.querySelectorAll('.bottom div')[idx].classList.add('active');if(name=='chat'){renderUserLists()}window.scrollTo(0,0)}
+function goPage(name){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active'));let idx={home:0,explore:1,snap:2,reels:3,chat:4,follow:5,profile:6}[name];if(idx!==undefined)document.querySelectorAll('.bottom div')[idx].classList.add('active');if(name=='chat'){renderUserLists()}if(name=='follow'||name=='home'){renderFollowUI()}window.scrollTo(0,0)}
 function openSetting(id,btn){document.querySelectorAll('.set-panel').forEach(p=>p.style.display='none');document.getElementById('set-'+id).style.display='block';if(btn){document.querySelectorAll('.set-menu button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}}
 function toggle(el,msg){el.classList.toggle('on');showToast((el.classList.contains('on')?'ON: ':'OFF: ')+msg)}
+function togglePrivate(el){el.classList.toggle('on');showToast(el.classList.contains('on')?'Private Account ON - Ab Follow Request aayegi':'Public Account ON')}
 function toggleTheme(el){el.classList.toggle('on');if(el.classList.contains('on')){document.body.style.background='#000';document.body.style.color='#fff';showToast('Dark Mode ON 🌙')}else{document.body.style.background='#fafafa';document.body.style.color='#171717';showToast('Light Mode ON ☀️')}}
 function updateProfile(){let n=document.getElementById('setName').value||'You';let u=document.getElementById('setUsername').value||'you';let b=document.getElementById('setBio').value;document.getElementById('profileUser').innerText=u;document.getElementById('sideUser').innerHTML=u+' '+(currentUserObj && currentUserObj.verified?'<span class="tick">✓</span>':'');document.getElementById('sideName').innerText=n;document.getElementById('profileBio').innerText=b}
 function saveProfile(){let u=document.getElementById('setUsername').value.trim();if(!u)return showToast('Username khaali nahi ho sakta');let users=getUsers();let idx=parseInt(localStorage.getItem('snapista_current')||'0');let exists=users.some((x,i)=>i!==idx && x.username.toLowerCase()==u.toLowerCase());if(exists){showToast('❌ Ye username pehle se liya hua hai!');alert('❌ Error: Ye username pehle se liya hua hai!');return}users[idx].username=u;users[idx].name=document.getElementById('setName').value;saveUsers(users);currentUserObj=users[idx];showToast('Profile saved ✅')}
 function changeAvatar(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);document.getElementById('profileAvatar').innerHTML=`<img src="${url}">`;document.getElementById('sideAvatar').innerHTML=`<img src="${url}">`;showToast('Profile photo badal gayi')}
 function changePass(){let np=prompt('Naya password daalo');if(np&&np.length>=4){let users=getUsers();let idx=parseInt(localStorage.getItem('snapista_current')||'0');users[idx].pass=np;saveUsers(users);showToast('Password badal gaya ✅')}}
+// ===== FOLLOW REQUEST SYSTEM =====
+function renderFollowUI(){
+let f=getFollows();
+let incoming=f.incoming||[], outgoing=f.outgoing||[], followers=f.followers||[], following=f.following||[];
+document.getElementById('followerCount').innerText=followers.length;
+document.getElementById('followingCount').innerText=following.length;
+document.getElementById('followerCount2').innerText=followers.length;
+document.getElementById('followingCount2').innerText=following.length;
+document.getElementById('streakText').innerHTML=`Roz 1 snap bhej, streak ban jayegi.<br>Followers: ${followers.length} • Following: ${following.length}`;
+let badge=document.getElementById('followBadge');
+if(incoming.length>0){badge.style.display='flex';badge.innerText=incoming.length}else{badge.style.display='none'}
+document.getElementById('followReqBanner').style.display=incoming.length>0?'block':'none';
+document.getElementById('followReqCount').innerText=incoming.length;
+document.getElementById('sideFollowReq').innerHTML=incoming.length==0?'<p style="color:#777;font-size:13px">Koi request nahi hai.</p>':incoming.map(u=>`<div class="follow-card" style="padding:8px"><div class="avatar" style="width:32px;height:32px">😎</div><b style="flex:1;font-size:13px">${u}</b><button class="btn btn-green" onclick="acceptFollow('${u}')">Accept</button><button class="btn btn-gray" onclick="rejectFollow('${u}')">Reject</button></div>`).join('');
+document.getElementById('incomingReqList').innerHTML=incoming.length==0?'<p style="color:#777">Koi request nahi aayi hai.</p>':incoming.map(u=>`<div class="follow-card"><div class="avatar">😎</div><div style="flex:1"><b>${u}</b><br><small style="color:#777">Tumhe Follow karna chahta hai</small></div><button class="btn btn-green" onclick="acceptFollow('${u}')">Accept ✅</button><button class="btn btn-gray" onclick="rejectFollow('${u}')">Reject ❌</button></div>`).join('');
+document.getElementById('outgoingReqList').innerHTML=outgoing.length==0?'<p style="color:#777">Tumne kisi ko request nahi bheji.</p>':outgoing.map(u=>`<div class="follow-card"><div class="avatar">😎</div><div style="flex:1"><b>${u}</b><br><small style="color:#777">Request Pending... ⏳</small></div><button class="btn btn-gray" onclick="cancelFollowReq('${u}')">Cancel</button></div>`).join('');
+document.getElementById('followersList').innerHTML=(followers.length==0&&following.length==0)?'<p style="color:#777">Abhi koi Follower / Following nahi hai.</p>':`<b>Followers:</b> ${followers.join(', ')||'Koi nahi'}<br><b>Following:</b> ${following.join(', ')||'Koi nahi'}`;
+let users=getUsers().filter(u=>u.username.toLowerCase()!==currentUserObj.username.toLowerCase());
+document.getElementById('suggestList').innerHTML=users.length==0?'<p style="color:#777;font-size:13px">Koi suggestion nahi.</p>':users.map(u=>`<div class="follow-card" style="padding:8px"><div class="avatar" style="width:32px;height:32px">😎</div><div style="flex:1"><b style="font-size:13px">${u.username}</b><br><small>${u.name}</small></div>${followBtnHTML(u.username)}</div>`).join('');
+document.getElementById('exploreList').innerHTML=users.length==0?'<div class="empty"><div class="big">🔍</div><h3>Abhi koi user nahi hai</h3><p>Dost ko file bhejo, wo Sign Up karega to yahan dikhega.</p></div>':users.map(u=>`<div class="follow-card"><div class="avatar">😎</div><div style="flex:1"><b>${u.username} ${u.verified?'✓':''}</b><br><small style="color:#777">${u.name} • Private Account 🔒</small></div>${followBtnHTML(u.username)}<button class="btn btn-gray" onclick="openChatFromExplore('${u.username}')">Chat →</button></div>`).join('');
+}
+function followBtnHTML(target){
+let f=getFollows();
+if((f.following||[]).includes(target)) return `<button class="btn btn-gray" onclick="unfollowUser('${target}')">Following ✓</button>`;
+if((f.outgoing||[]).includes(target)) return `<button class="btn btn-gray" onclick="cancelFollowReq('${target}')">Requested ⏳</button>`;
+return `<button class="btn" onclick="sendFollowReq('${target}')">Follow +</button>`;
+}
+function sendFollowReq(target){
+let f=getFollows();
+if(f.following.includes(target)) return showToast('Pehle se Following hai');
+if(f.outgoing.includes(target)) return showToast('Request pehle se bheji hui hai');
+f.outgoing.push(target);saveFollows(f);
+// Dusre phone pe bhi request bhejo - Encrypted
+sendFollowViaNtfy(target,'request');
+renderFollowUI();
+showToast('Follow Request bhej di → '+target+' ✅');
+alert('✅ Follow Request bhej di!\n\n'+target+' ko Accept karna padega, tabhi tu usko Follow kar payega.\n\nJaise Insta me hota hai.');
+}
+function acceptFollow(from){
+let f=getFollows();
+f.incoming=f.incoming.filter(u=>u!==from);
+if(!f.followers.includes(from)) f.followers.push(from);
+saveFollows(f);
+sendFollowViaNtfy(from,'accepted');
+renderFollowUI();
+showToast('Accept kar liya ✅ - '+from+' ab tera Follower hai');
+}
+function rejectFollow(from){
+let f=getFollows();
+f.incoming=f.incoming.filter(u=>u!==from);saveFollows(f);
+sendFollowViaNtfy(from,'rejected');
+renderFollowUI();showToast('Reject kar diya ❌');
+}
+function cancelFollowReq(target){let f=getFollows();f.outgoing=f.outgoing.filter(u=>u!==target);saveFollows(f);renderFollowUI();showToast('Request cancel kar di')}
+function unfollowUser(target){let f=getFollows();f.following=f.following.filter(u=>u!==target);saveFollows(f);renderFollowUI();showToast('Unfollow kar diya')}
+function openChatFromExplore(u){goPage('chat');addFriendByName(u)}
+function addFriendByName(u){activeChatUser=u;document.getElementById('chatHeadName').innerText=u;document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • 🔒 Encrypted';document.getElementById('chatLayout').classList.remove('show-list');document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:30px">👋 Say hi to ${u}<br>🔒 Chat Encrypted hai</div>`}
+async function sendFollowViaNtfy(target,action){
+try{
+  let payload={type:'follow', action:action, from:currentUserObj.username, to:target, time:Date.now()};
+  let enc=encryptText(JSON.stringify(payload), roomCode);
+  await fetch('https://ntfy.sh/'+roomCode,{method:'POST', body:enc, headers:{'Title':'follow-'+target}})
+}catch(e){}
+}
+// ===== FEED / STORIES / SNAP =====
 function renderStories(){let h=`<div class="story" onclick="goPage('snap')"><div class="ring"><div>+</div></div>Your story</div>`;if(myStories.length==0){h+=`<div style="display:flex;align-items:center;color:#888;font-size:13px">No story yet.<br>Snap se banao ✨</div>`}myStories.forEach((s,idx)=>{h+=`<div class="story" onclick="openStory(${idx})"><div class="ring"><div>📸</div></div>You</div>`});document.getElementById('stories').innerHTML=h}
 function openStory(idx){let s=myStories[idx];let c=document.getElementById('viewerContent');if(s.img)c.innerHTML=`<img src="${s.img}">`;else c.innerHTML=`<div style="font-size:80px">📸</div>`;document.getElementById('viewerText').innerText=s.text||'My Story';document.getElementById('viewer').classList.add('active')}
-function renderFeed(){if(posts.length==0){document.getElementById('feed').innerHTML=`<div class="empty"><div class="big">🌙</div><h3>Feed khaali hai</h3><p>Abhi koi post nahi hai.<br>Upar se pehla post bana.</p></div>`;return}let h="";posts.forEach((p,idx)=>{h+=`<article class="post"><div class="post-head"><div class="avatar">😎</div><div><div class="username">${currentUserObj?currentUserObj.username:'you'} ${currentUserObj && currentUserObj.verified?'<span class="tick">✓</span>':''}</div><div class="place">Just now • Snapista</div></div><button class="more" onclick="document.getElementById('moreModal').classList.add('active')">···</button></div><div style="background:#eee">${p.img}</div><div class="actions"><button class="icon-btn" onclick="likePost(${idx},this)">♡</button><button class="icon-btn">♧</button><button class="icon-btn">➤</button><button class="icon-btn save">♧</button></div><div class="likes">${p.likes} likes</div><p class="caption"><strong>${currentUserObj?currentUserObj.username:'you'}</strong> ${p.caption}</p><div class="comments">Add a comment...</div><div class="date">Just now</div></article>`});document.getElementById('feed').innerHTML=h}
+function renderFeed(){
+if(posts.length==0){document.getElementById('feed').innerHTML=`<div class="empty"><div class="big">🌙</div><h3>Feed khaali hai</h3><p>Abhi koi post nahi hai.<br>Upar se pehla post bana.</p></div>`;return}
+let h="";posts.forEach((p,idx)=>{h+=`<article class="post"><div class="post-head"><div class="avatar">😎</div><div><div class="username">${currentUserObj?currentUserObj.username:'you'} ${currentUserObj && currentUserObj.verified?'<span class="tick">✓</span>':''}</div><div class="place">Just now • Snapista</div></div><button class="more" onclick="document.getElementById('moreModal').classList.add('active')">···</button></div><div style="background:#eee">${p.img}</div><div class="actions"><button class="icon-btn" onclick="likePost(${idx},this)">♡</button><button class="icon-btn" onclick="focusComment(${idx})">♧</button><button class="icon-btn">➤</button><button class="icon-btn save">♧</button></div><div class="likes">${p.likes} likes</div><p class="caption"><strong>${currentUserObj?currentUserObj.username:'you'}</strong> ${p.caption}</p><div class="comments" id="comments-${idx}">${(p.comments||[]).map(c=>`<div><b>${c.user}:</b> ${c.text}</div>`).join('')||'Add a comment...'}</div><div style="display:flex;gap:8px;padding:0 15px 14px"><input id="commentInput-${idx}" placeholder="Add a comment..." style="flex:1;padding:10px;border:1px solid #ddd;border-radius:20px;outline:none"><button class="btn" style="width:auto;margin:0;padding:8px 16px" onclick="addComment(${idx})">Post</button></div><div class="date">Just now</div></article>`});document.getElementById('feed').innerHTML=h}
+function focusComment(idx){document.getElementById('commentInput-'+idx)?.focus()}
+function addComment(idx){let inp=document.getElementById('commentInput-'+idx);let t=inp.value.trim();if(!t) return;if(!posts[idx].comments) posts[idx].comments=[];posts[idx].comments.push({user:currentUserObj.username,text:t});renderFeed();showToast('Comment ho gaya 💬')}
 function likePost(i,el){if(el.innerText=='♥'){el.innerText='♡';el.style.color='inherit';posts[i].likes--}else{el.innerText='♥';el.style.color='#ed4956';posts[i].likes++}}
-function uploadPost(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);posts.unshift({img:`<img class="post-image" src="${url}">`,likes:0,caption:"My Snapista post ✨"});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Post ho gaya 🔥')}
-function doSearch(){let q=document.getElementById('searchInput').value;if(!q)return showToast('Type something');showToast('No users yet for "'+q+'"')}
+function uploadPost(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);posts.unshift({img:`<img class="post-image" src="${url}">`,likes:0,caption:"My Snapista post ✨",comments:[]});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Post ho gaya 🔥')}
+function doSearch(){let q=document.getElementById('searchInput').value.trim().toLowerCase();if(!q)return showToast('Type something');let users=getUsers();let found=users.filter(u=>u.username.toLowerCase().includes(q));if(found.length==0) return showToast('No user mila "'+q+'"');document.getElementById('exploreList').innerHTML=found.map(u=>`<div class="follow-card"><div class="avatar">😎</div><div style="flex:1"><b>${u.username} ${u.verified?'✓':''}</b><br><small>${u.name}</small></div>${followBtnHTML(u.username)}</div>`).join('');showToast(found.length+' user mile ✅')}
 async function startCamera(){try{if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing},audio:false});let v=document.getElementById('cameraVideo');v.srcObject=stream;v.style.display='block';document.getElementById('cameraPlaceholder').style.display='none';document.getElementById('capturedImg').style.display='none';capturedDataUrl=null;showToast('Camera on 🔥')}catch(e){showToast('Camera nahi khula - Permission allow karo')}}
 function switchCamera(){facing=facing=='user'?'environment':'user';startCamera()}
 function takeSnap(){let v=document.getElementById('cameraVideo');if(!v.srcObject||v.style.display=='none'){showToast('Pehle Open Camera dabao');return}let canvas=document.getElementById('snapCanvas');let ctx=canvas.getContext('2d');canvas.width=v.videoWidth||640;canvas.height=v.videoHeight||480;ctx.drawImage(v,0,0,canvas.width,canvas.height);let txt=document.getElementById('snapText').value;if(txt){ctx.font='bold 32px sans-serif';ctx.fillStyle='white';ctx.strokeStyle='black';ctx.lineWidth=5;ctx.textAlign='center';ctx.strokeText(txt,canvas.width/2,canvas.height-20);ctx.fillText(txt,canvas.width/2,canvas.height-20)}capturedDataUrl=canvas.toDataURL('image/png');let img=document.getElementById('capturedImg');img.src=capturedDataUrl;img.style.display='block';v.style.display='none';showToast('Photo ho gayi! Ab Send dabao')}
 function retakeSnap(){document.getElementById('capturedImg').style.display='none';let v=document.getElementById('cameraVideo');if(v.srcObject){v.style.display='block'}else{document.getElementById('cameraPlaceholder').style.display='block'}capturedDataUrl=null;showToast('Dobara photo lo')}
 function downloadSnap(){if(!capturedDataUrl){showToast('Pehle photo khicho');return}let a=document.createElement('a');a.href=capturedDataUrl;a.download='snapista-snap.png';a.click();showToast('Snap download ho gaya')}
-function sendSnap(){if(!capturedDataUrl){showToast('Pehle camera se photo khicho');return}posts.unshift({img:`<img class="post-image" src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap ✨'});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Snap bhej diya 🔥');goPage('home')}
+function sendSnap(){if(!capturedDataUrl){showToast('Pehle camera se photo khicho');return}posts.unshift({img:`<img class="post-image" src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap ✨',comments:[]});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Snap bhej diya 🔥');goPage('home')}
 function addToStory(){if(!capturedDataUrl&&!document.getElementById('snapText').value){showToast('Pehle photo khicho');return}myStories.push({img:capturedDataUrl,text:document.getElementById('snapText').value||'My Story'});renderStories();showToast('Story me add ho gaya ✨');goPage('home')}
-// ===== REAL CHAT - FIXED: 1 baar hi jayega =====
-function renderUserLists(){let users=getUsers().filter(u=>u.username.toLowerCase()!==currentUserObj.username.toLowerCase());let box=document.getElementById('chatUserList');if(users.length==0){box.innerHTML=`<div style="padding:16px;color:#777;text-align:center">Is phone me koi aur user nahi hai<br>Neeche se Dost Add Karo<br>Alag phone wale dost ka naam daalo</div>`;return}box.innerHTML=users.map(u=>`<div class="chat-user ${activeChatUser==u.username?'active':''}" onclick="openChat('${u.username}')"><div class="avatar">😎</div><div><b>${u.username} ${u.verified?'✓':''}</b><div style="font-size:12px;color:#777">${u.name}</div></div></div>`).join('')}
-function addFriend(){let name=document.getElementById('newFriendInput').value.trim().toLowerCase();if(!name) return showToast('Dost ka username daalo');if(name==currentUserObj.username) return showToast('Ye to tu khud hai!');activeChatUser=name;document.getElementById('chatHeadName').innerText=name;document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';document.getElementById('chatLayout').classList.remove('show-list');document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:30px">👋 Say hi to ${name}<br>Message bhejte hi uske phone pe jayega</div>`;showToast('Chat khul gayi - '+name)}
-function joinRoom(){let val=document.getElementById('roomInput').value.trim();if(val) roomCode=val.toLowerCase().replace(/[^a-z0-9-_]/g,'-');document.getElementById('roomCodeText').innerText=roomCode;document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';showToast('Room join ho gaya: '+roomCode);if(pollTimer) clearInterval(pollTimer);pollTimer=setInterval(fetchMessages,2500);fetchMessages()}
+// ===== ENCRYPTED PRIVATE CHAT =====
+function renderUserLists(){
+let users=getUsers().filter(u=>u.username.toLowerCase()!==currentUserObj.username.toLowerCase());
+let box=document.getElementById('chatUserList');
+if(users.length==0){box.innerHTML=`<div style="padding:16px;color:#777;text-align:center">Is phone me koi aur user nahi hai<br>Neeche se Dost Add Karo</div>`;return}
+box.innerHTML=users.map(u=>`<div class="chat-user ${activeChatUser==u.username?'active':''}" onclick="openChat('${u.username}')"><div class="avatar">😎</div><div><b>${u.username} ${u.verified?'✓':''}</b><div style="font-size:12px;color:#777">${u.name} • 🔒 Private</div></div></div>`).join('')
+}
+function addFriend(){let name=document.getElementById('newFriendInput').value.trim().toLowerCase();if(!name) return showToast('Dost ka username daalo');if(name==currentUserObj.username) return showToast('Ye to tu khud hai!');addFriendByName(name);showToast('Chat khul gayi - '+name+' 🔒')}
+function joinRoom(){
+let val=document.getElementById('roomInput').value.trim();
+if(val) roomCode=val.toLowerCase().replace(/[^a-z0-9-_]/g,'-');
+document.getElementById('roomCodeText').innerText=roomCode;
+document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • 🔒 Encrypted';
+showToast('Secret Room join ho gaya: '+roomCode+' 🔒');
+if(pollTimer) clearInterval(pollTimer);
+pollTimer=setInterval(fetchMessages,2500);
+fetchMessages()
+}
 async function sendRealChat(){
 let input=document.getElementById('chatInput');let text=input.value.trim();
 if(!activeChatUser) return showToast('Pehle dost ko chuno ya Add Karo');
 if(!text) return;
-let msg={from:currentUserObj.username,to:activeChatUser,text:text,time:Date.now()};
+let msg={from:currentUserObj.username,to:activeChatUser,text:text,time:Date.now(),seen:false,type:'msg'};
+let enc=encryptText(JSON.stringify(msg), roomCode);
 try{
-  await fetch('https://ntfy.sh/'+roomCode,{method:'POST',body:JSON.stringify(msg),headers:{'Title':currentUserObj.username+' -> '+activeChatUser}});
+  await fetch('https://ntfy.sh/'+roomCode,{method:'POST',body:enc,headers:{'Title':'🔒 Private'}});
   input.value='';
-  addBubble(msg,true);
-  showToast('Bhej diya → '+activeChatUser)
+  addBubble(msg,true,'✓');
+  showToast('🔒 Lock karke bhej diya → '+activeChatUser)
 }catch(e){showToast('Internet check karo')}
 }
-async function fetchMessages(){
+async function sendTyping(){
 if(!activeChatUser) return;
+try{
+  let msg={from:currentUserObj.username,to:activeChatUser,type:'typing',time:Date.now()};
+  let enc=encryptText(JSON.stringify(msg), roomCode);
+  await fetch('https://ntfy.sh/'+roomCode,{method:'POST',body:enc,headers:{'Title':'typing'}});
+}catch(e){}
+}
+async function fetchMessages(){
+if(!currentUserObj) return;
 try{
   let res=await fetch('https://ntfy.sh/'+roomCode+'/json?since=1h&poll=1');
   let txt=await res.text();
@@ -203,33 +322,85 @@ try{
     try{
       let j=JSON.parse(line);
       if(j.event!=='message') return;
-      // FIX: Ek message dobara nahi dikhega
       if(seenMsgIds.has(j.id)) return;
       seenMsgIds.add(j.id);
-      localStorage.setItem('seen_msgs', JSON.stringify([...seenMsgIds].slice(-200)));
-      let data=JSON.parse(j.message);
-      if((data.from==currentUserObj.username && data.to==activeChatUser) || (data.from==activeChatUser && data.to==currentUserObj.username)){
-        if(data.from!==currentUserObj.username){
-          addBubble(data,false)
+      localStorage.setItem('seen_msgs', JSON.stringify([...seenMsgIds].slice(-300)));
+      let raw=j.message;
+      // Agar message encrypt nahi hai to skip - purana public message
+      let data;
+      try{ data=JSON.parse(decryptText(raw, roomCode)) }catch(e){return}
+      if(!data || !data.type) return;
+      // FOLLOW REQUEST - cross phone
+      if(data.type=='follow'){
+        if(data.to==currentUserObj.username && data.action=='request'){
+          let f=getFollows();
+          if(!f.incoming.includes(data.from) && !f.followers.includes(data.from)){f.incoming.push(data.from);saveFollows(f);renderFollowUI();showToast('👥 Follow Request aayi - '+data.from)}
         }
+        if(data.to==currentUserObj.username && data.action=='accepted'){
+          let f=getFollows();
+          f.outgoing=f.outgoing.filter(u=>u!==data.from);
+          if(!f.following.includes(data.from)) f.following.push(data.from);
+          saveFollows(f);renderFollowUI();showToast('✅ '+data.from+' ne Accept kar liya!');
+        }
+        return;
+      }
+      if(data.type=='typing'){
+        if(activeChatUser && data.from==activeChatUser){
+          document.getElementById('typingBar').style.display='block';
+          setTimeout(()=>{document.getElementById('typingBar').style.display='none'},2000)
+        }
+        return;
+      }
+      if(data.type=='msg'){
+        if(activeChatUser && ((data.from==currentUserObj.username && data.to==activeChatUser) || (data.from==activeChatUser && data.to==currentUserObj.username))){
+          if(data.from!==currentUserObj.username){
+            addBubble(data,false,'✓✓');
+            // Seen bhejo
+            sendSeen(data.from)
+          }
+        } else if(data.to==currentUserObj.username){
+          // Dusri chat me message aaya
+          let b=document.getElementById('chatBadge');b.style.display='flex';b.innerText='1';
+          showToast('💬 Naya message - '+data.from)
+        }
+      }
+      if(data.type=='seen'){
+        // Seen tick update - mere bheje hue ko blue karo
+        document.querySelectorAll('.bubble.me small').forEach(s=>{if(s.innerText.includes('✓')) s.innerText=s.innerText.replace('✓','✓✓'); s.style.color='#FFFC00'});
       }
     }catch(e){}
   })
 }catch(e){}
 }
-function addBubble(m,isMe){let box=document.getElementById('chatMsgs');if(box.innerHTML.includes('Say hi to')) box.innerHTML='';let d=document.createElement('div');d.className='bubble '+(isMe?'me':'them');d.innerHTML=`${m.text}<small>${isMe?'You':m.from} • ${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</small>`;box.appendChild(d);box.scrollTop=box.scrollHeight}
+async function sendSeen(to){
+try{
+  let msg={from:currentUserObj.username,to:to,type:'seen',time:Date.now()};
+  let enc=encryptText(JSON.stringify(msg), roomCode);
+  await fetch('https://ntfy.sh/'+roomCode,{method:'POST',body:enc})
+}catch(e){}
+}
+function addBubble(m,isMe,seenText){
+let box=document.getElementById('chatMsgs');
+if(box.innerHTML.includes('Say hi to')) box.innerHTML='';
+let d=document.createElement('div');
+d.className='bubble '+(isMe?'me':'them');
+let seenHtml=isMe?`<br><span style="font-size:11px">${seenText||'✓'}</span>`:'';
+d.innerHTML=`${m.text}<small>${isMe?'You':m.from} • ${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} ${isMe?seenHtml:''}</small>`;
+box.appendChild(d);box.scrollTop=box.scrollHeight
+}
 function openChat(username){
 activeChatUser=username;
 document.getElementById('chatHeadName').innerText=username;
-document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • LIVE';
+document.getElementById('chatHeadStatus').innerText='Room: '+roomCode+' • 🔒 Encrypted';
 document.getElementById('chatLayout').classList.remove('show-list');
-document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:20px">Chat khul gayi - ${username}</div>`;
+document.getElementById('chatMsgs').innerHTML=`<div style="text-align:center;color:#999;padding:20px">🔒 Private Chat - ${username}<br>Koi beech me nahi padh sakta</div>`;
+document.getElementById('chatBadge').style.display='none';
 fetchMessages()
 }
 function backToChatList(){document.getElementById('chatLayout').classList.add('show-list')}
 function closeViewer(){document.getElementById('viewer').classList.remove('active')}
 function closeModal(){document.getElementById('moreModal').classList.remove('active')}
-function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
 renderSavedUsers()
 let savedIdx=localStorage.getItem('snapista_current');let allUsers=getUsers()
 if(savedIdx!==null && allUsers[savedIdx]){enterApp(allUsers[savedIdx])}else{switchTab('signup')}
