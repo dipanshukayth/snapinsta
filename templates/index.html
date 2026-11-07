@@ -2,118 +2,229 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SnapInsta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Snapista</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-    body { background: #0f0f12; color: #fff; display: flex; flex-direction: column; align-items: center; padding: 16px; }
-    .app-container { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 16px; }
-
-    .camera-box { position: relative; width: 100%; height: 320px; background: #000; border-radius: 18px; overflow: hidden; }
-    video { width: 100%; height: 100%; object-fit: cover; }
-    canvas { display: none; }
-
-    .controls { display: flex; flex-direction: column; gap: 10px; background: #1a1a24; padding: 12px; border-radius: 14px; }
-    .toggle-group { display: flex; gap: 8px; }
-    .toggle-btn { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #222; color: #bbb; cursor: pointer; font-weight: bold; }
-    .toggle-btn.active { background: #6366f1; color: white; border-color: #6366f1; }
-
-    input[type="text"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #111; color: #fff; }
-    .btn-capture { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #10b981; color: #fff; font-weight: bold; cursor: pointer; }
-
-    .feed { display: flex; flex-direction: column; gap: 16px; }
-    .card { background: #181820; border-radius: 14px; overflow: hidden; border: 1px solid #282836; }
-    .card-badge { padding: 6px 12px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
-    .badge-snap { background: #eab308; color: #000; }
-    .badge-post { background: #ec4899; color: #fff; }
-    .card img { width: 100%; max-height: 380px; object-fit: cover; }
-    .card-body { padding: 10px 12px; }
-    .caption { font-size: 14px; margin-top: 4px; }
-  </style>
-</head>
-<body>
-  <div class="app-container">
-    <h2>SnapInsta 📸</h2>
-
-    <div class="camera-box">
-      <video id="video" autoplay playsinline></video>
-      <canvas id="canvas"></canvas>
-    </div>
-
-    <div class="controls">
-      <div class="toggle-group">
-        <button type="button" class="toggle-btn active" id="btnModeSnap" onclick="setMode('snap')">⚡ Snap (60s Expire)</button>
-        <button type="button" class="toggle-btn" id="btnModePost" onclick="setMode('post')">🖼️ Permanent Post</button>
-      </div>
-      <input type="text" id="captionInput" placeholder="Add a caption..." />
-      <button class="btn-capture" onclick="captureAndUpload()">Capture & Share</button>
-    </div>
-
-    <h3>Feed</h3>
-    <div class="feed" id="feedContainer"></div>
-  </div>
-
-  <script>
-    let selectedMode = 'snap';
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false })
-      .then(stream => { video.srcObject = stream; })
-      .catch(err => { alert("Camera allow karna padega: " + err); });
-
-    function setMode(mode) {
-      selectedMode = mode;
-      document.getElementById('btnModeSnap').classList.toggle('active', mode === 'snap');
-      document.getElementById('btnModePost').classList.toggle('active', mode === 'post');
+    :root {
+      --bg: #000000;
+      --surface: #121212;
+      --border: #262626;
+      --accent-snap: #fffc00;
+      --accent-insta: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      --text: #ffffff;
+      --text-muted: #8e8e8e;
     }
 
-    async function captureAndUpload() {
-      canvas.width = video.videoWidth || 640;
-      canvas.height = video.videoHeight || 480;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; justify-content: center; }
 
-      const imageData = canvas.toDataURL('image/jpeg', 0.8);
-      const caption = document.getElementById('captionInput').value;
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: imageData, type: selectedMode, caption: caption })
-      });
-
-      if (res.ok) {
-        document.getElementById('captionInput').value = '';
-        loadFeed();
-      }
+    .app-viewport {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--bg);
+      border-left: 1px solid #1a1a1a;
+      border-right: 1px solid #1a1a1a;
     }
 
-    async function loadFeed() {
-      const res = await fetch('/api/feed');
-      const data = await res.json();
-      const container = document.getElementById('feedContainer');
-      container.innerHTML = '';
+    /* Screen Views */
+    .screen { flex: 1; overflow-y: auto; display: none; position: relative; }
+    .screen.active { display: flex; flex-direction: column; }
 
-      data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        const isSnap = item.type === 'snap';
-        card.innerHTML = `
-          <div class="card-badge ${isSnap ? 'badge-snap' : 'badge-post'}">
-            ${isSnap ? '⚡ Snap (Temporary)' : '🖼️ Permanent Post'}
-          </div>
-          <img src="${item.image_url}" />
-          <div class="card-body">
-            <p class="caption"><b>You:</b> ${item.caption || 'No caption'}</p>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+    /* ================= SNAPCHAT CAMERA VIEW ================= */
+    #cameraScreen {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+      transition: filter 0.3s ease;
+    }
+    /* Filter Classes */
+    video.filter-bw { filter: grayscale(100%) contrast(120%); }
+    video.filter-vintage { filter: sepia(60%) contrast(110%) brightness(90%); }
+    video.filter-cyber { filter: hue-rotate(180deg) saturate(180%); }
+
+    /* Floating Camera Overlay UI */
+    .camera-top-bar {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      right: 0;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .brand-pill {
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+    .icon-btn {
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
     }
 
-    loadFeed();
-    setInterval(loadFeed, 5000);
-  </script>
-</body>
-</html>
+    /* Side Tools Bar */
+    .camera-side-tools {
+      position: absolute;
+      top: 75px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    /* Bottom Shutter & Controls */
+    .camera-bottom-ui {
+      position: absolute;
+      bottom: 25px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    /* Mode Pill Picker (Snap vs Post) */
+    .mode-selector {
+      display: flex;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(12px);
+      padding: 4px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mode-btn.active {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Snap Shutter Button */
+    .shutter-ring {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      border: 4px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .shutter-ring:active { transform: scale(0.9); }
+    .shutter-core {
+      width: 60px;
+      height: 60px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .shutter-snap .shutter-core { background: var(--accent-snap); }
+
+    /* Post Caption Input Bar */
+    .caption-box {
+      width: calc(100% - 40px);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      padding: 4px 12px;
+    }
+    .caption-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 8px 4px;
+      outline: none;
+      font-size: 13px;
+    }
+
+    /* ================= INSTAGRAM FEED VIEW ================= */
+    #feedScreen {
+      background: var(--bg);
+      padding-bottom: 70px;
+    }
+    .feed-header {
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      z-index: 20;
+      border-bottom: 1px solid var(--border);
+    }
+    .insta-logo {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      background: var(--accent-insta);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Stories Section */
+    .stories-tray {
+      display: flex;
+      gap: 14px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
+    }
+    .stories-tray::-webkit-scrollbar { display: none; }
+    .story-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .story-ring {
+      width: 6
