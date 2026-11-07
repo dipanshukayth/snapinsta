@@ -3,75 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snapista - Snap + Insta</title>
+<title>Snapista</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;padding-bottom:85px}
+body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;padding-bottom:80px}
+/* ===== LOGIN - SCREENSHOT WALI THEME ===== */
 #loginPage{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;padding:20px;z-index:200}
 .login-card{background:#111;width:100%;max-width:360px;padding:28px 22px;border-radius:16px;text-align:center}
 .login-logo{font-size:28px;font-weight:900}.login-logo span{color:#FFFC00}
 .login-sub{color:#888;font-size:13px;margin:6px 0 20px}
-.login-card input{width:100%;background:#222;border:none;color:#fff;padding:14px;border-radius:10px;outline:none;margin-bottom:12px}
+.login-card input{width:100%;background:#222;border:none;color:#fff;padding:14px;border-radius:10px;outline:none;margin-bottom:12px;font-size:14px}
 .login-btn{width:100%;background:#FFFC00;border:none;padding:14px;border-radius:10px;font-weight:900;font-size:16px;cursor:pointer;color:#000}
 .signup-text{color:#888;font-size:13px;margin-top:14px}.signup-text b{color:#fff;cursor:pointer;text-decoration:underline}
+/* ===== COMMON ===== */
 #app{display:none}
-.top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 6px;position:sticky;top:0;background:#000;z-index:20}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;position:sticky;top:0;background:#000;z-index:20;border-bottom:1px solid #1a1a1a}
 .logo{font-size:24px;font-weight:900}.logo span{color:#FFFC00}
-.top-icons{display:flex;gap:14px;font-size:21px;cursor:pointer}
-.search{margin:6px 12px 4px;display:flex;gap:8px}
-.search input{flex:1;background:#222;border:none;color:#fff;padding:10px 14px;border-radius:20px;outline:none}
-.search button{background:#FFFC00;border:none;padding:10px 14px;border-radius:20px;font-weight:800;cursor:pointer;color:#000}
-.moods{display:flex;gap:8px;overflow-x:auto;padding:6px 12px;scrollbar-width:none}
-.moods button{flex:0 0 auto;background:#1a1a1a;border:1px solid #333;color:#fff;padding:7px 14px;border-radius:20px;cursor:pointer;font-size:13px}
-.moods button.active{background:#FFFC00;color:#000;font-weight:800}
-.stories{display:flex;gap:12px;overflow-x:auto;padding:10px 12px;scrollbar-width:none}
+.top-icons{font-size:20px;cursor:pointer}
+.page{display:none;padding:0}
+.page.active{display:block}
+.section-title{padding:14px 16px 6px;font-size:18px;font-weight:800}
+.section-sub{padding:0 16px 12px;color:#888;font-size:13px}
+.empty{text-align:center;padding:40px 20px;color:#888}
+.empty .big{font-size:52px;margin-bottom:10px}
+.empty h3{color:#fff;margin-bottom:6px}
+.empty p{font-size:13px;line-height:1.5}
+.btn{width:100%;background:#FFFC00;border:none;padding:13px;border-radius:12px;font-weight:900;font-size:16px;cursor:pointer;margin-top:8px;color:#000}
+.btn2{background:#fff;color:#000}
+.btn3{background:#FF004C;color:#fff}
+input[type=text]{width:100%;background:#222;border:none;color:#fff;padding:12px 14px;border-radius:10px;outline:none}
+/* ===== HOME ===== */
+.stories{display:flex;gap:12px;overflow-x:auto;padding:12px 16px}
 .story{flex:0 0 68px;text-align:center;cursor:pointer}
 .story-ring{width:64px;height:64px;border-radius:50%;padding:3px;background:conic-gradient(#FFFC00,#FF004C,#A100F2)}
 .story-ring div{width:100%;height:100%;border-radius:50%;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:24px;background:#222}
-.story p{font-size:11px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs{display:flex;justify-content:space-around;border-bottom:1px solid #222;padding:8px 0;position:sticky;top:52px;background:#000;z-index:9}
-.tabs button{background:none;border:none;color:#888;font-size:14px;font-weight:700;padding:6px 12px;cursor:pointer}
-.tabs button.active{color:#fff;border-bottom:2px solid #FFFC00}
-.empty{text-align:center;padding:30px 20px;color:#888}.empty .big{font-size:50px;margin-bottom:10px}.empty h3{color:#fff;margin-bottom:6px}.empty p{font-size:13px;line-height:1.5}
-.post{border-bottom:1px solid #1a1a1a;padding-bottom:12px;margin-bottom:6px}
-.post-head{display:flex;align-items:center;gap:10px;padding:10px 12px}
-.post-img{width:100%;aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden}
+.story p{font-size:11px;margin-top:4px}
+.post{border-top:1px solid #1a1a1a;padding-bottom:14px}
+.post-head{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.post-img{width:100%;aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .post-img img{width:100%;height:100%;object-fit:cover}
-.post-actions{display:flex;gap:16px;padding:10px 12px 4px;font-size:22px;cursor:pointer}
-.post p{padding:2px 12px;font-size:14px}
-.comment-box{display:flex;gap:8px;padding:8px 12px}
-.comment-box input{flex:1;background:#222;border:none;outline:none;color:#fff;padding:8px 12px;border-radius:20px}
-.comment-box button{background:#FFFC00;border:none;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;color:#000}
-.explore{display:none;padding:10px}
-.reels{display:none}
-.snap{display:none;padding:14px}
-/* ===== SNAPCHAT CAMERA ===== */
-.camera-box{position:relative;width:100%;height:400px;background:#111;border-radius:20px;overflow:hidden;border:1px solid #333}
-.camera-box video,.camera-box canvas,.camera-box img{width:100%;height:100%;object-fit:cover;display:block}
+.post-actions{display:flex;gap:16px;padding:10px 16px;font-size:22px}
+.post p{padding:2px 16px;font-size:14px}
+.comment-box{display:flex;gap:8px;padding:8px 16px}
+.comment-box input{flex:1;background:#222;border:none;color:#fff;padding:9px 12px;border-radius:20px;outline:none}
+.comment-box button{background:#FFFC00;border:none;padding:8px 14px;border-radius:20px;font-weight:800;color:#000;cursor:pointer}
+/* ===== EXPLORE ===== */
+.search-box{padding:12px 16px;display:flex;gap:8px}
+.search-box input{flex:1}
+.search-box button{background:#FFFC00;border:none;padding:11px 16px;border-radius:12px;font-weight:800;cursor:pointer}
+.explore-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;padding:0 3px}
+.explore-grid div{aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center;font-size:36px}
+/* ===== SNAP - SIRF CAMERA, KOI FILTER NAHI ===== */
+.camera-box{margin:0 16px;position:relative;width:calc(100% - 32px);height:380px;background:#111;border-radius:20px;overflow:hidden;border:1px solid #333}
+.camera-box video,.camera-box img{width:100%;height:100%;object-fit:cover;display:block}
 .camera-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#888;text-align:center;padding:20px}
 .camera-placeholder .big{font-size:60px}
-/* Snapchat Face Filter Overlay - Face ke upar */
-.face-filter{position:absolute;inset:0;pointer-events:none;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.face-top{font-size:78px;line-height:1;margin-top:-90px;text-shadow:0 4px 10px rgba(0,0,0,.4)}
-.face-mid{font-size:44px;margin-top:18px}
-.face-bottom{font-size:34px;margin-top:6px}
-.face-frame{position:absolute;inset:18px;border-radius:20px;pointer-events:none;z-index:2}
-.camera-text{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:20px;font-weight:800;text-shadow:0 2px 8px #000;z-index:4;padding:0 10px;word-break:break-word}
-.capture-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin:14px 0 6px}
+.camera-text{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:20px;font-weight:800;text-shadow:0 2px 8px #000;padding:0 10px;word-break:break-word}
+.capture-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin:16px 0 6px}
 .capture-btn{width:70px;height:70px;border-radius:50%;background:#fff;border:5px solid #FFFC00;cursor:pointer}
 .capture-btn:active{transform:scale(0.92)}
 .small-btn{background:#222;color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer}
-.snap-filters{display:flex;gap:10px;overflow-x:auto;padding:10px 2px;scrollbar-width:none}
-.snap-filters::-webkit-scrollbar{display:none}
-.snap-filter{flex:0 0 66px;text-align:center;cursor:pointer}
-.snap-filter .circle{width:58px;height:58px;border-radius:50%;background:#1a1a1a;border:2px solid #333;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto}
-.snap-filter.active .circle{border-color:#FFFC00;background:#FFFC00;transform:scale(1.08)}
-.snap-filter p{font-size:10px;margin-top:4px;color:#ccc;white-space:nowrap}
-.snap-filter.active p{color:#FFFC00;font-weight:800}
-.snap input{width:100%;padding:12px;border-radius:10px;border:none;background:#222;color:#fff;outline:none;margin-bottom:10px}
-.btn{width:100%;background:#FFFC00;border:none;padding:13px;border-radius:12px;font-weight:900;font-size:16px;cursor:pointer;margin-top:6px;color:#000}
-.btn2{background:#fff;color:#000}
-.btn3{background:#FF004C;color:#fff}
+.snap-controls{padding:0 16px}
+/* ===== REELS ===== */
+.reel{margin:0 16px 14px;height:62vh;background:#111;border-radius:18px;position:relative;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden}
+.reel-info{position:absolute;bottom:14px;left:12px;right:60px}
+.reel-btns{position:absolute;right:12px;bottom:16px;display:flex;flex-direction:column;gap:14px;text-align:center;font-size:22px}
+.reel-btns small{display:block;font-size:11px}
+/* ===== CHAT ===== */
+.chat-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #1a1a1a;cursor:pointer}
+.chat-avatar{width:44px;height:44px;border-radius:50%;background:#222;display:flex;align-items:center;justify-content:center;font-size:22px}
+.chat-box{margin:12px 16px;background:#111;border-radius:16px;padding:14px;min-height:180px}
+.chat-input-row{display:flex;gap:8px;padding:0 16px;margin-top:10px}
+/* ===== PROFILE ===== */
+.profile-head{text-align:center;padding:20px 16px}
+.profile-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#FFFC00,#FF004C);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto}
+.stats{display:flex;justify-content:space-around;margin:16px 0}
+.stats b{display:block;font-size:18px}
+.stats span{color:#888;font-size:12px}
+/* ===== BOTTOM NAV ===== */
 .bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0 14px;z-index:20}
 .bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888}
 .bottom div.active{color:#FFFC00}
@@ -81,17 +90,11 @@ body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;p
 .viewer img{max-width:100%;max-height:60vh;border-radius:16px}
 .viewer button{margin-top:20px;background:#FFFC00;border:none;padding:10px 20px;border-radius:20px;font-weight:800}
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:8px 16px;border-radius:20px;font-weight:700;display:none;z-index:300;max-width:90%;text-align:center}
-.upload-box{background:#111;border:1px dashed #444;border-radius:14px;padding:12px;margin:10px 12px;text-align:center}
-.upload-box input{display:none}
-.profile{display:none;padding:14px;text-align:center}
-.profile .avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#FFFC00,#FF004C);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto}
-.stats{display:flex;justify-content:space-around;margin:14px 0}
-.stats b{display:block;font-size:18px}
-.stats span{color:#888;font-size:12px}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-card">
     <div class="login-logo">SNAP<span>ISTA</span></div>
@@ -104,130 +107,116 @@ body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;p
 </div>
 
 <div id="app">
-<div class="top">
-  <div class="logo">SNAP<span>ISTA</span></div>
-  <div class="top-icons"><span onclick="showToast('No notifications yet')">🔔</span><span onclick="showTab('chat')">💬</span><span onclick="showTab('snap')">📸</span><span onclick="logout()" style="font-size:13px">Logout</span></div>
-</div>
+  <div class="top">
+    <div class="logo">SNAP<span>ISTA</span></div>
+    <div class="top-icons"><span onclick="showToast('No notifications yet')">🔔</span> <span onclick="logout()" style="font-size:13px">Logout</span></div>
+  </div>
 
-<div class="search"><input id="searchInput" placeholder="Search..."><button onclick="doSearch()">Search</button></div>
-
-<div class="moods" id="moods">
-  <button class="active" onclick="setMood('All',this)">✨ All</button>
-  <button onclick="setMood('Happy',this)">😊 Happy</button>
-  <button onclick="setMood('Funny',this)">😂 Funny</button>
-  <button onclick="setMood('Chill',this)">😌 Chill</button>
-  <button onclick="setMood('Study',this)">📚 Study</button>
-</div>
-
-<div class="stories" id="stories"></div>
-
-<div class="tabs">
-  <button id="tab-feed" class="active" onclick="showTab('feed')">Feed</button>
-  <button id="tab-explore" onclick="showTab('explore')">Explore</button>
-  <button id="tab-reels" onclick="showTab('reels')">Reels</button>
-  <button id="tab-snap" onclick="showTab('snap')">Snap</button>
-  <button id="tab-chat" onclick="showTab('chat')">Chat</button>
-</div>
-
-<div class="upload-box">
-  <p>Upload photo to create first post</p>
-  <input type="file" id="fileInput" accept="image/*" onchange="uploadPost(event)">
-  <button class="btn" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">Choose Photo + Post</button>
-</div>
-
-<div id="feed"></div>
-
-<div id="explore" class="explore"><div class="empty"><div class="big">🔍</div><h3>No posts yet</h3><p>When users join, their posts will appear here.</p></div></div>
-<div id="reels" class="reels"></div>
-
-<!-- ===== SNAP - SNAPCHAT WALE FILTERS ===== -->
-<div id="snap" class="snap">
-  <div class="camera-box" id="cameraBox">
-    <video id="cameraVideo" autoplay playsinline muted style="display:none"></video>
-    <canvas id="snapCanvas" style="display:none"></canvas>
-    <img id="capturedImg" style="display:none">
-    <div class="face-frame" id="faceFrame"></div>
-    <!-- YAHAN SNAP FILTER DIKHEGA -->
-    <div class="face-filter" id="faceFilter">
-      <div class="face-top" id="filterTop">🐶</div>
-      <div class="face-mid" id="filterMid">👃</div>
-      <div class="face-bottom" id="filterBottom">👅</div>
+  <!-- ========== PAGE 1 : HOME ========== -->
+  <div id="page-home" class="page active">
+    <div class="section-title">Home</div>
+    <div class="section-sub">Stories aur Feed - sirf yahan</div>
+    <div class="stories" id="stories"></div>
+    <div style="padding:0 16px 12px">
+      <input type="file" id="fileInput" accept="image/*" onchange="uploadPost(event)" style="display:none">
+      <button class="btn" onclick="document.getElementById('fileInput').click()">+ New Post - Photo Chuno</button>
     </div>
-    <div class="camera-text" id="cameraText"></div>
-    <div class="camera-placeholder" id="cameraPlaceholder">
-      <div class="big">📸</div>
-      <b style="color:#fff">Snap Camera</b>
-      <p>Camera on karo, neeche se<br>Dog / Cat / Butterfly filter chuno</p>
-      <button class="btn" onclick="startCamera()">Open Camera</button>
-      <p style="font-size:11px">Camera allow karna padega.<br>HTTPS pe hi chalega.</p>
+    <div id="feed"></div>
+  </div>
+
+  <!-- ========== PAGE 2 : EXPLORE ========== -->
+  <div id="page-explore" class="page">
+    <div class="section-title">Explore</div>
+    <div class="section-sub">Search aur trending - sirf yahan</div>
+    <div class="search-box"><input id="searchInput" type="text" placeholder="Search..."><button onclick="doSearch()">Search</button></div>
+    <div class="empty"><div class="big">🔍</div><h3>No posts yet</h3><p>When users join, their posts will appear here.</p></div>
+    <div class="explore-grid"><div>📸</div><div>🎬</div><div>✨</div><div>🔥</div><div>🌸</div><div>🚀</div></div>
+  </div>
+
+  <!-- ========== PAGE 3 : SNAP - SIRF CAMERA ========== -->
+  <div id="page-snap" class="page">
+    <div class="section-title">Snap</div>
+    <div class="section-sub">Camera se photo lo, Snap bhejo - sirf yahan</div>
+    <div class="camera-box">
+      <video id="cameraVideo" autoplay playsinline muted style="display:none"></video>
+      <img id="capturedImg" style="display:none">
+      <div class="camera-text" id="cameraText"></div>
+      <div class="camera-placeholder" id="cameraPlaceholder">
+        <div class="big">📸</div>
+        <b style="color:#fff">Snap Camera</b>
+        <p>Camera on karo, photo khicho</p>
+        <button class="btn" onclick="startCamera()">Open Camera</button>
+        <p style="font-size:11px">Camera ke liye permission allow karo</p>
+      </div>
+    </div>
+    <div class="capture-bar">
+      <button class="small-btn" onclick="switchCamera()">🔄</button>
+      <button class="capture-btn" onclick="takeSnap()"></button>
+      <button class="small-btn" onclick="retakeSnap()">↩️</button>
+    </div>
+    <p style="text-align:center;color:#888;font-size:12px">Beech wala button = Photo khicho</p>
+    <div class="snap-controls">
+      <input type="text" id="snapText" placeholder="Write something on your snap..." oninput="document.getElementById('cameraText').innerText=this.value" style="margin-top:12px">
+      <button class="btn" onclick="sendSnap()">Send Snap</button>
+      <button class="btn btn2" onclick="addToStory()">+ Add to Story</button>
+      <button class="btn btn3" onclick="downloadSnap()">Download Snap</button>
+      <p style="text-align:center;color:#888;font-size:12px;margin-top:10px">Snap disappears in 24h</p>
     </div>
   </div>
 
-  <div class="capture-bar">
-    <button class="small-btn" onclick="switchCamera()">🔄</button>
-    <button class="capture-btn" onclick="takeSnap()"></button>
-    <button class="small-btn" onclick="retakeSnap()">↩️</button>
+  <!-- ========== PAGE 4 : REELS ========== -->
+  <div id="page-reels" class="page">
+    <div class="section-title">Reels</div>
+    <div class="section-sub">Short videos - sirf yahan</div>
+    <div class="empty"><div class="big">🎬</div><h3>No reels yet</h3><p>When users upload reels,<br>they will appear here.</p><button class="btn" onclick="showToast('Reel upload jald aayega')">Upload Reel</button></div>
+    <div id="reelsList"></div>
   </div>
-  <p style="text-align:center;color:#888;font-size:12px">Beech wala button = Photo khicho</p>
 
-  <!-- SNAPCHAT WALE FILTERS - GOL GOL -->
-  <p style="font-size:13px;font-weight:800;margin:12px 0 4px">Snapchat Filters - Swipe jaisa, tap karo 👇</p>
-  <div class="snap-filters" id="snapFilters"></div>
+  <!-- ========== PAGE 5 : CHAT ========== -->
+  <div id="page-chat" class="page">
+    <div class="section-title">Chat</div>
+    <div class="section-sub">Messages - sirf yahan</div>
+    <div class="empty"><div class="big">💬</div><h3>No chats yet</h3><p>When someone joins, you can chat here.</p><button class="btn" onclick="showToast('Link copied')">Copy Invite Link</button></div>
+    <div id="chatList"></div>
+    <div class="chat-box" id="chatBox" style="display:none"></div>
+    <div class="chat-input-row" id="chatInputRow" style="display:none">
+      <input type="text" id="chatInput" placeholder="Message...">
+      <button class="btn" style="width:auto;padding:11px 18px;margin:0" onclick="sendChat()">Send</button>
+    </div>
+  </div>
 
-  <input id="snapText" placeholder="Write something on your snap..." oninput="document.getElementById('cameraText').innerText=this.value">
-  <button class="btn" onclick="sendSnap()">📸 Send Snap</button>
-  <button class="btn btn2" onclick="addToStory()">+ Add to Story</button>
-  <button class="btn btn3" onclick="downloadSnap()">⬇️ Download Snap</button>
-  <p style="text-align:center;color:#888;font-size:12px;margin-top:10px">Snap disappears in 24h</p>
-</div>
+  <!-- ========== PAGE 6 : PROFILE ========== -->
+  <div id="page-profile" class="page">
+    <div class="section-title">Profile</div>
+    <div class="section-sub">Tumhara account - sirf yahan</div>
+    <div class="profile-head">
+      <div class="profile-avatar">😎</div>
+      <h2 style="margin-top:10px" id="profileName">You</h2>
+      <p style="color:#888;font-size:13px">Snapista User</p>
+      <div class="stats"><div><b id="postCount">0</b><span>Posts</span></div><div><b>0</b><span>Followers</span></div><div><b>0</b><span>Following</span></div><div><b>0</b><span>Streak</span></div></div>
+      <button class="btn" onclick="showToast('Profile link copied')">Share Profile</button>
+      <button class="btn btn2" onclick="showToast('Edit Profile opened')">Edit Profile</button>
+    </div>
+  </div>
 
-<div id="chat" style="display:none;padding:12px">
-  <div class="empty"><div class="big">💬</div><h3>No chats yet</h3><p>When someone joins, you can chat here.</p><button class="btn" onclick="showToast('Link copied')">Copy Invite Link</button></div>
-</div>
-
-<div id="profile" class="profile">
-  <div class="avatar">😎</div>
-  <h2 style="margin-top:10px" id="profileName">You</h2>
-  <p style="color:#888;font-size:13px">Snapista User</p>
-  <div class="stats"><div><b id="postCount">0</b><span>Posts</span></div><div><b>0</b><span>Followers</span></div><div><b>0</b><span>Following</span></div><div><b>0</b><span>Streak</span></div></div>
-  <button class="btn" onclick="showToast('Profile link copied')">Share Profile</button>
-</div>
-
-<div class="bottom">
-  <div class="active" onclick="showTab('feed')">🏠<small>Home</small></div>
-  <div onclick="showTab('explore')">🔍<small>Explore</small></div>
-  <div onclick="showTab('reels')">🎬<small>Reels</small></div>
-  <div onclick="showTab('snap')">📸<small>Snap</small></div>
-  <div onclick="showTab('profile')">👤<small>Profile</small></div>
-</div>
+  <!-- BOTTOM NAV - ALAG ALAG SECTION -->
+  <div class="bottom">
+    <div class="active" onclick="goPage('home',this)">🏠<small>Home</small></div>
+    <div onclick="goPage('explore',this)">🔍<small>Explore</small></div>
+    <div onclick="goPage('snap',this)">📸<small>Snap</small></div>
+    <div onclick="goPage('reels',this)">🎬<small>Reels</small></div>
+    <div onclick="goPage('chat',this)">💬<small>Chat</small></div>
+    <div onclick="goPage('profile',this)">👤<small>Profile</small></div>
+  </div>
 </div>
 
 <div class="viewer" id="viewer"><div id="viewerContent"></div><p id="viewerText" style="margin-top:10px"></p><button onclick="closeViewer()">Close</button></div>
 <div id="toast"></div>
+<canvas id="snapCanvas" style="display:none"></canvas>
 
 <script>
 let posts=[], myStories=[]
-let currentMood="All", isSignup=false
-let stream=null, facing='user', capturedDataUrl=null
-
-// ===== SNAPCHAT WALE FILTERS - YEHI CHAHIYE THE =====
-let snapFilters=[
- {id:'none', name:'No Filter', icon:'🚫', top:'', mid:'', bottom:'', frame:''},
- {id:'dog', name:'Dog', icon:'🐶', top:'🐶', mid:'👃', bottom:'👅', frame:''},
- {id:'cat', name:'Cat', icon:'🐱', top:'🐱', mid:'👃', bottom:'😺', frame:''},
- {id:'bunny', name:'Bunny', icon:'🐰', top:'🐰', mid:'👃', bottom:'🥕', frame:''},
- {id:'bear', name:'Bear', icon:'🐻', top:'🐻', mid:'👃', bottom:'🍯', frame:''},
- {id:'butterfly', name:'Butterfly', icon:'🦋', top:'🦋', mid:'✨', bottom:'💖', frame:'0 0 0 3px #FF9EC6'},
- {id:'crown', name:'King', icon:'👑', top:'👑', mid:'😎', bottom:'🔥', frame:''},
- {id:'angel', name:'Angel', icon:'😇', top:'😇', mid:'✨', bottom:'💫', frame:'0 0 0 3px #FFD700'},
- {id:'devil', name:'Devil', icon:'😈', top:'😈', mid:'🔥', bottom:'😈', frame:'0 0 0 3px #FF0000'},
- {id:'glasses', name:'Cool', icon:'😎', top:'😎', mid:'🕶️', bottom:'😎', frame:''},
- {id:'flower', name:'Flower', icon:'🌸', top:'🌸🌸', mid:'🌸', bottom:'🌸', frame:'0 0 0 3px #FF9EC6'},
- {id:'clown', name:'Clown', icon:'🤡', top:'🤡', mid:'🔴', bottom:'🤡', frame:''},
- {id:'alien', name:'Alien', icon:'👽', top:'👽', mid:'🛸', bottom:'👽', frame:'0 0 0 3px #00FF00'},
- {id:'panda', name:'Panda', icon:'🐼', top:'🐼', mid:'👃', bottom:'🎋', frame:''},
-]
-let activeFilter = snapFilters[1] // Dog default - Snapchat jaisa
+let isSignup=false, stream=null, facing='user', capturedDataUrl=null
 
 function doSignup(){
   if(!isSignup){ isSignup=true; document.getElementById('loginSub').innerText='Create your account'; document.querySelector('.login-btn').innerText='Sign Up'; document.querySelector('.signup-text').innerHTML='Already have an account? <b onclick="doSignup()">Login</b>'; }
@@ -241,123 +230,99 @@ function doLogin(){
   document.getElementById('loginPage').style.display='none'
   document.getElementById('app').style.display='block'
   showToast('Welcome @'+u)
-  renderStories();renderFeed();renderSnapFilters()
+  renderStories();renderFeed()
 }
 function logout(){ if(stream){stream.getTracks().forEach(t=>t.stop()); stream=null} document.getElementById('app').style.display='none'; document.getElementById('loginPage').style.display='flex' }
 
-async function startCamera(){
-  try{
-    if(stream) stream.getTracks().forEach(t=>t.stop())
-    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:facing}, audio:false})
-    let v=document.getElementById('cameraVideo')
-    v.srcObject=stream
-    v.style.display='block'
-    document.getElementById('cameraPlaceholder').style.display='none'
-    document.getElementById('capturedImg').style.display='none'
-    capturedDataUrl=null
-    showToast('Camera on - Filter lag gaya: '+activeFilter.name)
-  }catch(e){ showToast('Camera nahi khula - Permission allow karo'); }
-}
-function switchCamera(){ facing = facing=='user' ? 'environment' : 'user'; startCamera() }
-
-function renderSnapFilters(){
-  document.getElementById('snapFilters').innerHTML=snapFilters.map((f,i)=>`
-    <div class="snap-filter ${f.id==activeFilter.id?'active':''}" onclick="setSnapFilter(${i},this)">
-      <div class="circle">${f.icon}</div><p>${f.name}</p>
-    </div>`).join('')
-  applySnapFilter()
-}
-function setSnapFilter(i,el){
-  activeFilter=snapFilters[i]
-  document.querySelectorAll('.snap-filter').forEach(b=>b.classList.remove('active')); el.classList.add('active')
-  applySnapFilter()
-  showToast(activeFilter.name+' filter lag gaya')
-}
-function applySnapFilter(){
-  document.getElementById('filterTop').innerText=activeFilter.top
-  document.getElementById('filterMid').innerText=activeFilter.mid
-  document.getElementById('filterBottom').innerText=activeFilter.bottom
-  document.getElementById('faceFrame').style.boxShadow=activeFilter.frame||'none'
-  document.getElementById('faceFrame').style.border=activeFilter.frame?'none':'none'
+// ===== PAGE SWITCH - ALAG ALAG SECTION =====
+function goPage(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+  document.getElementById('page-'+name).classList.add('active')
+  document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active'))
+  el.classList.add('active')
+  window.scrollTo(0,0)
 }
 
-function takeSnap(){
-  let v=document.getElementById('cameraVideo')
-  if(!v.srcObject || v.style.display=='none'){ showToast('Pehle Open Camera dabao'); return }
-  let canvas=document.getElementById('snapCanvas')
-  let ctx=canvas.getContext('2d')
-  canvas.width=v.videoWidth || 640
-  canvas.height=v.videoHeight || 480
-  ctx.drawImage(v,0,0,canvas.width,canvas.height)
-  // Snapchat filter ko photo pe chipkao
-  ctx.textAlign='center'
-  ctx.font='100px sans-serif'
-  ctx.fillText(activeFilter.top, canvas.width/2, 120)
-  ctx.font='60px sans-serif'
-  ctx.fillText(activeFilter.mid, canvas.width/2, canvas.height/2+20)
-  ctx.font='50px sans-serif'
-  ctx.fillText(activeFilter.bottom, canvas.width/2, canvas.height/2+90)
-  let txt=document.getElementById('snapText').value
-  if(txt){ ctx.font='bold 32px sans-serif'; ctx.fillStyle='white'; ctx.strokeStyle='black'; ctx.lineWidth=5; ctx.strokeText(txt, canvas.width/2, canvas.height-20); ctx.fillText(txt, canvas.width/2, canvas.height-20) }
-  capturedDataUrl=canvas.toDataURL('image/png')
-  let img=document.getElementById('capturedImg')
-  img.src=capturedDataUrl; img.style.display='block'
-  v.style.display='none'
-  showToast('Snap capture ho gaya! Ab Send dabao')
-}
-function retakeSnap(){
-  document.getElementById('capturedImg').style.display='none'
-  let v=document.getElementById('cameraVideo')
-  if(v.srcObject){ v.style.display='block' } else { document.getElementById('cameraPlaceholder').style.display='flex' }
-  capturedDataUrl=null
-  showToast('Dobara photo lo')
-}
-function downloadSnap(){ if(!capturedDataUrl){ showToast('Pehle photo khicho'); return } let a=document.createElement('a'); a.href=capturedDataUrl; a.download='snapista-snap.png'; a.click(); showToast('Snap download ho gaya') }
-function sendSnap(){
-  if(!capturedDataUrl){ showToast('Pehle camera se photo khicho'); return }
-  posts.unshift({img:`<img src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap - '+activeFilter.name,mood:currentMood=="All"?"Happy":currentMood})
-  document.getElementById('postCount').innerText=posts.length
-  renderFeed(); showToast('Snap bhej diya - '+activeFilter.name+' filter ke saath'); showTab('feed')
-}
-function addToStory(){
-  if(!capturedDataUrl && !document.getElementById('snapText').value){ showToast('Pehle photo khicho'); return }
-  if(capturedDataUrl){ myStories.push({img:capturedDataUrl, text:document.getElementById('snapText').value||'My Story - '+activeFilter.name}) }
-  else{ myStories.push({img:null, text:document.getElementById('snapText').value||'My Story', emoji:activeFilter.icon}) }
-  renderStories(); showToast('Story me add ho gaya')
-}
-
+// ===== HOME =====
 function renderStories(){
-  let h=`<div class="story" onclick="showTab('snap')"><div class="story-ring"><div>+</div></div><p>Your Story</p></div>`
-  if(myStories.length==0){ h+=`<div style="display:flex;align-items:center;color:#888;font-size:13px;padding-left:8px">No stories yet.<br>Tap + to add.</div>` }
-  myStories.forEach((s,idx)=>{ h+=`<div class="story" onclick="openStory(${idx})"><div class="story-ring"><div>${s.emoji||'📸'}</div></div><p>You</p></div>` })
+  let h=`<div class="story" onclick="goPage('snap',document.querySelectorAll('.bottom div')[2])"><div class="story-ring"><div>+</div></div><p>Your Story</p></div>`
+  if(myStories.length==0){ h+=`<div style="display:flex;align-items:center;color:#888;font-size:13px;padding-left:8px">No stories yet.<br>Snap se story banao.</div>` }
+  myStories.forEach((s,idx)=>{ h+=`<div class="story" onclick="openStory(${idx})"><div class="story-ring"><div>📸</div></div><p>You</p></div>` })
   document.getElementById('stories').innerHTML=h
 }
 function openStory(idx){
   let s=myStories[idx]
   let c=document.getElementById('viewerContent')
   if(s.img) c.innerHTML=`<img src="${s.img}">`
-  else c.innerHTML=`<div style="font-size:80px">${s.emoji||'📸'}</div>`
+  else c.innerHTML=`<div style="font-size:80px">📸</div>`
   document.getElementById('viewerText').innerText=s.text||'My Story'
   document.getElementById('viewer').classList.add('active')
 }
 function renderFeed(){
-  if(posts.length==0){ document.getElementById('feed').innerHTML=`<div class="empty"><div class="big">📸</div><h3>Feed is empty</h3><p>Camera se Snap lo aur pehla post banao.</p></div>`; return }
-  let list = currentMood=="All"?posts:posts.filter(p=>p.mood==currentMood)
+  if(posts.length==0){ document.getElementById('feed').innerHTML=`<div class="empty"><div class="big">📸</div><h3>Feed is empty</h3><p>No posts yet.<br>+ New Post se pehla post banao.</p></div>`; return }
   let h=""
-  list.forEach((p,idx)=>{
-    h+=`<div class="post"><div class="post-head"><div style="font-size:30px">😎</div><div><b>You</b><small>${p.mood} • Just now</small></div></div><div class="post-img">${p.img}</div><div class="post-actions"><span onclick="likePost(${idx},this)">🤍</span><span>💬</span><span onclick="showToast('Shared')">↗️</span><span style="margin-left:auto">🔖</span></div><p><b>${p.likes} likes</b></p><p><b>You</b> ${p.caption}</p><div class="comment-box"><input id="c${idx}" placeholder="Add comment..."><button onclick="addComment(${idx})">Post</button></div></div>`
+  posts.forEach((p,idx)=>{
+    h+=`<div class="post"><div class="post-head"><div style="font-size:28px">😎</div><div><b>You</b><small>Just now</small></div></div><div class="post-img">${p.img}</div><div class="post-actions"><span onclick="likePost(${idx},this)">🤍</span><span>💬</span><span onclick="showToast('Shared')">↗️</span><span style="margin-left:auto">🔖</span></div><p><b>${p.likes} likes</b></p><p><b>You</b> ${p.caption}</p><div class="comment-box"><input id="c${idx}" placeholder="Add comment..."><button onclick="addComment(${idx})">Post</button></div></div>`
   })
   document.getElementById('feed').innerHTML=h
 }
 function likePost(i,el){ if(el.innerText=='❤️'){el.innerText='🤍';posts[i].likes--}else{el.innerText='❤️';posts[i].likes++} renderFeed() }
 function addComment(i){ let v=document.getElementById('c'+i).value; if(!v) return; showToast('Comment added'); document.getElementById('c'+i).value="" }
-function uploadPost(e){ let f=e.target.files[0]; if(!f) return; let url=URL.createObjectURL(f); posts.unshift({img:`<img src="${url}">`,likes:0,caption:"My Snapista post",mood:currentMood=="All"?"Happy":currentMood}); document.getElementById('postCount').innerText=posts.length; renderFeed(); showToast('Post uploaded') }
+function uploadPost(e){ let f=e.target.files[0]; if(!f) return; let url=URL.createObjectURL(f); posts.unshift({img:`<img src="${url}">`,likes:0,caption:"My Snapista post"}); document.getElementById('postCount').innerText=posts.length; renderFeed(); showToast('Post uploaded') }
 function doSearch(){ let q=document.getElementById('searchInput').value; if(!q) return showToast('Type something to search'); showToast('No users yet for "'+q+'"'); }
-function setMood(m,el){ currentMood=m; document.querySelectorAll('#moods button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); renderFeed(); }
-function showTab(t){ ['feed','explore','reels','snap','chat','profile'].forEach(x=>document.getElementById(x).style.display='none'); document.getElementById(t).style.display='block'; document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active')); if(t=='feed') document.getElementById('tab-feed').classList.add('active'); if(t=='explore') document.getElementById('tab-explore').classList.add('active'); if(t=='reels') document.getElementById('tab-reels').classList.add('active'); if(t=='snap') document.getElementById('tab-snap').classList.add('active'); if(t=='chat') document.getElementById('tab-chat').classList.add('active'); }
+
+// ===== SNAP - SIRF CAMERA =====
+async function startCamera(){
+  try{
+    if(stream) stream.getTracks().forEach(t=>t.stop())
+    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:facing}, audio:false})
+    let v=document.getElementById('cameraVideo')
+    v.srcObject=stream; v.style.display='block'
+    document.getElementById('cameraPlaceholder').style.display='none'
+    document.getElementById('capturedImg').style.display='none'
+    capturedDataUrl=null
+    showToast('Camera on ho gaya')
+  }catch(e){ showToast('Camera nahi khula - Permission allow karo'); }
+}
+function switchCamera(){ facing = facing=='user' ? 'environment' : 'user'; startCamera() }
+function takeSnap(){
+  let v=document.getElementById('cameraVideo')
+  if(!v.srcObject || v.style.display=='none'){ showToast('Pehle Open Camera dabao'); return }
+  let canvas=document.getElementById('snapCanvas')
+  let ctx=canvas.getContext('2d')
+  canvas.width=v.videoWidth || 640; canvas.height=v.videoHeight || 480
+  ctx.drawImage(v,0,0,canvas.width,canvas.height)
+  let txt=document.getElementById('snapText').value
+  if(txt){ ctx.font='bold 32px sans-serif'; ctx.fillStyle='white'; ctx.strokeStyle='black'; ctx.lineWidth=5; ctx.strokeText(txt, canvas.width/2, canvas.height-20); ctx.textAlign='center'; ctx.fillText(txt, canvas.width/2, canvas.height-20) }
+  capturedDataUrl=canvas.toDataURL('image/png')
+  let img=document.getElementById('capturedImg'); img.src=capturedDataUrl; img.style.display='block'
+  v.style.display='none'
+  showToast('Photo capture ho gayi! Ab Send dabao')
+}
+function retakeSnap(){
+  document.getElementById('capturedImg').style.display='none'
+  let v=document.getElementById('cameraVideo')
+  if(v.srcObject){ v.style.display='block' } else { document.getElementById('cameraPlaceholder').style.display='flex' }
+  capturedDataUrl=null; showToast('Dobara photo lo')
+}
+function downloadSnap(){ if(!capturedDataUrl){ showToast('Pehle photo khicho'); return } let a=document.createElement('a'); a.href=capturedDataUrl; a.download='snapista-snap.png'; a.click(); showToast('Snap download ho gaya') }
+function sendSnap(){
+  if(!capturedDataUrl){ showToast('Pehle camera se photo khicho'); return }
+  posts.unshift({img:`<img src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap'})
+  document.getElementById('postCount').innerText=posts.length
+  renderFeed(); showToast('Snap bhej diya - Home me aa gaya')
+  goPage('home',document.querySelectorAll('.bottom div')[0])
+}
+function addToStory(){
+  if(!capturedDataUrl && !document.getElementById('snapText').value){ showToast('Pehle photo khicho'); return }
+  if(capturedDataUrl){ myStories.push({img:capturedDataUrl, text:document.getElementById('snapText').value||'My Story'}) }
+  else{ myStories.push({img:null, text:document.getElementById('snapText').value||'My Story'}) }
+  renderStories(); showToast('Story me add ho gaya')
+  goPage('home',document.querySelectorAll('.bottom div')[0])
+}
+function sendChat(){ let v=document.getElementById('chatInput').value; if(!v) return; showToast('Chat tab me message bheja'); document.getElementById('chatInput').value="" }
 function closeViewer(){document.getElementById('viewer').classList.remove('active')}
 function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
-renderSnapFilters()
 </script>
 </body>
 </html>
