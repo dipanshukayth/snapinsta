@@ -1,24 +1,375 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Snapista - Snap + Insta</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root {
-  --yellow: #FFD500;
-  --insta: conic-gradient(#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
-  --dark: #000;
-  --card: #121212;
-  --border: #222;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;user-select:none}
-body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;padding-bottom:80px;position:relative}
-a{color:#fff;text-decoration:none}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;padding-bottom:85px}
+#loginPage{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;padding:20px;z-index:200}
+.login-card{background:#111;width:100%;max-width:360px;padding:28px 22px;border-radius:16px;text-align:center}
+.login-logo{font-size:28px;font-weight:900}.login-logo span{color:#FFFC00}
+.login-sub{color:#888;font-size:13px;margin:6px 0 20px}
+.login-card input{width:100%;background:#222;border:none;color:#fff;padding:14px;border-radius:10px;outline:none;margin-bottom:12px;font-size:14px}
+.login-btn{width:100%;background:#FFFC00;border:none;padding:14px;border-radius:10px;font-weight:900;font-size:16px;cursor:pointer;color:#000}
+.signup-text{color:#888;font-size:13px;margin-top:14px}.signup-text b{color:#fff;cursor:pointer;text-decoration:underline}
+#app{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 6px;position:sticky;top:0;background:#000;z-index:20}
+.logo{font-size:24px;font-weight:900}.logo span{color:#FFFC00}
+.top-icons{display:flex;gap:14px;font-size:21px;cursor:pointer}
+.search{margin:6px 12px 4px;display:flex;gap:8px}
+.search input{flex:1;background:#222;border:none;color:#fff;padding:10px 14px;border-radius:20px;outline:none}
+.search button{background:#FFFC00;border:none;padding:10px 14px;border-radius:20px;font-weight:800;cursor:pointer;color:#000}
+.moods{display:flex;gap:8px;overflow-x:auto;padding:6px 12px;scrollbar-width:none}
+.moods::-webkit-scrollbar{display:none}
+.moods button{flex:0 0 auto;background:#1a1a1a;border:1px solid #333;color:#fff;padding:7px 14px;border-radius:20px;cursor:pointer;font-size:13px}
+.moods button.active{background:#FFFC00;color:#000;font-weight:800}
+.stories{display:flex;gap:12px;overflow-x:auto;padding:10px 12px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.story{flex:0 0 68px;text-align:center;cursor:pointer}
+.story-ring{width:64px;height:64px;border-radius:50%;padding:3px;background:conic-gradient(#FFFC00,#FF004C,#A100F2)}
+.story-ring div{width:100%;height:100%;border-radius:50%;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:24px;background:#222}
+.story p{font-size:11px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;justify-content:space-around;border-bottom:1px solid #222;padding:8px 0;position:sticky;top:52px;background:#000;z-index:9}
+.tabs button{background:none;border:none;color:#888;font-size:14px;font-weight:700;padding:6px 12px;cursor:pointer}
+.tabs button.active{color:#fff;border-bottom:2px solid #FFFC00}
+.empty{text-align:center;padding:30px 20px;color:#888}.empty .big{font-size:50px;margin-bottom:10px}.empty h3{color:#fff;margin-bottom:6px}.empty p{font-size:13px;line-height:1.5}
+.post{border-bottom:1px solid #1a1a1a;padding-bottom:12px;margin-bottom:6px}
+.post-head{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.post-img{width:100%;aspect-ratio:1/1;background:#111;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden}
+.post-img img{width:100%;height:100%;object-fit:cover}
+.post-actions{display:flex;gap:16px;padding:10px 12px 4px;font-size:22px;cursor:pointer}
+.post p{padding:2px 12px;font-size:14px}
+.comment-box{display:flex;gap:8px;padding:8px 12px}
+.comment-box input{flex:1;background:#222;border:none;outline:none;color:#fff;padding:8px 12px;border-radius:20px}
+.comment-box button{background:#FFFC00;border:none;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;color:#000}
+.explore{display:none;padding:10px}
+.reels{display:none}
+.snap{display:none;padding:14px}
+/* ===== CAMERA ===== */
+.camera-box{position:relative;width:100%;height:380px;background:#111;border-radius:20px;overflow:hidden;border:1px solid #333}
+.camera-box video,.camera-box canvas,.camera-box img{width:100%;height:100%;object-fit:cover;display:block}
+.camera-overlay{position:absolute;top:12px;left:0;right:0;text-align:center;font-size:42px;pointer-events:none;text-shadow:0 4px 10px rgba(0,0,0,.6);z-index:2}
+.camera-text{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:20px;font-weight:800;text-shadow:0 2px 8px #000;z-index:2;word-break:break-word;padding:0 10px}
+.camera-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#888;text-align:center;padding:20px}
+.camera-placeholder .big{font-size:60px}
+.capture-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin:14px 0 6px}
+.capture-btn{width:68px;height:68px;border-radius:50%;background:#fff;border:5px solid #FFFC00;cursor:pointer}
+.capture-btn:active{transform:scale(0.92)}
+.small-btn{background:#222;color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer}
+.filter-row{display:flex;gap:8px;overflow-x:auto;margin:12px 0;scrollbar-width:none;padding-bottom:2px}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-row button{flex:0 0 auto;background:#1a1a1a;border:1px solid #333;color:#fff;padding:8px 14px;border-radius:20px;cursor:pointer}
+.filter-row button.active{background:#FFFC00;color:#000;font-weight:800}
+.snap input{width:100%;padding:12px;border-radius:10px;border:none;background:#222;color:#fff;outline:none;margin-bottom:10px}
+.btn{width:100%;background:#FFFC00;border:none;padding:13px;border-radius:12px;font-weight:900;font-size:16px;cursor:pointer;margin-top:6px;color:#000}
+.btn2{background:#fff;color:#000}
+.btn3{background:#FF004C;color:#fff}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0 14px;z-index:20}
+.bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888}
+.bottom div.active{color:#FFFC00}
+.bottom div small{display:block;font-size:10px}
+.viewer{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.viewer.active{display:flex}
+.viewer .big{font-size:120px}
+.viewer img{max-width:100%;max-height:60vh;border-radius:16px}
+.viewer button{margin-top:20px;background:#FFFC00;border:none;padding:10px 20px;border-radius:20px;font-weight:800}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:8px 16px;border-radius:20px;font-weight:700;display:none;z-index:300;max-width:90%;text-align:center}
+.upload-box{background:#111;border:1px dashed #444;border-radius:14px;padding:12px;margin:10px 12px;text-align:center}
+.upload-box input{display:none}
+.profile{display:none;padding:14px;text-align:center}
+.profile .avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#FFFC00,#FF004C);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto}
+.stats{display:flex;justify-content:space-around;margin:14px 0}
+.stats b{display:block;font-size:18px}
+.stats span{color:#888;font-size:12px}
+</style>
+</head>
+<body>
 
-/* TOP BAR */
-.top{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 8px;position:sticky;top:0;background:#000;z-index:10}
-.logo{font-size:22px;font-weight:900;letter-spacing:-0.5px}
-.logo span{color:var(--yellow)}
-.top-icons{display:flex;gap:16px;font-size:20
+<div id="loginPage">
+  <div class="login-card">
+    <div class="login-logo">SNAP<span>ISTA</span></div>
+    <div class="login-sub" id="loginSub">Login to your account</div>
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+    <button class="login-btn" onclick="doLogin()">Login</button>
+    <div class="signup-text">Don't have an account? <b onclick="doSignup()">Sign Up</b></div>
+  </div>
+</div>
+
+<div id="app">
+<div class="top">
+  <div class="logo">SNAP<span>ISTA</span></div>
+  <div class="top-icons"><span onclick="showToast('No notifications yet')">🔔</span><span onclick="showTab('chat')">💬</span><span onclick="showTab('snap')">📸</span><span onclick="logout()" style="font-size:13px">Logout</span></div>
+</div>
+
+<div class="search"><input id="searchInput" placeholder="Search - friends, reels, mood..."><button onclick="doSearch()">Search</button></div>
+
+<div class="moods" id="moods">
+  <button class="active" onclick="setMood('All',this)">✨ All</button>
+  <button onclick="setMood('Happy',this)">😊 Happy</button>
+  <button onclick="setMood('Funny',this)">😂 Funny</button>
+  <button onclick="setMood('Chill',this)">😌 Chill</button>
+  <button onclick="setMood('Study',this)">📚 Study</button>
+</div>
+
+<div class="stories" id="stories"></div>
+
+<div class="tabs">
+  <button id="tab-feed" class="active" onclick="showTab('feed')">Feed</button>
+  <button id="tab-explore" onclick="showTab('explore')">Explore</button>
+  <button id="tab-reels" onclick="showTab('reels')">Reels</button>
+  <button id="tab-snap" onclick="showTab('snap')">Snap</button>
+  <button id="tab-chat" onclick="showTab('chat')">Chat</button>
+</div>
+
+<div class="upload-box">
+  <p>Upload photo to create first post</p>
+  <input type="file" id="fileInput" accept="image/*" onchange="uploadPost(event)">
+  <button class="btn" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">Choose Photo + Post</button>
+</div>
+
+<div id="feed"></div>
+
+<div id="explore" class="explore">
+  <div class="empty"><div class="big">🔍</div><h3>No posts yet</h3><p>When users join, their posts will appear here.</p></div>
+</div>
+
+<div id="reels" class="reels"></div>
+
+<!-- ===== SNAP + CAMERA + FILTERS ===== -->
+<div id="snap" class="snap">
+  <div class="camera-box" id="cameraBox">
+    <video id="cameraVideo" autoplay playsinline muted style="display:none"></video>
+    <canvas id="snapCanvas" style="display:none"></canvas>
+    <img id="capturedImg" style="display:none">
+    <div class="camera-overlay" id="filterOverlay">😎</div>
+    <div class="camera-text" id="cameraText"></div>
+    <div class="camera-placeholder" id="cameraPlaceholder">
+      <div class="big">📸</div>
+      <b style="color:#fff">Snap Camera</b>
+      <p>Camera on karo, filter lagao,<br>photo khicho, Snap bhejo</p>
+      <button class="btn" onclick="startCamera()">Open Camera</button>
+      <p style="font-size:11px">Camera allow karna padega.<br>HTTPS / localhost pe hi chalega.</p>
+    </div>
+  </div>
+
+  <div class="capture-bar">
+    <button class="small-btn" onclick="switchCamera()" title="Switch">🔄</button>
+    <button class="capture-btn" onclick="takeSnap()" title="Capture"></button>
+    <button class="small-btn" onclick="retakeSnap()" title="Retake">↩️</button>
+  </div>
+
+  <p style="text-align:center;color:#888;font-size:12px;margin:4px 0 8px">👆 Beech wala button = Photo khicho</p>
+
+  <!-- FILTERS - ASLI WALE -->
+  <p style="font-size:13px;font-weight:800;margin-bottom:6px">Snap Filters</p>
+  <div class="filter-row" id="filters"></div>
+
+  <p style="font-size:13px;font-weight:800;margin:10px 0 6px">Face Sticker</p>
+  <div class="filter-row" id="stickers">
+    <button onclick="setSticker('😎',this)">😎 Cool</button>
+    <button onclick="setSticker('🐶',this)">🐶 Dog</button>
+    <button onclick="setSticker('👑',this)">👑 King</button>
+    <button onclick="setSticker('🔥',this)">🔥 Fire</button>
+    <button onclick="setSticker('😂',this)">😂 Funny</button>
+    <button onclick="setSticker('🌸',this)">🌸 Flower</button>
+    <button onclick="setSticker('💀',this)">💀 Skull</button>
+    <button onclick="setSticker('',this)">❌ None</button>
+  </div>
+
+  <input id="snapText" placeholder="Write something on your snap..." oninput="document.getElementById('cameraText').innerText=this.value">
+  <button class="btn" onclick="sendSnap()">📸 Send Snap</button>
+  <button class="btn btn2" onclick="addToStory()">+ Add to Story</button>
+  <button class="btn btn3" onclick="downloadSnap()">⬇️ Download Snap</button>
+  <p style="text-align:center;color:#888;font-size:12px;margin-top:10px">Snap disappears in 24h • Filter photo pe hi lagega</p>
+</div>
+
+<div id="chat" style="display:none;padding:12px">
+  <div class="empty"><div class="big">💬</div><h3>No chats yet</h3><p>When someone joins, you can chat here.</p><button class="btn" onclick="showToast('Link copied')">Copy Invite Link</button></div>
+</div>
+
+<div id="profile" class="profile">
+  <div class="avatar">😎</div>
+  <h2 style="margin-top:10px" id="profileName">You</h2>
+  <p style="color:#888;font-size:13px">Snapista User</p>
+  <div class="stats"><div><b id="postCount">0</b><span>Posts</span></div><div><b>0</b><span>Followers</span></div><div><b>0</b><span>Following</span></div><div><b>0</b><span>Streak</span></div></div>
+  <button class="btn" onclick="showToast('Profile link copied')">Share Profile</button>
+</div>
+
+<div class="bottom">
+  <div class="active" onclick="showTab('feed')">🏠<small>Home</small></div>
+  <div onclick="showTab('explore')">🔍<small>Explore</small></div>
+  <div onclick="showTab('reels')">🎬<small>Reels</small></div>
+  <div onclick="showTab('snap')">📸<small>Snap</small></div>
+  <div onclick="showTab('profile')">👤<small>Profile</small></div>
+</div>
+</div>
+
+<div class="viewer" id="viewer"><div id="viewerContent"></div><p id="viewerText" style="margin-top:10px"></p><button onclick="closeViewer()">Close</button></div>
+<div id="toast"></div>
+
+<script>
+let posts=[], myStories=[]
+let currentFilter={name:'Normal',css:'none'}
+let currentSticker='😎'
+let currentMood="All", isSignup=false
+let stream=null, facing='user', capturedDataUrl=null
+
+let snapFilters=[
+ {name:'😎 Normal', css:'none'},
+ {name:'🔥 Warm', css:'saturate(1.6) contrast(1.1) brightness(1.05)'},
+ {name:'❄️ Cool', css:'saturate(0.8) hue-rotate(180deg) brightness(1.1)'},
+ {name:'🖤 B&W', css:'grayscale(1) contrast(1.2)'},
+ {name:'🌸 Soft', css:'saturate(1.3) brightness(1.2) blur(0.3px)'},
+ {name:'🌅 Sunset', css:'sepia(0.6) saturate(1.5) contrast(1.1)'},
+ {name:'💜 Neon', css:'saturate(2) hue-rotate(280deg) contrast(1.2)'},
+ {name:'✨ Vintage', css:'sepia(0.4) contrast(1.1) brightness(0.95)'},
+]
+
+function doSignup(){
+  if(!isSignup){ isSignup=true; document.getElementById('loginSub').innerText='Create your account'; document.querySelector('.login-btn').innerText='Sign Up'; document.querySelector('.signup-text').innerHTML='Already have an account? <b onclick="doSignup()">Login</b>'; }
+  else{ isSignup=false; document.getElementById('loginSub').innerText='Login to your account'; document.querySelector('.login-btn').innerText='Login'; document.querySelector('.signup-text').innerHTML=`Don't have an account? <b onclick="doSignup()">Sign Up</b>`; }
+}
+function doLogin(){
+  let u=document.getElementById('loginUser').value.trim()
+  let p=document.getElementById('loginPass').value.trim()
+  if(!u || !p){ showToast('Username aur Password daalo'); return }
+  document.getElementById('profileName').innerText='@'+u
+  document.getElementById('loginPage').style.display='none'
+  document.getElementById('app').style.display='block'
+  showToast('Welcome @'+u)
+  renderStories();renderFeed();renderFilters()
+}
+function logout(){ if(stream){stream.getTracks().forEach(t=>t.stop()); stream=null} document.getElementById('app').style.display='none'; document.getElementById('loginPage').style.display='flex' }
+
+// ===== CAMERA =====
+async function startCamera(){
+  try{
+    if(stream) stream.getTracks().forEach(t=>t.stop())
+    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:facing}, audio:false})
+    let v=document.getElementById('cameraVideo')
+    v.srcObject=stream
+    v.style.display='block'
+    document.getElementById('cameraPlaceholder').style.display='none'
+    document.getElementById('capturedImg').style.display='none'
+    document.getElementById('snapCanvas').style.display='none'
+    capturedDataUrl=null
+    applyFilterToVideo()
+    showToast('Camera on ho gaya')
+  }catch(e){ showToast('Camera nahi khula - Permission allow karo aur HTTPS pe kholo'); }
+}
+function switchCamera(){
+  facing = facing=='user' ? 'environment' : 'user'
+  startCamera()
+}
+function applyFilterToVideo(){
+  let v=document.getElementById('cameraVideo')
+  v.style.filter = currentFilter.css
+  document.getElementById('filterOverlay').innerText = currentSticker
+}
+function takeSnap(){
+  let v=document.getElementById('cameraVideo')
+  if(!v.srcObject || v.style.display=='none'){ showToast('Pehle Open Camera dabao'); return }
+  let canvas=document.getElementById('snapCanvas')
+  let ctx=canvas.getContext('2d')
+  canvas.width=v.videoWidth || 640
+  canvas.height=v.videoHeight || 480
+  ctx.filter=currentFilter.css
+  ctx.drawImage(v,0,0,canvas.width,canvas.height)
+  // sticker draw
+  ctx.font='80px sans-serif'
+  ctx.textAlign='center'
+  ctx.fillText(currentSticker, canvas.width/2, 90)
+  // text draw
+  let txt=document.getElementById('snapText').value
+  if(txt){ ctx.font='bold 32px sans-serif'; ctx.fillStyle='white'; ctx.strokeStyle='black'; ctx.lineWidth=4; ctx.strokeText(txt, canvas.width/2, canvas.height-20); ctx.fillText(txt, canvas.width/2, canvas.height-20) }
+  capturedDataUrl=canvas.toDataURL('image/png')
+  let img=document.getElementById('capturedImg')
+  img.src=capturedDataUrl
+  img.style.display='block'
+  v.style.display='none'
+  showToast('Snap capture ho gaya! Ab Send dabao')
+}
+function retakeSnap(){
+  document.getElementById('capturedImg').style.display='none'
+  let v=document.getElementById('cameraVideo')
+  if(v.srcObject){ v.style.display='block' } else { document.getElementById('cameraPlaceholder').style.display='flex' }
+  capturedDataUrl=null
+  showToast('Dobara photo lo')
+}
+function downloadSnap(){
+  if(!capturedDataUrl){ showToast('Pehle photo khicho'); return }
+  let a=document.createElement('a'); a.href=capturedDataUrl; a.download='snapista-snap.png'; a.click(); showToast('Snap download ho gaya')
+}
+function sendSnap(){
+  if(!capturedDataUrl){ showToast('Pehle camera se photo khicho'); return }
+  posts.unshift({img:`<img src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap',mood:currentMood=="All"?"Happy":currentMood})
+  document.getElementById('postCount').innerText=posts.length
+  renderFeed()
+  showToast('Snap bhej diya - Feed me aa gaya')
+  showTab('feed')
+}
+function addToStory(){
+  if(!capturedDataUrl && !document.getElementById('snapText').value){ showToast('Pehle photo khicho ya text likho'); return }
+  if(capturedDataUrl){
+    myStories.push({img:capturedDataUrl, text:document.getElementById('snapText').value||'My Story'})
+  } else {
+    myStories.push({img:null, text:document.getElementById('snapText').value||'My Story', emoji:currentSticker})
+  }
+  renderStories()
+  showToast('Story me add ho gaya')
+}
+
+function renderFilters(){
+  document.getElementById('filters').innerHTML=snapFilters.map((f,i)=>`<button class="${currentFilter.name==f.name?'active':''}" onclick="setSnapFilter(${i},this)">${f.name}</button>`).join('')
+}
+function setSnapFilter(i,el){
+  currentFilter=snapFilters[i]
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('active')); el.classList.add('active')
+  applyFilterToVideo()
+  // agar photo capture hai to uspe bhi filter dikhao
+  if(capturedDataUrl){ document.getElementById('capturedImg').style.filter=currentFilter.css }
+}
+function setSticker(s,el){
+  currentSticker=s
+  document.querySelectorAll('#stickers button').forEach(b=>b.style.background='#1a1a1a'); el.style.background='#FFFC00'; el.style.color='#000'
+  document.getElementById('filterOverlay').innerText=s
+}
+
+// ===== BAAKI APP =====
+function renderStories(){
+  let h=`<div class="story" onclick="showTab('snap')"><div class="story-ring"><div>+</div></div><p>Your Story</p></div>`
+  if(myStories.length==0){ h+=`<div style="display:flex;align-items:center;color:#888;font-size:13px;padding-left:8px">No stories yet.<br>Tap + to add.</div>` }
+  myStories.forEach((s,idx)=>{ h+=`<div class="story" onclick="openStory(${idx})"><div class="story-ring"><div>${s.emoji||'📸'}</div></div><p>You</p></div>` })
+  document.getElementById('stories').innerHTML=h
+}
+function openStory(idx){
+  let s=myStories[idx]
+  let c=document.getElementById('viewerContent')
+  if(s.img) c.innerHTML=`<img src="${s.img}">`
+  else c.innerHTML=`<div class="big">${s.emoji||'📸'}</div>`
+  document.getElementById('viewerText').innerText=s.text||'My Story'
+  document.getElementById('viewer').classList.add('active')
+}
+function renderFeed(){
+  if(posts.length==0){ document.getElementById('feed').innerHTML=`<div class="empty"><div class="big">📸</div><h3>Feed is empty</h3><p>No users yet.<br>Camera se Snap lo aur pehla post banao.</p></div>`; return }
+  let list = currentMood=="All"?posts:posts.filter(p=>p.mood==currentMood)
+  let h=""
+  list.forEach((p,idx)=>{
+    h+=`<div class="post"><div class="post-head"><div style="font-size:30px">😎</div><div><b>You</b><small>${p.mood} • Just now</small></div></div><div class="post-img">${p.img}</div><div class="post-actions"><span onclick="likePost(${idx},this)">🤍</span><span>💬</span><span onclick="showToast('Shared')">↗️</span><span style="margin-left:auto">🔖</span></div><p><b>${p.likes} likes</b></p><p><b>You</b> ${p.caption}</p><div class="comment-box"><input id="c${idx}" placeholder="Add comment..."><button onclick="addComment(${idx})">Post</button></div></div>`
+  })
+  document.getElementById('feed').innerHTML=h
+}
+function likePost(i,el){ if(el.innerText=='❤️'){el.innerText='🤍';posts[i].likes--}else{el.innerText='❤️';posts[i].likes++} renderFeed() }
+function addComment(i){ let v=document.getElementById('c'+i).value; if(!v) return; showToast('Comment added'); document.getElementById('c'+i).value="" }
+function uploadPost(e){ let f=e.target.files[0]; if(!f) return; let url=URL.createObjectURL(f); posts.unshift({img:`<img src="${url}">`,likes:0,caption:"My Snapista post",mood:currentMood=="All"?"Happy":currentMood}); document.getElementById('postCount').innerText=posts.length; renderFeed(); showToast('Post uploaded') }
+function doSearch(){ let q=document.getElementById('searchInput').value; if(!q) return showToast('Type something to search'); showToast('No users yet for "'+q+'"'); }
+function setMood(m,el){ currentMood=m; document.querySelectorAll('#moods button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); renderFeed(); }
+function showTab(t){ ['feed','explore','reels','snap','chat','profile'].forEach(x=>document.getElementById(x).style.display='none'); document.getElementById(t).style.display='block'; document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active')); if(t=='feed') document.getElementById('tab-feed').classList.add('active'); if(t=='explore') document.getElementById('tab-explore').classList.add('active'); if(t=='reels') document.getElementById('tab-reels').classList.add('active'); if(t=='snap') document.getElementById('tab-snap').classList.add('active'); if(t=='chat') document.getElementById('tab-chat').classList.add('active'); if(t=='snap' && !stream && !capturedDataUrl){ /* camera khud se nahi kholega, user Open dabayega */ } }
+function closeViewer(){document.getElementById('viewer').classList.remove('active')}
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+</script>
+</body>
+</html>
