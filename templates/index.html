@@ -1,74 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Snapista</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: #000; color: #fff; height: 100vh; overflow: hidden; display: flex; justify-content: center; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kayth One - Snap + Insta</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#000;color:#fff;max-width:420px;margin:0 auto;min-height:100vh;padding-bottom:80px}
+a{color:#fff;text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 8px;position:sticky;top:0;background:#000;z-index:10}
+.logo{font-size:22px;font-weight:900;letter-spacing:-0.5px}
+.logo span{color:#FFD500}
+.top-icons{display:flex;gap:16px;font-size:20px;cursor:pointer}
+.stories{display:flex;gap:12px;overflow-x:auto;padding:10px 12px;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.story{flex:0 0 68px;text-align:center;cursor:pointer}
+.story-ring{width:64px;height:64px;border-radius:50%;padding:3px;background:conic-gradient(#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)}
+.story-ring img,.story-ring div{width:100%;height:100%;border-radius:50%;border:3px solid #000;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:24px;background:#222}
+.story p{font-size:11px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;justify-content:space-around;border-bottom:1px solid #222;padding:10px 0;position:sticky;top:52px;background:#000;z-index:9}
+.tabs button{background:none;border:none;color:#888;font-size:14px;font-weight:700;padding:6px 14px;cursor:pointer}
+.tabs button.active{color:#fff;border-bottom:2px solid #FFD500}
+.post{border-bottom:1px solid #1a1a1a;padding-bottom:12px;margin-bottom:8px}
+.post-head{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.post-head img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.post-head b{font-size:14px}
+.post-head small{color:#888;display:block;font-size:11px}
+.post-img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#111;display:flex;align-items:center;justify-content:center;font-size:80px}
+.post-actions{display:flex;gap:16px;padding:10px 12px 4px;font-size:22px;cursor:pointer}
+.post-actions span.liked{color:#ff3040}
+.post p{padding:2px 12px;font-size:14px;line-height:1.4}
+.post p b{margin-right:5px}
+.comment-box{display:flex;gap:8px;padding:8px 12px}
+.comment-box input{flex:1;background:#1a1a1a;border:none;outline:none;color:#fff;padding:8px 12px;border-radius:20px}
+.comment-box button{background:#FFD500;border:none;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer}
+.reels{display:none}
+.reel{height:72vh;position:relative;background:#111;margin:10px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:90px}
+.reel-info{position:absolute;bottom:16px;left:12px;right:60px}
+.reel-info b{font-size:15px}
+.reel-info p{font-size:13px;color:#ddd;margin-top:4px}
+.reel-btns{position:absolute;right:12px;bottom:20px;display:flex;flex-direction:column;gap:16px;text-align:center;font-size:22px}
+.reel-btns small{display:block;font-size:11px}
+.snap{display:none;padding:14px}
+.snap-box{height:340px;background:linear-gradient(135deg,#ff004c,#ff8a00,#FFD500);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:90px;position:relative;overflow:hidden}
+.snap-box span{filter:drop-shadow(0 10px 20px rgba(0,0,0,.5))}
+.filter-row{display:flex;gap:8px;overflow-x:auto;margin:12px 0;scrollbar-width:none}
+.filter-row button{flex:0 0 auto;background:#1a1a1a;border:1px solid #333;color:#fff;padding:8px 14px;border-radius:20px;cursor:pointer}
+.filter-row button.active{background:#FFD500;color:#000;font-weight:800}
+.snap input{width:100%;padding:12px;border-radius:12px;border:none;background:#1a1a1a;color:#fff;outline:none;margin-bottom:10px}
+.btn{width:100%;background:#FFD500;border:none;padding:13px;border-radius:14px;font-weight:900;font-size:16px;cursor:pointer;margin-top:6px}
+.btn2{background:#fff;color:#000}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 0 14px;z-index:20}
+.bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888}
+.bottom div.active{color:#FFD500}
+.bottom div small{display:block;font-size:10px}
+.viewer{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center}
+.viewer.active{display:flex}
+.viewer .big{font-size:120px}
+.viewer p{margin-top:14px;font-size:18px}
+.viewer button{margin-top:20px;background:#FFD500;border:none;padding:10px 20px;border-radius:20px;font-weight:800}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:8px 16px;border-radius:20px;font-weight:700;display:none;z-index:99}
+</style>
+</head>
+<body>
 
-    .app {
-      width: 100%;
-      max-width: 430px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      background: #000;
-    }
+<div class="top">
+  <div class="logo">KAYTH <span>ONE</span></div>
+  <div class="top-icons"><span onclick="showTab('snap')">📸</span><span onclick="showTab('chat')">💬</span></div>
+</div>
 
-    .view { flex: 1; height: calc(100vh - 60px); position: relative; overflow: hidden; display: none; }
-    .view.active { display: flex; flex-direction: column; }
+<!-- STORIES - SNAP + INSTA -->
+<div class="stories" id="stories"></div>
 
-    /* ================= CAMERA VIEW ================= */
-    #camView { background: #111; position: relative; }
-    
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      background: #000;
-    }
+<div class="tabs">
+  <button id="tab-feed" class="active" onclick="showTab('feed')">Feed</button>
+  <button id="tab-reels" onclick="showTab('reels')">Reels</button>
+  <button id="tab-snap" onclick="showTab('snap')">Snap</button>
+  <button id="tab-chat" onclick="showTab('chat')">Chat</button>
+</div>
 
-    /* Filters */
-    .filter-none { filter: none; }
-    .filter-golden { filter: sepia(35%) saturate(150%) brightness(105%); }
-    .filter-cyber { filter: hue-rotate(185deg) contrast(130%) saturate(180%); }
-    .filter-noir { filter: grayscale(100%) contrast(130%); }
+<!-- FEED -->
+<div id="feed"></div>
 
-    /* Top Elements */
-    .top-bar {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-    .badge {
-      background: rgba(0,0,0,0.6);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 800;
-      font-size: 13px;
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .badge i { color: #fffc00; }
-    .btn-circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+<!-- REELS -->
+<div id="reels" class="reels"></div>
+
+<!-- SNAP CAMERA -->
+<div id="snap" class="snap">
+  <div class="snap-box" id="snapPreview"><span id="snapEmoji">😎</span></div>
+  <div class="filter-row" id="filters"></div>
+  <input id="snapText" placeholder="Snap pe kya likhna hai? Ex: Siwani vibes...">
+  <button class="btn" onclick="sendSnap()">📸 Snap Bhejo</button>
+  <button class="btn btn2" onclick="addToStory()">+ Story Me Daalo</button>
+  <p style="text-align:center;color:#888;font-size:12px;margin-top:10px">Snap 24 ghante me gayab ho jayega - Snapchat style</p>
+</div>
+
+<!-- CHAT -->
+<div id="chat" style="display:none;padding:12px">
+  <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:10px" id="chatList"></div>
+  <div id="chatBox" style="background:#111;border-radius:16px;padding:12px;min-height:280px"></div>
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <input id="chatInput" placeholder="Message..." style="flex:1;background:#1a1a1a;border:none;color:#fff;padding:11px;border-radius:20px;outline:none">
+    <button onclick="sendChat()" style="background:#FFD500;border:none;padding:10px 16px;border-radius:20px;font-weight:800">Send</button>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="active" onclick="showTab('feed')">🏠<small>Home</small></div>
+  <div onclick="showTab('reels')">🎬<small>Reels</small></div>
+  <div onclick="showTab('snap')">📸<small>Snap</small></div>
+  <div onclick="showTab('chat')">💬<small>Chat</small></div>
+  <div onclick="showToast('Profile jald aa raha hai')">👤<small>Profile</small></div>
+</div>
+
+<div class="viewer" id="viewer">
+  <div class="big" id="viewerEmoji">🔥</div>
+  <p id="viewerText">Story</p>
+  <button onclick="closeViewer()">Close ✖</button>
+</div>
+<div id="toast"></div>
+
+<script>
+let users=[
+ {name:"dipanshu",emoji:"😎",img:"😎"},
+ {name:"kayth",emoji:"🔥",img:"🔥"},
+ {name:"siwani_boy",emoji:"💪",img:"💪"},
+ {name:"haryanvi",emoji:"🚜",img:"🚜"},
+ {name:"roast_king",emoji:"😂",img:"😂"},
+ {name:"aaru",emoji:"✨",img:"✨"},
+]
+let posts=[
+ {user:0,img:"🏙️",likes:124,caption:"Siwani wali vibe hi alag hai 🔥",comments:["Bhai OP 🔥","Location bata"]},
+ {user:3,img:"🚜",likes:89,caption:"Khet me bhi swag chahiye 💪 #Haryanvi",comments:["Gajab bhai"]},
+ {user:5,img:"🌸",likes:210,caption:"Aaj mood happy wala hai ✨",comments:["Cute 😍"]},
+]
+let reelsData=[
+ {user:1,emoji:"🔥",caption:"Ye reel dekh ke maza aa jayega 😂 #viral",likes:1200},
+ {user:2,emoji:"💪",caption:"Gym wale bhaiyo ke liye 💪",likes:890},
+ {user:4,emoji:"😂",caption:"Roast of the day 😂",likes:2300},
+]
+let filters=["😎 Normal","🔥 Fire","🐶 Dog","👑 King","😂 Funny","🌸 Soft","💀 Skull","🤖 Robot"]
+let currentFilter="😎"
+let chats=[
+ {name:"Aaru",msg:"Hi Kayth!"},
+ {name:"Roast King",msg:"Bhai ek roast de na 😂"},
+ {name:"Siwani Boy",msg:"Kal milte hai?"},
+]
+let activeChat=0
+let myStories=[]
+
+function renderStories(){
+  let h=`<div class="story" onclick="addToStory()"><div class="story-ring"><div>+</div></div><p>Your Story</p></div>`
+  users.forEach((u,i)=>{ h+=`<div class="story" onclick="openViewer('${u.emoji}','${u.name} ki Story')"><div class="story-ring"><div>${u.img}</div></div><p>${u.name}</p></div>` })
+  myStories.forEach(s=>{ h+=`<div class="story" onclick="openViewer('${s.emoji}','${s.text}')"><div class="story-ring"><div>${s.emoji}</div></div><p>You</p></div>` })
+  document.getElementById('stories').innerHTML=h
+}
+function renderFeed(){
+  let h=""
+  posts.forEach((p,i)=>{
+    h+=`<div class="post">
+      <div class="post-head"><div style="font-size:30px">${users[p.user].img}</div><div><b>${users[p.user].name}</b><small>Siwani, Haryana • 2h</small></div><span style="margin-left:auto">...</span></div>
+      <div class="post-img">${p.img}</div>
+      <div class="post-actions"><span id="like${i}" onclick="likePost(${i},this)">🤍</span><span>💬</span><span>↗️</span><span style="margin-left:auto">🔖</span></div>
+      <p><b>${p.likes} likes</b></p><p><b>${users[p.user].name}</b> ${p.caption}</p>
+      <p style="color:#888">${p.comments.map(c=>`💬 ${c}`).join('<br>')}</p>
+      <div class="comment-box"><input id="c${i}" placeholder="Add comment..."><button onclick="addComment(${i})">Post</button></div>
+    </div>`
+  })
+  document.getElementById('feed').innerHTML=h
+}
+function likePost(i,el){
+  if(el.classList.contains('liked')){el.classList.remove('liked');el.innerText='🤍';posts[i].likes--}
+  else{el.classList.add('liked');el.innerText='❤️';posts[i].likes++}
+  renderFeed()
+  showToast('Liked ❤️')
+}
+function addComment(i){
+  let v=document.getElementById('c'+i).value
+  if(!v) return
+  posts[i].comments.push(v)
+  renderFeed()
+}
+function renderReels(){
+  let h=""
+  reelsData.forEach(r=>{
+    h+=`<div class="reel">${r.emoji}<div class="reel-info"><b>@${users[r.user].name}</b><p>${r.caption}</p></div><div class="reel-btns"><div onclick="showToast('Liked ❤️')">❤️<small>${r.likes}</small></div><div onclick="showToast('Comment khula')">💬<small>45</small></div><div onclick="showToast('Share kiya')">↗️<small>Share</small></div></div></div>`
+  })
+  document.getElementById('reels').innerHTML=h
+}
+function renderFilters(){
+  document.getElementById('filters').innerHTML=filters.map(f=>`<button class="${f.startsWith(currentFilter)?'active':''}" onclick="setFilter('${f}')">${f}</button>`).join('')
+}
+function setFilter(f){
+  currentFilter=f.split(' ')[0]
+  document.getElementById('snapEmoji').innerText=currentFilter
+  renderFilters()
+}
+function sendSnap(){
+  let t=document.getElementById('snapText').value||"Mera Snap 🔥"
+  showToast('Snap bheja gaya: '+t)
+  document.getElementById('snapText').value=""
+}
+function addToStory(){
+  let t=document.getElementById('snapText').value||"Nayi Story 🔥"
+  myStories.push({emoji:currentFilter,text:t})
+  renderStories()
+  showToast('Story me add ho gaya ✅')
+}
+function renderChatList(){
+  document.getElementById('chatList').innerHTML=chats.map((c,i)=>`<div onclick="openChat(${i})" style="flex:0 0 auto;background:${i==activeChat?'#FFD500':'#1a1a1a'};color:${i==activeChat?'#000':'#fff'};padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer">${c.name}</div>`).join('')
+  document.getElementById('chatBox').innerHTML=`<b>${chats[activeChat].name}</b><p style="margin-top:8px;background:#222;padding:10px;border-radius:12px;display:inline-block">${chats[activeChat].msg}</p><p style="color:#888;font-size:12px;margin-top:6px">Online • Abhi</p>`
+}
+function openChat(i){activeChat=i;renderChatList()}
+function sendChat(){
+  let v=document.getElementById('chatInput').value
+  if(!v) return
+  document.getElementById('chatBox').innerHTML+=`<p style="text-align:right;margin-top:8px"><span style="background:#FFD500;color:#000;padding:8px 12px;border-radius:14px;display:inline-block">${v}</span></p>`
+  document.getElementById('chatInput').value=""
+  setTimeout(()=>{document.getElementById('chatBox').innerHTML+=`<p style="margin-top:8px"><span style="background:#222;padding:8px 12px;border-radius:12px;display:inline-block">Haan bhai samajh gaya 😎 Aur bata?</span></p>`},800)
+}
+function showTab(t){
+  ['feed','reels','snap','chat'].forEach(x=>document.getElementById(x).style.display='none')
+  document.getElementById(t).style.display='block'
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'))
+  document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active'))
+  if(t=='feed') document.getElementById('tab-feed').classList.add('active')
+  if(t=='reels') document.getElementById('tab-reels').classList.add('active')
+  if(t=='snap') document.getElementById('tab-snap').classList.add('active')
+  if(t=='chat') document.getElementById('tab-chat').classList.add('active')
+}
+function openViewer(e,t){document.getElementById('viewerEmoji').innerText=e;document.getElementById('viewerText').innerText=t;document.getElementById('viewer').classList.add('active')}
+function closeViewer(){document.getElementById('viewer').classList.remove('active')}
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2000)}
+renderStories();renderFeed();renderReels();renderFilters();renderChatList()
+</script>
+</body>
+</html>
