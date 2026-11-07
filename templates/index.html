@@ -1,149 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Social — Connect with friends</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #fafafa;
-      color: #171717;
-      font: 15px/1.45 system-ui, -apple-system, Segoe UI, sans-serif;
-    }
-    button { font: inherit; cursor: pointer; }
-    .topbar {
-      height: 64px; background: #fff; border-bottom: 1px solid #e8e8e8;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 max(5%, calc((100% - 1100px)/2)); position: sticky; top: 0; z-index: 5;
-    }
-    .brand { font-size: 25px; font-weight: 800; letter-spacing: -1px; }
-    .search { width: 240px; padding: 10px 14px; border: 0; border-radius: 10px; background: #f2f2f2; }
-    .nav { display: flex; gap: 18px; font-size: 21px; }
-    .layout { max-width: 1000px; margin: 28px auto; padding: 0 18px; display: grid; grid-template-columns: minmax(0, 620px) 300px; gap: 38px; }
-    .stories, .post, .profile-card { background: white; border: 1px solid #e8e8e8; border-radius: 14px; }
-    .stories { padding: 16px; display: flex; gap: 16px; overflow-x: auto; margin-bottom: 20px; }
-    .story { flex: 0 0 62px; text-align: center; font-size: 12px; }
-    .ring { width: 58px; height: 58px; padding: 3px; margin: auto auto 6px; border-radius: 50%; background: linear-gradient(45deg,#ffb900,#ff315f,#a32cff); }
-    .ring img { width: 100%; height: 100%; object-fit: cover; border: 2px solid white; border-radius: 50%; }
-    .post { margin-bottom: 22px; overflow: hidden; }
-    .post-head { display: flex; align-items: center; gap: 10px; padding: 13px 15px; }
-    .avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
-    .username { font-weight: 700; }
-    .place { color: #777; font-size: 12px; }
-    .more { margin-left: auto; border: 0; background: none; font-size: 22px; }
-    .post-image { display: block; width: 100%; max-height: 650px; object-fit: cover; background: #eee; }
-    .actions { display: flex; gap: 14px; padding: 12px 15px 2px; }
-    .icon-btn { border: 0; background: none; padding: 0; font-size: 25px; }
-    .save { margin-left: auto; }
-    .likes, .caption, .comments, .date { padding: 0 15px; }
-    .likes { font-weight: 700; margin: 5px 0; }
-    .caption { margin: 5px 0; }
-    .comments { color: #777; margin: 5px 0; }
-    .date { color: #999; font-size: 11px; padding-bottom: 14px; }
-    .profile-card { border: 0; background: transparent; position: sticky; top: 85px; height: fit-content; }
-    .profile-row { display: flex; align-items: center; gap: 12px; }
-    .profile-row .avatar { width: 48px; height: 48px; }
-    .switch { margin-left: auto; color: #1687e8; border: 0; background: none; font-weight: 700; }
-    .suggest-title { margin-top: 26px; color: #777; font-weight: 700; }
-    .suggestion { display: flex; align-items: center; gap: 10px; margin: 15px 0; }
-    .suggestion .avatar { width: 34px; height: 34px; }
-    .follow { margin-left: auto; border: 0; color: #1687e8; background: none; font-weight: 700; }
-    @media (max-width: 800px) {
-      .layout { display: block; max-width: 620px; margin-top: 16px; }
-      .profile-card { display: none; }
-      .search { width: min(38vw, 220px); }
-    }
-    @media (max-width: 480px) {
-      .topbar { height: 56px; padding: 0 14px; }
-      .search { display: none; }
-      .layout { padding: 0; margin: 10px auto; }
-      .stories, .post { border-radius: 0; border-left: 0; border-right: 0; }
-      .post-image { max-height: 75vh; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Snapista — Connect with friends</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fafafa;color:#171717;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;padding-bottom:80px}
+button{font:inherit;cursor:pointer}
+.topbar{height:64px;background:#fff;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;padding:0 max(5%,calc((100% - 1100px)/2));position:sticky;top:0;z-index:5}
+.brand{font-size:26px;font-weight:900;letter-spacing:-1px}
+.brand span{background:linear-gradient(90deg,#FFFC00,#FF004C,#A100F2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.search{width:240px;padding:10px 14px;border:0;border-radius:10px;background:#f2f2f2;outline:none}
+.nav{display:flex;gap:18px;font-size:21px}
+.nav span{cursor:pointer}
+.layout{max-width:1000px;margin:28px auto;padding:0 18px;display:grid;grid-template-columns:minmax(0,620px) 300px;gap:38px}
+.stories,.post,.profile-card{background:white;border:1px solid #e8e8e8;border-radius:14px}
+.stories{padding:16px;display:flex;gap:16px;overflow-x:auto;margin-bottom:20px}
+.story{flex:0 0 62px;text-align:center;font-size:12px;cursor:pointer}
+.ring{width:58px;height:58px;padding:3px;margin:auto auto 6px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2)}
+.ring div{width:100%;height:100%;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:26px;border:2px solid white}
+.post{margin-bottom:22px;overflow:hidden}
+.post-head{display:flex;align-items:center;gap:10px;padding:13px 15px}
+.avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#eee;display:flex;align-items:center;justify-content:center;font-size:20px}
+.username{font-weight:700}
+.place{color:#777;font-size:12px}
+.more{margin-left:auto;border:0;background:none;font-size:22px}
+.post-image{display:block;width:100%;max-height:650px;object-fit:cover;background:#eee}
+.actions{display:flex;gap:14px;padding:12px 15px 2px}
+.icon-btn{border:0;background:none;padding:0;font-size:25px}
+.save{margin-left:auto}
+.likes,.caption,.comments,.date{padding:0 15px}
+.likes{font-weight:700;margin:5px 0}
+.caption{margin:5px 0}
+.comments{color:#777;margin:5px 0}
+.date{color:#999;font-size:11px;padding-bottom:14px}
+.profile-card{border:0;background:transparent;position:sticky;top:85px;height:fit-content}
+.profile-row{display:flex;align-items:center;gap:12px}
+.profile-row .avatar{width:48px;height:48px}
+.switch{margin-left:auto;color:#1687e8;border:0;background:none;font-weight:700}
+.suggest-title{margin-top:26px;color:#777;font-weight:700}
+.suggestion{display:flex;align-items:center;gap:10px;margin:15px 0}
+.suggestion .avatar{width:34px;height:34px}
+.follow{margin-left:auto;border:0;color:#1687e8;background:none;font-weight:700}
+.page{display:none}
+.page.active{display:block}
+.vibe-banner{margin:0 0 20px;background:linear-gradient(135deg,#FFFC00,#FF004C,#A100F2);border-radius:14px;padding:18px;color:#fff}
+.vibe-banner h2{margin:0;font-size:22px;line-height:1.2}
+.vibe-banner p{margin:6px 0 0;opacity:.9;font-size:13px}
+.vibe-banner button{margin-top:12px;background:#000;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:800}
+.btn{width:100%;background:#FFFC00;border:none;padding:13px;border-radius:12px;font-weight:800;font-size:15px;margin-top:10px}
+.btn2{background:#000;color:#fff}
+.camera-box{width:100%;height:380px;background:#111;border-radius:14px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}
+.camera-box video,.camera-box img{width:100%;height:100%;object-fit:cover}
+.camera-text{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-weight:800;text-shadow:0 2px 8px #000;font-size:20px}
+.capture-bar{display:flex;align-items:center;justify-content:center;gap:20px;margin:14px 0}
+.capture-btn{width:68px;height:68px;border-radius:50%;background:#fff;border:6px solid #FFFC00;cursor:pointer}
+.small-btn{background:#eee;border:1px solid #ddd;width:46px;height:46px;border-radius:50%;font-size:20px}
+.snap-input{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:12px;outline:none;margin-top:8px}
+.reel{height:55vh;background:#111;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:80px;color:#fff;position:relative;margin-bottom:16px}
+.reel span{position:absolute;bottom:14px;left:14px;font-size:15px;font-weight:700}
+.chat-box{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:16px;min-height:180px}
+.chat-input-row{display:flex;gap:8px;margin-top:10px}
+.chat-input-row input{flex:1;padding:12px;border:1px solid #ddd;border-radius:12px;outline:none}
+.bottom{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:620px;background:#111;color:#fff;border-radius:22px;display:flex;justify-content:space-around;padding:12px 0;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.bottom div{text-align:center;font-size:22px;cursor:pointer;color:#888}
+.bottom div.active{color:#FFFC00}
+.bottom div small{display:block;font-size:10px;font-weight:700}
+#toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:20px;font-weight:700;display:none;z-index:100}
+.viewer{position:fixed;inset:0;background:#000;z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:20px}
+.viewer.active{display:flex}
+.viewer img{max-width:100%;max-height:60vh;border-radius:14px}
+@media(max-width:800px){.layout{display:block;max-width:620px;margin-top:16px}.profile-card{display:none}.search{width:min(38vw,220px)}}
+@media(max-width:480px){.topbar{height:56px;padding:0 14px}.search{display:none}.layout{padding:0;margin:10px auto}.stories,.post{border-radius:0;border-left:0;border-right:0}.post-image{max-height:75vh}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">social.</div>
-    <input class="search" placeholder="Search" aria-label="Search" />
-    <nav class="nav" aria-label="Main navigation">
-      <span title="Home">⌂</span><span title="Messages">✉</span>
-      <span title="Create">＋</span><span title="Explore">⌕</span><span title="Profile">◉</span>
-    </nav>
-  </header>
 
-  <main class="layout">
-    <section>
-      <div class="stories" id="stories"></div>
-      <div id="feed"></div>
-    </section>
-    <aside class="profile-card">
-      <div class="profile-row">
-        <img class="avatar" src="https://i.pravatar.cc/100?img=12" alt="" />
-        <div><div class="username">your_username</div><div class="place">Your profile</div></div>
-        <button class="switch">Switch</button>
-      </div>
-      <div class="suggest-title">Suggestions for you</div>
-      <div id="suggestions"></div>
-    </aside>
-  </main>
+<header class="topbar">
+<div class="brand">SNAP<span>ISTA</span></div>
+<input class="search" placeholder="Search" oninput="if(event.key==='Enter')showToast('Search: '+this.value)" />
+<nav class="nav"><span onclick="goPage('home')">⌂</span><span onclick="goPage('chat')">✉</span><span onclick="goPage('snap')">＋</span><span onclick="goPage('explore')">⌕</span><span onclick="goPage('profile')">◉</span></nav>
+</header>
 
-  <script>
-    const people = [
-      ["maya.jpg", "maya", 47], ["arjun.jpg", "arjun", 12], ["zoya.jpg", "zoya", 44],
-      ["rohan.jpg", "rohan", 33], ["isha.jpg", "isha", 5], ["kabir.jpg", "kabir", 60]
-    ];
+<!-- HOME -->
+<div id="page-home" class="page active">
+<main class="layout">
+<section>
+<div class="vibe-banner"><h2>Apna vibe,<br>apni duniya ✨</h2><p>Snap lo. Post karo. Vibe banao.</p><button onclick="goPage('snap')">📸 Snap Lo →</button></div>
+<div class="stories" id="stories"></div>
+<div style="background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:14px;margin-bottom:20px">
+<input type="file" id="fileInput" accept="image/*" onchange="uploadPost(event)" style="display:none">
+<button class="btn" style="margin:0" onclick="document.getElementById('fileInput').click()">+ New Post - Photo Chuno</button>
+</div>
+<div id="feed"></div>
+</section>
+<aside class="profile-card">
+<div class="profile-row"><div class="avatar">😎</div><div><div class="username">you</div><div class="place">Your profile • Snapista</div></div><button class="switch" onclick="showToast('Profile shared')">Share</button></div>
+<div class="suggest-title">Suggestions for you</div>
+<div id="suggestions"></div>
+<div style="margin-top:20px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:14px"><b>🔥 Snapista Streak</b><p style="color:#777;font-size:13px;margin:6px 0 0">Roz 1 snap bhej, streak ban jayegi.<br>Abhi: 0 days</p></div>
+</aside>
+</main>
+</div>
 
-    const photo = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1000&q=85`;
-    const posts = [
-      { user: "maya", avatar: 47, place: "Goa, India", image: "photo-1519046904884-53103b34b206", likes: "2,481", caption: "Somewhere between the sea and the sunset 🌅", comments: 38 },
-      { user: "arjun", avatar: 12, place: "Jaipur, India", image: "photo-1477587458883-47145ed94245", likes: "1,206", caption: "A little colour for the feed ✨", comments: 21 },
-      { user: "zoya", avatar: 44, place: "Mumbai, India", image: "photo-1519608487953-e999c86e7455", likes: "3,902", caption: "Night walks hit different.", comments: 64 }
-    ];
+<!-- EXPLORE -->
+<div id="page-explore" class="page"><main class="layout"><section>
+<h2 style="margin:0">Explore</h2><p style="color:#777">Duniya kya dekh rahi hai</p>
+<div style="display:flex;gap:8px;margin-bottom:14px"><input id="searchInput" placeholder="Search friends, reels..." style="flex:1;padding:12px;border:1px solid #ddd;border-radius:12px;outline:none"><button class="btn" style="width:auto;margin:0;padding:12px 18px" onclick="doSearch()">Search</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px"><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:6px">📸</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:6px">🎬</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:6px">✨</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:6px">🔥</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:6px">🌸</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:6px">🚀</div></div>
+</section></main></div>
 
-    document.querySelector("#stories").innerHTML = `
-      <div class="story"><div class="ring"><img src="https://i.pravatar.cc/100?img=12" alt=""></div>Your story</div>
-      ${people.map(([_, name, id]) => `<div class="story"><div class="ring"><img src="https://i.pravatar.cc/100?img=${id}" alt=""></div>${name}</div>`).join("")}
-    `;
+<!-- SNAP -->
+<div id="page-snap" class="page"><main class="layout"><section>
+<h2 style="margin:0">Snap</h2><p style="color:#777">Camera • Photo • Send - bas itna hi</p>
+<div class="camera-box">
+<video id="cameraVideo" autoplay playsinline muted style="display:none"></video>
+<img id="capturedImg" style="display:none">
+<div id="cameraPlaceholder"><div><div style="font-size:64px">📸</div><b>Snap Camera Ready</b><p style="color:#aaa">Camera on karo, photo khicho</p><button class="btn" onclick="startCamera()">Open Camera</button></div></div>
+<div class="camera-text" id="cameraText"></div>
+</div>
+<div class="capture-bar"><button class="small-btn" onclick="switchCamera()">🔄</button><button class="capture-btn" onclick="takeSnap()"></button><button class="small-btn" onclick="retakeSnap()">↩️</button></div>
+<p style="text-align:center;color:#888;font-size:12px">Beech wala = Photo 📸</p>
+<input class="snap-input" id="snapText" placeholder="Is Snap pe kya likhna hai?..." oninput="document.getElementById('cameraText').innerText=this.value">
+<button class="btn" onclick="sendSnap()">Send Snap →</button>
+<button class="btn btn2" onclick="addToStory()">+ Add to Story</button>
+<button class="btn" style="background:#eee" onclick="downloadSnap()">⬇️ Download</button>
+</section></main></div>
 
-    document.querySelector("#feed").innerHTML = posts.map((post, i) => `
-      <article class="post">
-        <div class="post-head">
-          <img class="avatar" src="https://i.pravatar.cc/100?img=${post.avatar}" alt="">
-          <div><div class="username">${post.user}</div><div class="place">${post.place}</div></div>
-          <button class="more" aria-label="More options">···</button>
-        </div>
-        <img class="post-image" src="${photo(post.image)}" alt="A travel photo from ${post.place}">
-        <div class="actions">
-          <button class="icon-btn like" aria-label="Like post">♡</button>
-          <button class="icon-btn" aria-label="Comment">♧</button>
-          <button class="icon-btn" aria-label="Share">➤</button>
-          <button class="icon-btn save" aria-label="Save post">♧</button>
-        </div>
-        <div class="likes">${post.likes} likes</div>
-        <p class="caption"><strong>${post.user}</strong> ${post.caption}</p>
-        <div class="comments">View all ${post.comments} comments</div>
-        <div class="date">${i + 1} days ago</div>
-      </article>
-    `).join("");
+<!-- REELS -->
+<div id="page-reels" class="page"><main class="layout"><section>
+<h2 style="margin:0">Reels</h2><p style="color:#777">Short • Fast • Vibe</p>
+<div class="reel">🎬<span>@you • My first reel ✨</span></div>
+<div style="text-align:center;color:#777">Abhi aur reels nahi hai.<br>Tu pehli reel daalega?</div>
+<button class="btn" onclick="showToast('Reel upload jald aayega')">Upload Reel</button>
+</section></main></div>
 
-    document.querySelector("#suggestions").innerHTML = people.slice(1, 4).map(([_, name, id]) => `
-      <div class="suggestion">
-        <img class="avatar" src="https://i.pravatar.cc/100?img=${id}" alt="">
-        <div><div class="username">${name}</div><div class="place">Suggested for you</div></div>
-        <button class="follow">Follow</button>
-      </div>
-    `).join("");
+<!-- CHAT -->
+<div id="page-chat" class="page"><main class="layout"><section>
+<h2 style="margin:0">Chat</h2><p style="color:#777">Doston se baat - yahin</p>
+<div class="chat-box" id="chatBox">Abhi koi chat nahi hai.<br>Link share kar, doston ko bula.</div>
+<div class="chat-input-row"><input id="chatInput" placeholder="Message..."><button class="btn" style="width:auto;margin:0" onclick="sendChat()">Send</button></div>
+</section></main></div>
 
-    document.querySelectorAll(".like").forEach(button => {
-      button.addEventListener("click", () => {
-        const liked = button.classList.toggle("liked");
-        button.textContent = liked ? "♥" : "♡";
-        button.style.color = liked ? "#ed4956" : "inherit";
-      });
-    });
-  </script>
+<!-- PROFILE -->
+<div id="page-profile" class="page"><main class="layout"><section>
+<h2 style="margin:0">Profile</h2>
+<div style="text-align:center;padding:20px;background:#fff;border:1px solid #e8e8e8;border-radius:14px;margin-top:12px"><div style="width:96px;height:96px;border-radius:50%;background:linear-gradient(45deg,#FFFC00,#FF004C,#A100F2);padding:3px;margin:0 auto"><div style="width:100%;height:100%;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:46px">😎</div></div><h2>you</h2><p style="color:#777">Snapista Creator • Vibe King 👑</p><p><b id="postCount">0</b> Posts • <b>0</b> Followers • <b>0</b> Following</p><button class="btn" onclick="showToast('Profile link copied')">Share Profile</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:14px" id="profileGrid"><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:30px;border-radius:6px">📸</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:30px;border-radius:6px">✨</div><div style="aspect-ratio:1;background:#eee;display:flex;align-items:center;justify-content:center;font-size:30px;border-radius:6px">+</div></div>
+</section></main></div>
+
+<div class="bottom">
+<div class="active" onclick="goPage('home')">🏠<small>Home</small></div>
+<div onclick="goPage('explore')">🔍<small>Explore</small></div>
+<div onclick="goPage('snap')">📸<small>Snap</small></div>
+<div onclick="goPage('reels')">🎬<small>Reels</small></div>
+<div onclick="goPage('chat')">💬<small>Chat</small></div>
+<div onclick="goPage('profile')">👤<small>You</small></div>
+</div>
+
+<div class="viewer" id="viewer"><div id="viewerContent"></div><p id="viewerText"></p><button class="btn" style="width:auto" onclick="closeViewer()">Close</button></div>
+<div id="toast"></div>
+<canvas id="snapCanvas" style="display:none"></canvas>
+
+<script>
+let posts=[], myStories=[], stream=null, facing='user', capturedDataUrl=null
+function goPage(name){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active'));let idx={home:0,explore:1,snap:2,reels:3,chat:4,profile:5}[name];document.querySelectorAll('.bottom div')[idx].classList.add('active');window.scrollTo(0,0)}
+function renderStories(){let h=`<div class="story" onclick="goPage('snap')"><div class="ring"><div>+</div></div>Your story</div>`;if(myStories.length==0){h+=`<div style="display:flex;align-items:center;color:#888;font-size:13px">No story yet.<br>Snap se banao ✨</div>`}myStories.forEach((s,idx)=>{h+=`<div class="story" onclick="openStory(${idx})"><div class="ring"><div>📸</div></div>You</div>`});document.getElementById('stories').innerHTML=h}
+function openStory(idx){let s=myStories[idx];let c=document.getElementById('viewerContent');if(s.img)c.innerHTML=`<img src="${s.img}">`;else c.innerHTML=`<div style="font-size:80px">📸</div>`;document.getElementById('viewerText').innerText=s.text||'My Story';document.getElementById('viewer').classList.add('active')}
+const photo=(id)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=1000&q=85`;
+let defaultPosts=[
+{user:"maya",avatar:"🌸",place:"Goa, India",image:"photo-1519046904884-53103b34b206",likes:"2,481",caption:"Somewhere between the sea and the sunset 🌅",comments:38},
+{user:"arjun",avatar:"🔥",place:"Jaipur, India",image:"photo-1477587458883-47145ed94245",likes:"1,206",caption:"A little colour for the feed ✨",comments:21},
+{user:"zoya",avatar:"🌙",place:"Mumbai, India",image:"photo-1519608487953-e999c86e7455",likes:"3,902",caption:"Night walks hit different.",comments:64}
+];
+function renderFeed(){
+let h="";
+posts.forEach((p,idx)=>{h+=`<article class="post"><div class="post-head"><div class="avatar">😎</div><div><div class="username">you</div><div class="place">Just now • Snapista</div></div><button class="more">···</button></div><div style="background:#eee">${p.img}</div><div class="actions"><button class="icon-btn" onclick="likePost(${idx},this)">♡</button><button class="icon-btn">♧</button><button class="icon-btn">➤</button><button class="icon-btn save">♧</button></div><div class="likes">${p.likes} likes</div><p class="caption"><strong>you</strong> ${p.caption}</p><div class="comments">Add a comment...</div><div class="date">Just now</div></article>`});
+h+=defaultPosts.map((post,i)=>`<article class="post"><div class="post-head"><div class="avatar">${post.avatar}</div><div><div class="username">${post.user}</div><div class="place">${post.place}</div></div><button class="more">···</button></div><img class="post-image" src="${photo(post.image)}"><div class="actions"><button class="icon-btn like">♡</button><button class="icon-btn">♧</button><button class="icon-btn">➤</button><button class="icon-btn save">♧</button></div><div class="likes">${post.likes} likes</div><p class="caption"><strong>${post.user}</strong> ${post.caption}</p><div class="comments">View all ${post.comments} comments</div><div class="date">${i+1} days ago</div></article>`).join("");
+document.getElementById('feed').innerHTML=h;
+document.querySelectorAll(".like").forEach(b=>{b.addEventListener("click",()=>{let liked=b.classList.toggle("liked");b.textContent=liked?"♥":"♡";b.style.color=liked?"#ed4956":"inherit"})});
+}
+function likePost(i,el){if(el.innerText=='♥'){el.innerText='♡';el.style.color='inherit';posts[i].likes--}else{el.innerText='♥';el.style.color='#ed4956';posts[i].likes++}}
+function uploadPost(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);posts.unshift({img:`<img class="post-image" src="${url}">`,likes:0,caption:"My Snapista post ✨"});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Post ho gaya 🔥')}
+function doSearch(){let q=document.getElementById('searchInput').value;if(!q)return showToast('Type something');showToast('No users yet for "'+q+'"')}
+async function startCamera(){try{if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing},audio:false});let v=document.getElementById('cameraVideo');v.srcObject=stream;v.style.display='block';document.getElementById('cameraPlaceholder').style.display='none';document.getElementById('capturedImg').style.display='none';capturedDataUrl=null;showToast('Camera on 🔥')}catch(e){showToast('Camera nahi khula - Permission allow karo')}}
+function switchCamera(){facing=facing=='user'?'environment':'user';startCamera()}
+function takeSnap(){let v=document.getElementById('cameraVideo');if(!v.srcObject||v.style.display=='none'){showToast('Pehle Open Camera dabao');return}let canvas=document.getElementById('snapCanvas');let ctx=canvas.getContext('2d');canvas.width=v.videoWidth||640;canvas.height=v.videoHeight||480;ctx.drawImage(v,0,0,canvas.width,canvas.height);let txt=document.getElementById('snapText').value;if(txt){ctx.font='bold 32px sans-serif';ctx.fillStyle='white';ctx.strokeStyle='black';ctx.lineWidth=5;ctx.textAlign='center';ctx.strokeText(txt,canvas.width/2,canvas.height-20);ctx.fillText(txt,canvas.width/2,canvas.height-20)}capturedDataUrl=canvas.toDataURL('image/png');let img=document.getElementById('capturedImg');img.src=capturedDataUrl;img.style.display='block';v.style.display='none';showToast('Photo ho gayi! Ab Send dabao')}
+function retakeSnap(){document.getElementById('capturedImg').style.display='none';let v=document.getElementById('cameraVideo');if(v.srcObject){v.style.display='block'}else{document.getElementById('cameraPlaceholder').style.display='block'}capturedDataUrl=null;showToast('Dobara photo lo')}
+function downloadSnap(){if(!capturedDataUrl){showToast('Pehle photo khicho');return}let a=document.createElement('a');a.href=capturedDataUrl;a.download='snapista-snap.png';a.click();showToast('Snap download ho gaya')}
+function sendSnap(){if(!capturedDataUrl){showToast('Pehle camera se photo khicho');return}posts.unshift({img:`<img class="post-image" src="${capturedDataUrl}">`,likes:0,caption:document.getElementById('snapText').value||'My Snap ✨'});document.getElementById('postCount').innerText=posts.length;renderFeed();showToast('Snap bhej diya 🔥');goPage('home')}
+function addToStory(){if(!capturedDataUrl&&!document.getElementById('snapText').value){showToast('Pehle photo khicho');return}myStories.push({img:capturedDataUrl,text:document.getElementById('snapText').value||'My Story'});renderStories();showToast('Story me add ho gaya ✨');goPage('home')}
+function sendChat(){let v=document.getElementById('chatInput').value;if(!v)return;let b=document.getElementById('chatBox');b.innerHTML+=`<div style="margin-top:8px;background:#f2f2f2;padding:8px 12px;border-radius:12px;width:fit-content">You: ${v}</div>`;document.getElementById('chatInput').value="";showToast('Message bheja')}
+function closeViewer(){document.getElementById('viewer').classList.remove('active')}
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+document.querySelector("#suggestions").innerHTML=[["maya","🌸"],["arjun","🔥"],["zoya","🌙"]].map(([n,e])=>`<div class="suggestion"><div class="avatar">${e}</div><div><div class="username">${n}</div><div class="place">Suggested for you</div></div><button class="follow" onclick="this.innerText='Following'">Follow</button></div>`).join("");
+renderStories();renderFeed();
+</script>
 </body>
 </html>
